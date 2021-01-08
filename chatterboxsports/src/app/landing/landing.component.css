@@ -1,0 +1,107 @@
+.cb-video-liveicon
+{
+    background: #c6c9d3;
+    position: absolute;
+    top: 4px;
+    left: 19px;
+    border-radius: 20px;
+    padding: 4px 5px;
+}
+
+
+.cb-recentgames-block , .cb-livevideo-block , .cb-instantclassic-block
+{
+margin-top:40px;
+}
+
+.cb-video-liveicon span
+{
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: block;
+}
+
+.cb-video-liveicon span i
+{
+    background: #e83b4e;
+    height: 6px;
+    border-radius: 50%;
+    width: 6px;
+    display: inline-block;
+    margin-right: 6px;
+    -webkit-animation: 1s blink ease infinite;
+    -moz-animation: 1s blink ease infinite;
+    -ms-animation: 1s blink ease infinite;
+    -o-animation: 1s blink ease infinite;
+    animation: 1s blink ease infinite;
+}
+
+@keyframes blink {
+    from, to {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  .cb-video-head
+  {
+    color:#000;
+    margin: 0;
+    font-size: 10px;
+    margin-top: 10px;
+  }
+
+  .cb-video-subhead
+  {
+    color:#737b7d;
+    margin: 0;
+    font-size: 10px;
+  }
+ 
+  /* How can we help you section  */
+
+  .cb-helpsection-block
+  {
+    padding: 40px 0px 0px;
+  }
+.cb-help-search
+{
+    width:100%;
+    max-width:700px;
+    margin: 0 auto;
+    display: block;
+}
+
+
+
+ 
+/* FAQ section  */
+.cb-faq-block
+{
+padding:40px 0px;
+}
+
+.cb-bg-color
+{
+    background:#fff;
+    color:#373f41;
+
+}
+
+.cb-faq-head-color
+{
+color:#373f41;
+}
+
+.cb-faq-head
+{
+    margin-bottom: 35px;
+}
+
+.cb-faq-subhead
+{
+    margin-bottom: 20px;
+}

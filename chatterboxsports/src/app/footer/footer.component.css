@@ -1,0 +1,26 @@
+.cb-footer-bg
+{
+background:#181818;
+}
+.cb-footer-color
+{
+    color:#fff;
+}
+
+.cb-footer-pad p
+{
+    padding:30px 0px 14px;
+}
+
+.cb-phone-pad p
+{
+    padding-left:66px;
+}
+
+.cb-footer-pad p.cb-pad
+{
+    padding-bottom:20px;
+    padding-top:20px;
+    border-top: 1px solid #6d6d6d;
+    margin: 0px;
+}
