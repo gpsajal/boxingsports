@@ -61,6 +61,52 @@ margin-top:40px;
     font-size: 10px;
   }
  
+
+/* get in touch section */
+
+
+  .cb-getintouch-section
+  {
+    padding: 40px 0px 0px;
+  
+  }
+
+  .cb-getintouch-block
+  {
+    background: url(../../assets/images/cb-banner-getintouch.jpg);
+    min-height: 267px;
+  }
+.cb-getintouch-text
+{
+    font-size: 27px;
+    color: #fff;
+
+}
+.cb-getintouch-textblock
+{
+    padding-left: 600px;
+    padding-top: 60px;
+}
+
+.cb-getintouch-btn
+{
+    background: #cb3342;
+    color: #fff;
+    padding: 11px 25px;
+    font-size: 14px;
+    display: inline-block;
+    margin-top: 10px;
+    border:1px solid #cb3342;
+}
+.cb-getintouch-btn:hover
+{
+    background: #cb3342;
+    color: #fff;
+    padding: 11px 25px;
+    font-size: 14px;
+    display: inline-block;
+    margin-top: 10px;
+}
   /* How can we help you section  */
 
   .cb-helpsection-block
@@ -81,6 +127,11 @@ margin-top:40px;
       margin: 25px auto;
     
   }
+.cb-wehelp-block
+{
+    padding: 0px 0px 30px;
+}
+
 
 .cb-help-search input[type="search"]
 {
