@@ -1,0 +1,121 @@
+.cb-signup-popup a
+{
+    color: #cb3342;
+}
+.cb-signup-left
+{
+    position: relative;
+}
+.cb-signup-left , .cb-signup-right
+{
+    width:50%;
+    float: left;
+}
+.cb-signup-pay
+{
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.cb-signup-popup
+{
+    max-height: 585px;
+    overflow-y: scroll;
+    padding: 40px 0px;
+}
+.cb-signup-popup .left.float-left h3
+{
+    font-size: 35px;
+    font-weight: 600;
+    line-height: 34px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.cb-signup-popup .left.float-left span
+{
+color:#cb3342;
+}
+.cb-signup-popup .left.float-left p
+{
+color:#8692a6;
+text-transform: uppercase;
+
+}
+
+
+.cb-signup-popup .cb-submit-btn
+{
+    width:100%;
+    background: #cb3342;
+    color:#fff;
+    border: none;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 22px 0px;
+    margin: 10px 0px 20px;
+}
+.cb-payment-total p
+{
+    font-size: 14px;
+    font-weight: 600;
+    margin: 13px 0px;
+    border-top: 1px solid #e7e7e7;
+    padding: 13px 0px 15px;
+}
+
+.cb-payment-text
+{
+    font-size: 12px;
+}
+.cb-popup-close-signup
+{
+    position: absolute;
+    z-index: 3;
+    cursor: pointer;
+    left: 22px;
+    top: -10px;
+}
+.listing
+{
+    padding-left: 23px;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 11px;
+    line-height: 14px;
+    margin-top: 14px;
+}
+.cb-selected
+{
+font-weight: 600;
+text-transform: uppercase;
+margin: 15px 0px;
+}
+.cb-live-text
+{
+    margin: 20px 0px;
+    font-size: 18px;
+    font-weight: 600;
+}
+.cb-box
+{
+margin:15px 0px;
+background: #f7f7f7;
+text-align: center;
+box-shadow: 1px 0px 8px #cecece;
+margin: 40px auto 0px;
+    padding:10px 20px;
+    max-width: 300px;
+}
+.cb-doller-btn
+{
+    padding: 10px;
+    border: 2px solid #dbdbdb;
+    border-radius: 4px;
+    background: transparent;
+}
+
+.cb-signup-pay
+{
+text-align: center;
+margin-top: 10px;
+}
