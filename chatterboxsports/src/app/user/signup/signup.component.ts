@@ -23,12 +23,19 @@ export class SignupComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.createFormControls();
     this.createForm();
   }
 
-   /* start function for create form controls*/
-   createFormControls() {
+  /*start custom validator for check whitespace in user input*/ 
+  public noWhitespaceValidator(control: FormControl) {
+    let isWhitespace = (control.value || '').trim().length === 0;
+    let isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true }
+  }
+  /*end custom validator for check whitespace in user input*/ 
+
+  /* start- function for create form*/
+  createForm() {
     this.first_name = new FormControl('', [
       Validators.required,
       Validators.maxLength(50),
@@ -59,40 +66,19 @@ export class SignupComponent implements OnInit {
       Validators.required
     ]);
     this.terms = new FormControl('',Validators.required);
-  }
-   /* end function for create form controls*/
-
-  /*start custom validator for check whitespace in user input*/ 
-  public noWhitespaceValidator(control: FormControl) {
-    let isWhitespace = (control.value || '').trim().length === 0;
-    let isValid = !isWhitespace;
-    return isValid ? null : { 'whitespace': true }
-  }
-  /*end custom validator for check whitespace in user input*/ 
-
-  /* start function for create group of form controls*/
-  createForm() {
     this.signupform = new FormGroup({
       first_name: this.first_name,
       last_name: this.last_name,
       email_address: this.email_address,
       confirm_email_address: this.confirm_email_address,
       password: this.password,
+      confirm_password: this.confirm_password,
       terms: this.terms,
     });
   }
-  /* end function for create group of form controls*/
+  /* end- function for create form*/
 
-  /*start function for mobile number field validation*/
-  keyPress(event: any) {
-    const pattern = /[0-9\+\-\ ]/;
-    let inputChar = String.fromCharCode(event.charCode);
-    if (event.keyCode != 8 && !pattern.test(inputChar)) {
-      event.preventDefault();
-    }
-  }
-  /*end function for mobile number field validation*/
-
+  
   /*start- user signup function */
   // submitSignupForm() {
   //   this.isValidFormSubmitted = false;
