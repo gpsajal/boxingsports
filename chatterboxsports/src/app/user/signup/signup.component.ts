@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  model: any = {};
   signupform: FormGroup;
   first_name: FormControl;
   last_name: FormControl;
@@ -19,7 +20,7 @@ export class SignupComponent implements OnInit {
   confirm_password: FormControl;
   terms: FormControl;
   isFormValid: boolean = null;
-
+  loader:boolean = false;
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
@@ -60,7 +61,7 @@ export class SignupComponent implements OnInit {
       Validators.required,
       Validators.minLength(8),
       Validators.maxLength(20),
-      Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[ !"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~])[A-Za-z\d !"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~]{8,20}$/)
+      Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[ !"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~])[A-Za-z\d !"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~]{5,10}$/)
     ]);
     this.confirm_password = new FormControl('', [
       Validators.required
@@ -80,24 +81,107 @@ export class SignupComponent implements OnInit {
 
   
   /*start- user signup function */
-  // submitSignupForm() {
-  //   this.isValidFormSubmitted = false;
-	//   if(this.signupform.invalid){
-	// 	  return;	
-  //   }
-  //   this.isValidFormSubmitted = true;	
-  //   this.loader = true;
-
-  //   this.userService.userSignup(this.signupform.value)
-  //       .subscribe(
-  //           data => {
-  //               this.showErrors(data);
-  //           },
-  //           error => { 
-  //             this.isValidFormSubmitted = false;
-  //             this.showErrors(error);
-  //           }); 
-  // }
+  submitSignupForm() {
+    this.isFormValid = false;
+	  if(this.signupform.invalid){
+		  return;	
+    }
+    this.isFormValid = true;	
+    this.loader = true;
+delete this.signupform.value.terms;
+    this.userService.userSignup(this.signupform.value)
+        .subscribe(
+            data => {
+                this.displayResponse(data);
+            },
+            error => { 
+              this.isFormValid = false;
+              this.displayResponse(error);
+            }); 
+  }
   /*end- user signup function */
+
+    /*start- signup form validations messages*/
+    showErrors(errortype:string) {
+     
+      if(errortype == 'first_name')
+      {
+        return  this.first_name.hasError('required') ? 'This Field is required.' : 
+                this.first_name.hasError('maxlength') ? 'Maximun 50 characters allowed.' :
+                this.first_name.hasError('whitespace') ? 'Please enter valid data.' :
+                '';
+                
+      }
+      else if(errortype == 'last_name')
+      {
+        return  this.last_name.hasError('required') ? 'This Field is required.' : 
+                this.last_name.hasError('maxlength') ? 'Maximun 50 characters allowed.' :
+                this.last_name.hasError('whitespace') ? 'Please enter valid data.' :
+                '';
+                
+      }
+      else if(errortype == 'email_address')
+      {
+        return  this.email_address.hasError('required') ? 'This Field is required.' :
+                this.email_address.hasError('email') ? 'Please enter valid email.' :
+                this.email_address.hasError('pattern') ? 'Please enter valid email.' :
+                '';
+  
+      }
+      else if(errortype == 'confirm_email_address')
+      {
+        return  this.confirm_email_address.hasError('required') ? 'This Field is required.' :
+                this.confirm_email_address.hasError('email') ? 'Please enter valid email.' :
+                this.confirm_email_address.hasError('pattern') ? 'Please enter valid email.' :
+                '';
+  
+      }
+      else if(errortype == 'password')
+      {
+        return  this.password.hasError('required') ? 'This Field is required.' :
+                this.password.hasError('minlength') ? 'Password must contain at least 5 characters.' :
+                this.password.hasError('maxlength') ? 'Your password should not be greater than 10 characters.' :
+                this.password.hasError('pattern') ? 'Password should contain at least an alphabet, a number and a special character.' :
+                '';
+      }
+      else if(errortype == 'confirm_password')
+      {
+        return  this.confirm_password.hasError('required') ? 'This Field is required.' :
+        this.confirm_password.hasError('confirmpassword') ? 'Password does not match.' :
+                '';
+      }
+      else if(errortype == 'terms')
+      {
+        return  this.terms.hasError('required') ? 'This Field is required.' :
+                '';
+      }         
+    }
+    /*end- signup form validations messages*/
+
+    /*Start- function to display alert messages */
+  displayResponse(errorobject) {
+    if (errorobject.status === 400) {
+     var errordata = errorobject.error['details'];
+     errordata.forEach((key) => {
+       /*this.signupform.controls['error'].setErrors({
+         remote: message.message }); */
+         //this.errormsg = key.message;
+     });
+    }
+    else if (errorobject.status === 409) {
+     var errordata = errorobject.error['details'];
+     var responsedata = errorobject.error['response'];
+     errordata.forEach((key) => {
+         //this.infomsg = key.message;
+     });
+    }
+    else{
+     var successdata = errorobject['details'];
+     successdata.forEach((key) => {
+         //this.successmsg = key.message;
+     });
+    }
+   }
+   /*End- function to display alert messages */
 
 }

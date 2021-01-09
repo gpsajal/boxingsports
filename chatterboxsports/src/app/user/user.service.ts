@@ -20,7 +20,7 @@ export class UserService {
 
   /** POST: add a new hero to the server */
   userSignup(user: User): Observable<User> {
-    return this.http.post<User>(this.BASE_URL, user, this.httpOptions).pipe(
+    return this.http.post<User>(this.BASE_URL+'register', user, this.httpOptions).pipe(
       tap((newUser: User) => this.log('')),
       catchError(this.handleError<User>('registerUser'))
     );
