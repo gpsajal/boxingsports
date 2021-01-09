@@ -11,10 +11,7 @@ max-width: 650px;
 
 }
 
-.cb-signin-logo
-{
 
-}
 
 .cb-login-popup
 {
@@ -109,4 +106,14 @@ max-width: 650px;
 {
     display: block;
     clear: both;
+}
+.cb-bottom-circle-img
+{
+    position: absolute;
+    bottom: 4px;
+    left: -14px;
+}
+.cb-bottom-circle-img img
+{
+    width:120px;
 }
