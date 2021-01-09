@@ -3,19 +3,21 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LandingComponent } from './landing/landing.component';
-
-
+import { HomeRoutingModule } from './home-routing/home-routing.module';
+import { HomeService } from './home.service';
 @NgModule({
   declarations: [HeaderComponent,
     FooterComponent,
     LandingComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    HomeRoutingModule
   ],
   exports: [
     HeaderComponent,
     LandingComponent,
     FooterComponent,
-  ]
+  ],
+  providers: [HomeService]
 })
 export class HomeModule { }
