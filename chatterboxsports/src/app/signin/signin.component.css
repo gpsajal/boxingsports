@@ -1,0 +1,38 @@
+.cb-login-banner
+{
+background:url(../../assets/images/cb-login-banner.jpg);
+background-size: 100%;
+}
+.cb-login-popup
+{
+    min-width: 750px;
+}
+.cb-login-left , .cb-login-right
+{
+    width:50%;
+    float: left;
+}
+
+.cb-forgot-button
+{
+    display: block;
+}
+
+.cb-submit-btn
+{
+    width:100%;
+    background: #cb3342;
+    color:#fff;
+    border: none;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 22px 0px;
+    margin: 40px 0px 50px
+}
+.cb-right-inner-block
+{
+    max-width:425px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+}
