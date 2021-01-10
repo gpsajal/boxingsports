@@ -19,7 +19,7 @@ export class SigninComponent implements OnInit {
     const dialogRef = this.dialog.open(SignupComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      //console.log(`Dialog result: ${result}`);
     });
   }
 

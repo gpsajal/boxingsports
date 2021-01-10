@@ -5,6 +5,7 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 //import { setTimeout } from 'timers';
 import { environment } from '../../../environments/environment';
 import {MatDialog} from '@angular/material/dialog';
+import { AlertService }  from '../../common/index';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -22,7 +23,7 @@ export class SignupComponent implements OnInit {
   terms: FormControl;
   isFormValid: boolean = null;
   loader:boolean = false;
-  constructor(private userService: UserService,public dialog: MatDialog) { }
+  constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -89,7 +90,7 @@ export class SignupComponent implements OnInit {
     }
     this.isFormValid = true;	
     this.loader = true;
-delete this.signupform.value.terms;
+    delete this.signupform.value.terms;
     this.userService.userSignup(this.signupform.value)
         .subscribe(
             data => {
@@ -160,27 +161,20 @@ delete this.signupform.value.terms;
     /*end- signup form validations messages*/
 
     /*Start- function to display alert messages */
-  displayResponse(errorobject) {
-    if (errorobject.status === 400) {
-     var errordata = errorobject.error['details'];
-     errordata.forEach((key) => {
-       /*this.signupform.controls['error'].setErrors({
-         remote: message.message }); */
-         //this.errormsg = key.message;
-     });
+  displayResponse(responseobject) {
+    console.log(responseobject)
+    if (responseobject.status === 400) {
+     var errordata = responseobject.error.message;
+     console.log(errordata);
+     this.alertService.error(errordata);
     }
-    else if (errorobject.status === 409) {
-     var errordata = errorobject.error['details'];
-     var responsedata = errorobject.error['response'];
-     errordata.forEach((key) => {
-         //this.infomsg = key.message;
-     });
+    else if (responseobject.status === 409) {
+      var infodata = responseobject.error.message;
+      this.alertService.info(infodata);
     }
     else{
-     var successdata = errorobject['details'];
-     successdata.forEach((key) => {
-         //this.successmsg = key.message;
-     });
+      var successdata = responseobject.message;
+      this.alertService.success(successdata);
     }
    }
    /*End- function to display alert messages */

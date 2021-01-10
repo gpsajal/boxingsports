@@ -9,9 +9,12 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { HomeModule }    from './home/home.module';
 import { UserModule }    from './user/user.module';
+import { AlertService } from './common/alertService';
+import { AlertComponent } from './shared/alert/alert.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,7 @@ import { UserModule }    from './user/user.module';
     HomeModule,
     UserModule,
   ],
-  providers: [],
+  providers: [AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

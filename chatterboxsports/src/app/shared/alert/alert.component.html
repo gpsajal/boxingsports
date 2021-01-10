@@ -1,0 +1,6 @@
+<div class="outerframe"  *ngFor="let alert of alerts" >
+    <div class="{{ cssClass(alert) }} alert-dismissable">
+            <a class="close" (click)="removeAlert(alert)">&times;</a>
+    <p> {{alert.message}}</p>
+    </div>
+</div>

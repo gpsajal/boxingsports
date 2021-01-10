@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User} from './models/index';
-import { Observable, of } from 'rxjs';
+import { Observable, of, EMPTY, throwError  } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Router, ActivatedRoute, ParamMap  } from '@angular/router';
 import { environment } from '../../environments/environment';
@@ -14,7 +14,7 @@ export class UserService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private router: Router) { }
 
 
 
@@ -39,13 +39,29 @@ export class UserService {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
+      if (error.status === 400) {
+        return throwError (error);
+      }else if(error.status === 409){
+        return throwError (error);
+      }else if(error.status === 403){
+        return throwError (error);
+      }else if(error.status === 404){
+        return this.pageNotFoud();
+      }
+
       // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
+      //this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
+
+  pageNotFoud(): Observable<any>
+  {
+      this.router.navigate(['pagenotfound']);
+      return EMPTY;
+  } 
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
