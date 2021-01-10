@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 //import { setTimeout } from 'timers';
 import { environment } from '../../../environments/environment';
+import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -21,7 +22,7 @@ export class SignupComponent implements OnInit {
   terms: FormControl;
   isFormValid: boolean = null;
   loader:boolean = false;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -183,5 +184,10 @@ delete this.signupform.value.terms;
     }
    }
    /*End- function to display alert messages */
+
+   closeDialog()
+   {
+     this.dialog.closeAll();
+   }
 
 }

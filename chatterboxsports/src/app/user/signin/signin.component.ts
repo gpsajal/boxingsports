@@ -23,4 +23,9 @@ export class SigninComponent implements OnInit {
     });
   }
 
+  closeDialog()
+  {
+    this.dialog.closeAll();
+  }
+
 }
