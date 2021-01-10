@@ -21,6 +21,8 @@
     max-height: 585px;
     overflow-y: scroll;
     padding: 40px 0px;
+    min-width: 750px;
+    max-width: 786px;
 }
 .cb-signup-popup .left.float-left h3
 {
@@ -84,6 +86,10 @@ text-transform: uppercase;
     line-height: 14px;
     margin-top: 14px;
 }
+.cb-right-inner-block
+{
+    padding:0px 25px;
+}
 .cb-selected
 {
 font-weight: 600;
@@ -119,3 +125,16 @@ margin: 40px auto 0px;
 text-align: center;
 margin-top: 10px;
 }
+
+.form-group input
+{
+    position: relative;
+    top: 0;
+    border: 1px solid #d3d3d3;
+    padding: 12px;
+}
+.form-group .mat-form-field-invalid input
+{
+    border: 1px solid #f44336;
+}
+
