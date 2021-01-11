@@ -21,12 +21,12 @@ export class AlertComponent implements OnInit {
             }
             this.alerts.push(alert);
      setTimeout(() => 
-     this.removeAlert(alert), 8000);
+     this.removeAlert(alert), 10000);
         });
     }
 
     removeAlert(alert: Alert) {
-       // this.alerts = this.alerts.filter(x => x !== alert);
+        this.alerts = this.alerts.filter(x => x !== alert);
     }
 
     cssClass(alert: Alert) {

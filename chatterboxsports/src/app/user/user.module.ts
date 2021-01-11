@@ -9,6 +9,8 @@ import { UserService } from './user.service';
 import { PasswordValidatorDirective } from '../directives/password-validator.directive';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { AlertService, AuthenticationService }  from '../common/index';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
   declarations: [SignupComponent,
     SigninComponent,PasswordValidatorDirective],
@@ -21,6 +23,6 @@ import {MatInputModule} from '@angular/material/input';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [UserService]
+  providers: [UserService, AuthenticationService]
 })
 export class UserModule { }

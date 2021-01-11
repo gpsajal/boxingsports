@@ -26,6 +26,13 @@ export class UserService {
     );
   }
 
+  /** POST: add a new hero to the server */
+  userSignin(user: User): Observable<User> {
+    return this.http.post<User>(this.BASE_URL+'login', user, this.httpOptions).pipe(
+      tap((newUser: User) => this.log('')),
+      catchError(this.handleError<User>('loginUser'))
+    );
+  }
 
   /**
    * Handle Http operation that failed.

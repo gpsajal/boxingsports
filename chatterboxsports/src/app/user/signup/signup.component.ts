@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
-//import { setTimeout } from 'timers';
 import { environment } from '../../../environments/environment';
 import {MatDialog} from '@angular/material/dialog';
 import { AlertService }  from '../../common/index';
