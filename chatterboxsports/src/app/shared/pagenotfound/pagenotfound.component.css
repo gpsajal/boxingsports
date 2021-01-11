@@ -1,0 +1,47 @@
+.error-message-wrap
+{
+position:relative;
+top:0;
+bottom:0;
+left:0;
+right:0;
+min-height:400px;
+}
+
+.error-inner-box
+{
+    background: #aa1b2a;
+    box-shadow: 2px 2px 13px #474747;
+    text-align: center;
+    color: #fff;
+    max-width: 600px;
+    min-width: 300px;
+    margin: 45px auto;
+    padding: 48px 0px;
+}
+.error-inner-box img
+{
+    margin-bottom: 40px;
+}
+
+.error-number
+{
+    font-size:70px;
+    margin-bottom:40px;
+    font-weight: 600;
+    letter-spacing: 10x;
+    text-shadow: 1px 1px 5px #555;
+}
+
+.error-name
+{
+    font-size: 25px;
+    margin-bottom:25px;
+    letter-spacing: 2px;
+}
+
+.error-text
+{
+   
+    font-size:18px
+}
