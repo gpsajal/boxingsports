@@ -90,6 +90,7 @@ export class SignupComponent implements OnInit {
     this.isFormValid = true;	
     this.loader = true;
     delete this.signupform.value.terms;
+    this.signupform.value.stripeToken = 'pm_1I8qqtGV54ADk0vh6NPjo9ts';
     this.userService.userSignup(this.signupform.value)
         .subscribe(
             data => {
