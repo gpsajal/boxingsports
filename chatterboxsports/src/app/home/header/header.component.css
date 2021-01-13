@@ -1,23 +1,76 @@
-
-.cp-top-wrap
-{
+.cp-top-wrap {
     box-shadow: 0px 1px 9px #dedede;
 }
-.cp-nav-bg
-{
+
+.mobile-show a {
+    padding: .5rem 0rem;
+    display: block;
+    color: #373f41;
+    font-weight: 800;
+}
+
+.navbar-light .navbar-toggler {
+    color: transparent;
+    border-color: transparent;
+}
+
+button.navbar-toggler:focus {
+    outline: 1px dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+}
+
+.cp-nav-bg {
     background: #fff;
 }
 
-.cp-nav-loginbtn
-{
+.cp-nav-loginbtn {
     background: #cb3342;
     color: #fff;
     padding: 8px 20px;
     text-decoration: none;
 }
 
-.cb-navbar-nav
-{
+.cb-navbar-nav {
     margin: 0 auto;
 }
 
+.mobile-show {
+    display: none;
+}
+
+.login.desktop {
+    display: block;
+    background: #cb3342;
+    color: #fff;
+    padding: 11px 25px;
+    font-weight: 700;
+}
+
+.login.desktop:hover {
+    text-decoration: none;
+}
+
+.navbar-nav .nav-link {
+    color: #373f41;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-item.active .nav-link {
+    color: #cb3342;
+}
+
+@media (max-width:991px) {
+    .mobile-show {
+        display: block;
+    }
+    .login.desktop {
+        display: none;
+    }
+    .navbar-light .navbar-nav .nav-link,
+    .mobile-show a {
+        text-align: center;
+    }
+}

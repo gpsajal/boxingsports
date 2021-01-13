@@ -132,6 +132,10 @@
     .cb-signup-right {
         width: 100%;
     }
+    .cb-submit-btn {
+        padding: 15px 0px;
+        margin: 10px 0px 15px;
+    }
 }
 
 @media (max-width:480px) {

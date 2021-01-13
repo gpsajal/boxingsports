@@ -1,11 +1,13 @@
 html,
 body {
     height: 100%;
+    font-family: 'Mulish', sans-serif;
+    overflow-x: hidden;
 }
 
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: 'Mulish', sans-serif !important;
 }
 
 .mat-dialog-container {
