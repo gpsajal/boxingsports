@@ -1,16 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import { environment } from '../../../environments/environment';
 import {MatDialog} from '@angular/material/dialog';
 import { AlertService }  from '../../common/index';
+import { StripeService, StripeCardComponent } from 'ngx-stripe';
+import {
+  StripeCardElementOptions,
+  StripeElementsOptions
+} from '@stripe/stripe-js';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  @ViewChild(StripeCardComponent) card: StripeCardComponent;
+  cardOptions: StripeCardElementOptions = {
+    style: {
+      base: {
+        iconColor: '#666EE8',
+        color: '#31325F',
+        fontWeight: '300',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSize: '18px',
+        '::placeholder': {
+          color: '#CFD7E0'
+        }
+      }
+    }
+  };
+ 
+  elementsOptions: StripeElementsOptions = {
+    locale: 'en'
+  };
   model: any = {};
   signupform: FormGroup;
   first_name: FormControl;
@@ -22,7 +46,8 @@ export class SignupComponent implements OnInit {
   terms: FormControl;
   isFormValid: boolean = null;
   loader:boolean = false;
-  constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService) { }
+  singupButtonCaption:string = 'Complete Purchase';
+  constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService,private stripeService: StripeService) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -87,19 +112,37 @@ export class SignupComponent implements OnInit {
 	  if(this.signupform.invalid){
 		  return;	
     }
-    this.isFormValid = true;	
+    
     this.loader = true;
+    this.singupButtonCaption = 'payment processing...';
     delete this.signupform.value.terms;
-    this.signupform.value.stripeToken = 'pm_1I8qqtGV54ADk0vh6NPjo9ts';
-    this.userService.userSignup(this.signupform.value)
-        .subscribe(
-            data => {
-                this.displayResponse(data);
-            },
-            error => { 
-              this.isFormValid = false;
-              this.displayResponse(error);
-            }); 
+      this.isFormValid = true;	
+      //this.signupform.value.stripeToken = 'pm_1I8qqtGV54ADk0vh6NPjo9ts';
+      var name = this.signupform.value.first_name+' '+this.signupform.value.last_name;
+      this.stripeService
+      //.createToken(this.card.element, { name })
+      .createPaymentMethod ({
+    type: 'card',
+    card: this.card.element,
+    billing_details: {
+      name: name,
+      email:this.signupform.value.email_address
+    },
+  }).subscribe((result) => {
+        if (result.paymentMethod != undefined) {
+          // Use the token
+          this.signupform.value.stripeToken = result.paymentMethod.id;
+          console.log( result.paymentMethod.id);
+          this.saveUser();
+        } else if (result.error) {
+          // Error creating the token
+          this.isFormValid = false;
+          this.alertService.error(result.error.message);
+          this.singupButtonCaption = 'Complete Purchase';
+          console.log(result.error.message);
+        }
+      });
+     
   }
   /*end- user signup function */
 
@@ -162,7 +205,8 @@ export class SignupComponent implements OnInit {
 
     /*Start- function to display alert messages */
   displayResponse(responseobject) {
-    console.log(responseobject)
+    console.log(responseobject);
+    this.singupButtonCaption = 'Complete Purchase';
     if (responseobject.status === 400) {
      var errordata = responseobject.error.message;
      console.log(errordata);
@@ -184,4 +228,17 @@ export class SignupComponent implements OnInit {
      this.dialog.closeAll();
    }
 
+   /*Start- function for create stripe token*/
+   saveUser() {
+    this.userService.userSignup(this.signupform.value)
+    .subscribe(
+        data => {
+            this.displayResponse(data);
+        },
+        error => { 
+          this.isFormValid = false;
+          this.displayResponse(error);
+        }); 
+    }
+   /*End- function for create stripe token*/
 }

@@ -93,7 +93,7 @@
                             <!-- <label for="password">Password<sup>*</sup></label> -->
                             <mat-form-field>
                                 <mat-label>Password<sup>*</sup></mat-label>
-                                <input matInput type="password" class="form-control" id="cemail" formControlName="password" [(ngModel)]="model.password" maxLength="50" validateEqual="confirm_password" reverse="true">
+                                <input matInput type="password" class="form-control" id="pass" formControlName="password" [(ngModel)]="model.password" maxLength="50" validateEqual="confirm_password" reverse="true">
                                 <mat-error *ngIf="password.invalid">{{showErrors('password')}}</mat-error>
                             </mat-form-field>
                         </div>
@@ -103,7 +103,7 @@
                             <!-- <label for="cpassword">Confirm Password<sup>*</sup></label> -->
                             <mat-form-field>
                                 <mat-label>Confirm Password<sup>*</sup></mat-label>
-                                <input matInput type="password" class="form-control" id="cemail" formControlName="confirm_password" [(ngModel)]="model.confirm_password" maxLength="50" validateEqual="password" reverse="false">
+                                <input matInput type="password" class="form-control" id="cpass" formControlName="confirm_password" [(ngModel)]="model.confirm_password" maxLength="50" validateEqual="password" reverse="false">
                                 <mat-error *ngIf="confirm_password.invalid && signupform.controls.confirm_password.hasError('required')">
                                     {{showErrors('confirm_password')}}</mat-error>
                                 <mat-error *ngIf="confirm_password.invalid && !signupform.controls.confirm_password.hasError('required')">
@@ -136,11 +136,10 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <mat-form-field>
-                                    <mat-label>Email address<sup>*</sup></mat-label>
-                                    <input matInput type="text" class="form-control" id="" formControlName="">
-                                    <!-- <mat-error *ngIf="email_address.invalid">{{showErrors('email_address')}}</mat-error> -->
-                                </mat-form-field>
+                                <ngx-stripe-card
+                                    [options]="cardOptions"
+                                    [elementsOptions]="elementsOptions"
+                                ></ngx-stripe-card>
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -156,8 +155,7 @@
                         </div>
 
                         <div class="col-sm-12">
-                            <button class="cb-submit-btn" type="submit" [disabled]="isFormValid"> Complete
-                                Purchase</button>
+                            <button class="cb-submit-btn" type="submit" [disabled]="isFormValid"> {{singupButtonCaption}}</button>
                             <p class="cb-payment-text">Hy making this purchage, you authorize us to charge your credit or debit card agree to our Terms of service,Cookies Policy & Privacy and reperent that you are at least 16 years of age. Charges on your card will appear as OTT
                                 ISC SSPORTSNETWORK.
                             </p>

@@ -11,6 +11,7 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { AlertService, AuthenticationService }  from '../common/index';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxStripeModule } from 'ngx-stripe';
 @NgModule({
   declarations: [SignupComponent,
     SigninComponent,PasswordValidatorDirective],
@@ -21,7 +22,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxStripeModule.forRoot('pk_test_ahyaxlBCFVqNmlrlyMHTvUsb'),
   ],
   providers: [UserService, AuthenticationService]
 })
