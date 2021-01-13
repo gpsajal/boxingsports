@@ -1,29 +1,26 @@
-.cb-video-liveicon
-{
+.cb-video-liveicon {
     background: #c6c9d3;
     position: absolute;
     top: 4px;
     left: 19px;
     border-radius: 20px;
-    padding: 4px 5px;
+    padding: 0px 5px;
 }
 
-
-.cb-recentgames-block , .cb-livevideo-block , .cb-instantclassic-block
-{
-margin-top:40px;
+.cb-recentgames-block,
+.cb-livevideo-block,
+.cb-instantclassic-block {
+    margin-top: 40px;
 }
 
-.cb-video-liveicon span
-{
+.cb-video-liveicon span {
     font-size: 7px;
     font-weight: 600;
     letter-spacing: 1px;
     display: block;
 }
 
-.cb-video-liveicon span i
-{
+.cb-video-liveicon span i {
     background: #e83b4e;
     height: 6px;
     border-radius: 50%;
@@ -38,152 +35,157 @@ margin-top:40px;
 }
 
 @keyframes blink {
-    from, to {
-      opacity: 0;
+    from,
+    to {
+        opacity: 0;
     }
     50% {
-      opacity: 1;
+        opacity: 1;
     }
-  }
-  
-  .cb-video-head
-  {
-    color:#000;
+}
+
+.cb-video-head {
+    color: #000;
     margin: 0;
     font-size: 10px;
     margin-top: 10px;
-  }
+}
 
-  .cb-video-subhead
-  {
-    color:#737b7d;
+.cb-video-subhead {
+    color: #737b7d;
     margin: 0;
     font-size: 10px;
-  }
- 
+}
+
 
 /* get in touch section */
 
-
-  .cb-getintouch-section
-  {
+.cb-getintouch-section {
     padding: 40px 0px 0px;
-  
-  }
+}
 
-  .cb-getintouch-block
-  {
-    background: url(../../../assets/images/cb-banner-getintouch.jpg);
+.cb-getintouch-block {
+    background: url(../../../assets/images/cb-banner-getintouch.jpg) no-repeat;
     min-height: 267px;
-  }
-.cb-getintouch-text
-{
+}
+
+.cb-getintouch-text {
     font-size: 27px;
     color: #fff;
-
+    line-height: 29px;
 }
-.cb-getintouch-textblock
-{
+
+.cb-getintouch-textblock {
     padding-left: 600px;
     padding-top: 60px;
 }
 
-.cb-getintouch-btn
-{
+.cb-getintouch-btn {
     background: #cb3342;
     color: #fff;
     padding: 11px 25px;
     font-size: 14px;
     display: inline-block;
     margin-top: 10px;
-    border:1px solid #cb3342;
+    border: 1px solid #cb3342;
 }
-.cb-getintouch-btn:hover
-{
-    background: #cb3342;
-    color: #fff;
-    padding: 11px 25px;
-    font-size: 14px;
-    display: inline-block;
-    margin-top: 10px;
-}
-  /* How can we help you section  */
 
-  .cb-helpsection-block
-  {
+.cb-getintouch-btn:hover {
+    background: #cb3342;
+    color: #fff;
+    padding: 11px 25px;
+    font-size: 14px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+
+/* How can we help you section  */
+
+.cb-helpsection-block {
     padding: 40px 0px 0px;
-  }
-  .cb-wehelp-section
-  {
+}
+
+.cb-wehelp-section {
     padding: 40px 0px 0px;
     background: #faebee;
-  }
+}
 
-  .cb-help-search
-  {
-      position: relative;
-      width: 100%;
-      max-width: 700px;
-      margin: 25px auto;
-    
-  }
-.cb-wehelp-block
-{
+.cb-help-search {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    margin: 25px auto;
+}
+
+.cb-wehelp-block {
     padding: 0px 0px 30px;
 }
 
-
-.cb-help-search input[type="search"]
-{
+.cb-help-search input[type="search"] {
     width: 100%;
     max-width: 700px;
-    border:0px;
+    border: 0px;
     margin: 0 auto;
     display: block;
     background: #fff;
     box-shadow: 0px 0px 3px #e9e9e9;
     height: 56px;
     border-radius: 50px;
-    padding:14px;
+    padding: 14px;
 }
 
-.cb-help-search input[type="search"]
-{
+.cb-help-search input[type="search"] {
     outline: none;
 }
-.cb-help-search input[type="submit"]
-{
+
+.cb-help-search input[type="submit"] {
     position: absolute;
     right: 19px;
     top: 13px;
     text-indent: -100px;
 }
 
- 
+
 /* FAQ section  */
-.cb-faq-block
-{
-padding:40px 0px;
+
+.cb-faq-block {
+    padding: 40px 0px;
 }
 
-.cb-bg-color
-{
-    background:#fff;
-    color:#373f41;
-
+.cb-bg-color {
+    background: #fff;
+    color: #373f41;
 }
 
-.cb-faq-head-color
-{
-color:#373f41;
+.cb-faq-head-color {
+    color: #373f41;
 }
 
-.cb-faq-head
-{
+.cb-faq-head {
     margin-bottom: 35px;
 }
 
-.cb-faq-subhead
-{
+.cb-faq-subhead {
     margin-bottom: 20px;
+}
+
+@media(max-width:991px) {
+    .cb-getintouch-block {
+        position: relative;
+        background-position: 16%;
+    }
+    .cb-getintouch-textblock {
+        padding-left: 39px;
+        padding: 40px;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.5);
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+    .cb-getintouch-text {
+        font-size: 22px;
+    }
 }

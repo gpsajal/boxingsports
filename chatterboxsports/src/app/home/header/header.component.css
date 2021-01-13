@@ -1,23 +1,42 @@
-
-.cp-top-wrap
-{
+.cp-top-wrap {
     box-shadow: 0px 1px 9px #dedede;
 }
-.cp-nav-bg
-{
+
+.cp-nav-bg {
     background: #fff;
 }
 
-.cp-nav-loginbtn
-{
+.cp-nav-loginbtn {
     background: #cb3342;
     color: #fff;
     padding: 8px 20px;
     text-decoration: none;
 }
 
-.cb-navbar-nav
-{
+.cb-navbar-nav {
     margin: 0 auto;
 }
 
+.mobile-show {
+    display: none;
+}
+
+.login.desktop {
+    display: block;
+    background: #cb3342;
+    color: #fff;
+    padding: 11px 25px;
+}
+
+.login.desktop:hover {
+    text-decoration: none;
+}
+
+@media (max-width:991px) {
+    .mobile-show {
+        display: block;
+    }
+    .login.desktop {
+        display: none;
+    }
+}
