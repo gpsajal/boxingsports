@@ -5,7 +5,8 @@
 .mobile-show a {
     padding: .5rem 0rem;
     display: block;
-    color: rgba(0, 0, 0, .5);
+    color: #373f41;
+    font-weight: 800;
 }
 
 .navbar-light .navbar-toggler {

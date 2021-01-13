@@ -226,4 +226,22 @@
     .cb-getintouch-text {
         font-size: 22px;
     }
+    .how-help-text {
+        font-size: 31px;
+    }
+    .how-help-text {
+        font-size: 32px;
+    }
+}
+
+@media(max-width:568px) {
+    .cb-getintouch-text {
+        font-size: 19px;
+    }
+    .how-help-text {
+        font-size: 24px;
+    }
+    .cb-faq-block .col-sm-12 {
+        margin-bottom: 15px;
+    }
 }
