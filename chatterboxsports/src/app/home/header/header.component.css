@@ -2,6 +2,22 @@
     box-shadow: 0px 1px 9px #dedede;
 }
 
+.mobile-show a {
+    padding: .5rem 0rem;
+    display: block;
+    color: rgba(0, 0, 0, .5);
+}
+
+.navbar-light .navbar-toggler {
+    color: transparent;
+    border-color: transparent;
+}
+
+button.navbar-toggler:focus {
+    outline: 1px dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+}
+
 .cp-nav-bg {
     background: #fff;
 }
@@ -38,5 +54,9 @@
     }
     .login.desktop {
         display: none;
+    }
+    .navbar-light .navbar-nav .nav-link,
+    .mobile-show a {
+        text-align: center;
     }
 }

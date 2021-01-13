@@ -5,13 +5,14 @@ import { FooterComponent } from './footer/footer.component';
 import { LandingComponent } from './landing/landing.component';
 import { HomeRoutingModule } from './home-routing/home-routing.module';
 import { HomeService } from './home.service';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [HeaderComponent,
     FooterComponent,
     LandingComponent],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,MatIconModule
   ],
   exports: [
     HeaderComponent,
