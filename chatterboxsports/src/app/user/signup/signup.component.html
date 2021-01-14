@@ -136,10 +136,7 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <ngx-stripe-card
-                                    [options]="cardOptions"
-                                    [elementsOptions]="elementsOptions"
-                                ></ngx-stripe-card>
+                                <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -178,3 +175,26 @@
     <!-- Ends right block-->
 
 </div>
+
+<!-- Starts---Loader code -->
+<!-- <div class="cb-loader-overlay">
+    <img src="../../../assets/images/loading.gif">
+</div> -->
+<!-- Ends---Loader code -->
+
+<!-- Starts---Payment success code -->
+<div class="cb-payment-success">
+
+    <div class="cb-popup-close-signup">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="closeDialog()">close</mat-icon>
+    </div>
+
+    <div class="success-animation">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
+    </div>
+
+    <p class="payment-message">Payment Successful</p>
+    <p>Lorem ipsum Lklsajd jsahdkj asjdhs</p>
+</div>
+
+<!-- Ends---Payment success code -->
