@@ -47,6 +47,7 @@ export class SignupComponent implements OnInit {
   isFormValid: boolean = null;
   loader:boolean = false;
   singupButtonCaption:string = 'Complete Purchase';
+  isSignupPaymentStatus:boolean = false;
   constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService,private stripeService: StripeService) { }
 
   ngOnInit(): void {
@@ -218,6 +219,7 @@ export class SignupComponent implements OnInit {
     }
     else{
       var successdata = responseobject.message;
+      this.isSignupPaymentStatus = true;
       this.alertService.success(successdata);
     }
    }
