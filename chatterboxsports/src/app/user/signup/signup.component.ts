@@ -48,6 +48,7 @@ export class SignupComponent implements OnInit {
   loader:boolean = false;
   singupButtonCaption:string = 'Complete Purchase';
   isSignupPaymentStatus:boolean = false;
+  successMsg:string;
   constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService,private stripeService: StripeService) { }
 
   ngOnInit(): void {
@@ -115,7 +116,7 @@ export class SignupComponent implements OnInit {
     }
     
     this.loader = true;
-    this.singupButtonCaption = 'payment processing...';
+    this.singupButtonCaption = 'Please wait...';
     delete this.signupform.value.terms;
       this.isFormValid = true;	
       //this.signupform.value.stripeToken = 'pm_1I8qqtGV54ADk0vh6NPjo9ts';
@@ -138,6 +139,7 @@ export class SignupComponent implements OnInit {
         } else if (result.error) {
           // Error creating the token
           this.isFormValid = false;
+          this.loader = false;
           this.alertService.error(result.error.message);
           this.singupButtonCaption = 'Complete Purchase';
           console.log(result.error.message);
@@ -207,6 +209,7 @@ export class SignupComponent implements OnInit {
     /*Start- function to display alert messages */
   displayResponse(responseobject) {
     console.log(responseobject);
+    this.loader = false;
     this.singupButtonCaption = 'Complete Purchase';
     if (responseobject.status === 400) {
      var errordata = responseobject.error.message;
@@ -220,7 +223,8 @@ export class SignupComponent implements OnInit {
     else{
       var successdata = responseobject.message;
       this.isSignupPaymentStatus = true;
-      this.alertService.success(successdata);
+      //this.alertService.success(successdata);
+      this.successMsg = successdata;
     }
    }
    /*End- function to display alert messages */

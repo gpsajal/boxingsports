@@ -1,4 +1,4 @@
-<div class="cb-signup-popup">
+<div class="cb-signup-popup" *ngIf="!isSignupPaymentStatus">
     <!-- Starts Left block-->
 
     <div class="cb-signup-left">
@@ -177,13 +177,13 @@
 </div>
 
 <!-- Starts---Loader code -->
-<!-- <div class="cb-loader-overlay">
+<div class="cb-loader-overlay" *ngIf="loader">
     <img src="../../../assets/images/loading.gif">
-</div> -->
+</div>
 <!-- Ends---Loader code -->
 
 <!-- Starts---Payment success code -->
-<div class="cb-payment-success">
+<div class="cb-payment-success" *ngIf="isSignupPaymentStatus">
 
     <div class="cb-popup-close-signup">
         <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="closeDialog()">close</mat-icon>
@@ -194,7 +194,7 @@
     </div>
 
     <p class="payment-message">Payment Successful</p>
-    <p>Lorem ipsum Lklsajd jsahdkj asjdhs</p>
+    <p>{{successMsg}}</p>
 </div>
 
 <!-- Ends---Payment success code -->
