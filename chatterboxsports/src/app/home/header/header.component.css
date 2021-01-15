@@ -84,16 +84,40 @@ button.navbar-toggler:focus {
     color: #cb3342;
 }
 
+.usersection .profileicon {
+    display: inline-block;
+}
+
+.profileiconmobile {
+    display: none;
+}
+
+.usersection {
+    display: block;
+}
+
 @media (max-width:991px) {
+    .usersection {
+        display: none;
+    }
     .mobile-show {
         display: block;
     }
-    .login.desktop,
-    .usersection .logout {
+    .usersection a.login.desktop,
+    .usersection a.logout {
         display: none;
     }
     .navbar-light .navbar-nav .nav-link,
     .mobile-show a {
         text-align: center;
+    }
+    .usersection .profileicon {
+        display: none;
+    }
+    .profileiconmobile {
+        display: inline-block;
+        text-align: center;
+        font-weight: 800;
+        margin: 5px 0px;
     }
 }
