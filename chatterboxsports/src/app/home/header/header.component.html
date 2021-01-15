@@ -43,9 +43,9 @@
                 <!-- Ends - Menu items -->
 
                 <div class="usersection">
-                    <span>Hi! User  <img src="../../../assets/images/user-icon.png"> </span>
-                    <a class=" login desktop" href="javascript:void(0)" (click)="openSigninDialog()">Login</a>
-                    <a class="login logout" href="javascript:void(0)">Logout</a>
+                    <span *ngIf="fullname != undefined && fullname != ''">Hi {{fullname}}  <img src="../../../assets/images/user-icon.png"> </span>
+                    <a *ngIf="fullname == undefined || fullname == ''" class=" login desktop" href="javascript:void(0)" (click)="openSigninDialog()">Login</a>
+                    <a *ngIf="fullname != undefined && fullname != ''" class="login logout" href="javascript:void(0)"  (click)="userLogout()">Logout</a>
                 </div>
             </div>
         </nav>
