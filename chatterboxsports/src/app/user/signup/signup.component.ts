@@ -87,8 +87,8 @@ export class SignupComponent implements OnInit {
     ]);
     this.password = new FormControl('', [
       Validators.required,
-      Validators.minLength(8),
-      Validators.maxLength(20),
+      Validators.minLength(5),
+      Validators.maxLength(10),
       Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[ !"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~])[A-Za-z\d !"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~]{5,10}$/)
     ]);
     this.confirm_password = new FormControl('', [

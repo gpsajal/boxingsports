@@ -31,11 +31,11 @@
                         <li class="nav-item">
                             <a class="nav-link " href="#">FAQ</a>
                         </li>
-                        <li class="mobile-show">
+                        <li class="mobile-show" *ngIf="fullname == undefined || fullname == ''">
                             <a class="login" href="javascript:void(0)" (click)="openSigninDialog()">Login</a>
                         </li>
-                        <li class="mobile-show">
-                            <a class="login logout" href="javascript:void(0)" (click)="openSigninDialog()">Logout</a>
+                        <li class="mobile-show" *ngIf="fullname != undefined && fullname != ''">
+                            <a class="login logout" href="javascript:void(0)" (click)="userLogout()">Logout</a>
                         </li>
 
                     </ul>
