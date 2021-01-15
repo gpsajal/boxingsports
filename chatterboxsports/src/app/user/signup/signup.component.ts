@@ -87,8 +87,8 @@ export class SignupComponent implements OnInit {
     ]);
     this.password = new FormControl('', [
       Validators.required,
-      Validators.minLength(8),
-      Validators.maxLength(20),
+      Validators.minLength(5),
+      Validators.maxLength(10),
       Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[ !"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~])[A-Za-z\d !"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~]{5,10}$/)
     ]);
     this.confirm_password = new FormControl('', [
@@ -134,7 +134,7 @@ export class SignupComponent implements OnInit {
         if (result.paymentMethod != undefined) {
           // Use the token
           this.signupform.value.stripeToken = result.paymentMethod.id;
-          console.log( result.paymentMethod.id);
+         // console.log( result.paymentMethod.id);
           this.saveUser();
         } else if (result.error) {
           // Error creating the token
@@ -142,7 +142,7 @@ export class SignupComponent implements OnInit {
           this.loader = false;
           this.alertService.error(result.error.message);
           this.singupButtonCaption = 'Complete Purchase';
-          console.log(result.error.message);
+          //console.log(result.error.message);
         }
       });
      
@@ -208,12 +208,12 @@ export class SignupComponent implements OnInit {
 
     /*Start- function to display alert messages */
   displayResponse(responseobject) {
-    console.log(responseobject);
+   // console.log(responseobject);
     this.loader = false;
     this.singupButtonCaption = 'Complete Purchase';
     if (responseobject.status === 400) {
      var errordata = responseobject.error.message;
-     console.log(errordata);
+    // console.log(errordata);
      this.alertService.error(errordata);
     }
     else if (responseobject.status === 409) {

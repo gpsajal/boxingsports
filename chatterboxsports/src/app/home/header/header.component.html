@@ -31,11 +31,11 @@
                         <li class="nav-item">
                             <a class="nav-link " href="#">FAQ</a>
                         </li>
-                        <li class="mobile-show">
+                        <li class="mobile-show" *ngIf="fullname == undefined || fullname == ''">
                             <a class="login" href="javascript:void(0)" (click)="openSigninDialog()">Login</a>
                         </li>
-                        <li class="mobile-show">
-                            <a class="login logout" href="javascript:void(0)" (click)="openSigninDialog()">Logout</a>
+                        <li class="mobile-show" *ngIf="fullname != undefined && fullname != ''">
+                            <a class="login logout" href="javascript:void(0)" (click)="userLogout()">Logout</a>
                         </li>
                         <li class="profileiconmobile ">
                             <span class="profileicon">Hi! User  <img src="../../../assets/images/user-icon.png"> </span>
@@ -46,9 +46,9 @@
                 <!-- Ends - Menu items -->
 
                 <div class="usersection">
-                    <span class="profileicon">Hi! User  <img src="../../../assets/images/user-icon.png"> </span>
-                    <a class=" login desktop" href="javascript:void(0)" (click)="openSigninDialog()">Login</a>
-                    <a class="login logout" href="javascript:void(0)">Logout</a>
+                    <span class="profileicon" *ngIf="fullname != undefined && fullname != ''">Hi {{fullname}}  <img src="../../../assets/images/user-icon.png"> </span>
+                    <a *ngIf="fullname == undefined || fullname == ''" class=" login desktop" href="javascript:void(0)" (click)="openSigninDialog()">Login</a>
+                    <a *ngIf="fullname != undefined && fullname != ''" class="login logout" href="javascript:void(0)" (click)="userLogout()">Logout</a>
                 </div>
             </div>
         </nav>
