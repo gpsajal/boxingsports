@@ -37,8 +37,8 @@
                         <li class="mobile-show" *ngIf="fullname != undefined && fullname != ''">
                             <a class="login logout" href="javascript:void(0)" (click)="userLogout()">Logout</a>
                         </li>
-                        <li class="profileiconmobile ">
-                            <span class="profileicon">Hi! User  <img src="../../../assets/images/user-icon.png"> </span>
+                        <li class="profileiconmobile " *ngIf="fullname != undefined && fullname != ''">
+                            <span class="profileicon">Hi {{fullname}}   <img src="../../../assets/images/user-icon.png"> </span>
                         </li>
 
                     </ul>
