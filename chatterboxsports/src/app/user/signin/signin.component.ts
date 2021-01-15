@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { SignupComponent } from '../signup/signup.component';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog , MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
@@ -18,7 +18,9 @@ export class SigninComponent implements OnInit {
   pass: FormControl;
   isFormValid: boolean = null;
   loader:boolean = false;
-  constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService, private authservice:AuthenticationService) { }
+  userFullname:string;
+  userEmail:string;
+  constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService, private authservice:AuthenticationService,public dialogRef: MatDialogRef<SigninComponent>, @Inject(MAT_DIALOG_DATA) public data: any,) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -81,6 +83,7 @@ export class SigninComponent implements OnInit {
         .subscribe(
             data => {
                 this.displayResponse(data);
+                
             },
             error => { 
               this.isFormValid = false;
@@ -123,6 +126,10 @@ export class SigninComponent implements OnInit {
     else{
       var successdata = responseobject.message;
       this.alertService.success(successdata);
+      console.log(responseobject.data)
+      this.userFullname = responseobject.data.first_name+' '+responseobject.data.last_name;
+      this.userEmail = responseobject.data.email;;
+      this.dialogRef.close(this.userFullname);
     }
    }
    /*End- function to display alert messages */
