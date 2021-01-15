@@ -12,10 +12,7 @@
                     <div class="cb-dotte-img"></div>
                     <div class="cb-text-blck">
                         <img class="cb-comma" src="../../assets/images/cb-signin-comma.png">
-                        <p>The passage experienced a surge in popularity during the 1960s when Letraset used it on their
-                            dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with
-                            their
-                            software.
+                        <p>The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their software.
                         </p>
                         <p>Vincent Obi<i class="cb-tickicon"></i></p>
                         <img class="cb-corner float-right" src="../../assets/images/cb-signin-corner.png">
@@ -46,8 +43,7 @@
                     <!-- <label for="usr">Email address<sup>*</sup></label> -->
                     <mat-form-field>
                         <mat-label>Email address<sup>*</sup></mat-label>
-                        <input matInput type="text" class="form-control" id="email"
-                            formControlName="email" [(ngModel)]="model.email" maxLength="100">
+                        <input matInput type="text" class="form-control" id="email" formControlName="email" [(ngModel)]="model.email" maxLength="100">
                         <mat-error *ngIf="email.invalid">{{showErrors('email')}}</mat-error>
                     </mat-form-field>
                 </div>
@@ -55,8 +51,7 @@
                     <!-- <label for="pwd">Password<sup>*</sup></label> -->
                     <mat-form-field>
                         <mat-label>Password<sup>*</sup></mat-label>
-                        <input matInput type="password" class="form-control" id="password"
-                            formControlName="pass" [(ngModel)]="model.pass" maxLength="50">
+                        <input matInput type="password" class="form-control" id="password" formControlName="pass" [(ngModel)]="model.pass" maxLength="50">
                         <mat-error *ngIf="pass.invalid">{{showErrors('pass')}}</mat-error>
                     </mat-form-field>
                 </div>
@@ -75,3 +70,9 @@
         <!-- Starts right block-->
 
     </div>
+
+    <!-- Starts---Loader code -->
+    <div class="cb-loader-overlay">
+        <img src="../../../assets/images/loading.gif">
+    </div>
+    <!-- Ends---Loader code -->

@@ -10,13 +10,14 @@ body {
     top: 0;
     left: 0;
     right: 0;
+    z-index: 99;
     bottom: 0px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.4)
 }
 
 .cb-loader-overlay img {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     left: 50%;
     top: 50%;
     position: absolute;
