@@ -9,6 +9,20 @@
     font-weight: 800;
 }
 
+.usersection span {
+    font-weight: 700;
+    color: #cb3342;
+    margin-right: 10px;
+}
+
+.usersection span img {
+    margin-left: 5px;
+}
+
+.usersection a {
+    display: inline-block;
+}
+
 .navbar-light .navbar-toggler {
     color: transparent;
     border-color: transparent;
@@ -36,6 +50,14 @@ button.navbar-toggler:focus {
 
 .mobile-show {
     display: none;
+}
+
+.usersection .logout {
+    display: inline-block;
+    background: #cb3342;
+    color: #fff;
+    padding: 11px 25px;
+    font-weight: 700;
 }
 
 .login.desktop {
@@ -66,7 +88,8 @@ button.navbar-toggler:focus {
     .mobile-show {
         display: block;
     }
-    .login.desktop {
+    .login.desktop,
+    .usersection .logout {
         display: none;
     }
     .navbar-light .navbar-nav .nav-link,

@@ -20,7 +20,7 @@
 .cb-signup-popup {
     max-height: 585px;
     overflow-y: scroll;
-    padding: 40px 0px;
+    padding: 20px 0px;
     min-width: 750px;
     max-width: 786px;
 }
@@ -40,6 +40,7 @@
 .cb-signup-popup .left.float-left p {
     color: #8692a6;
     text-transform: uppercase;
+    font-size: 12px;
 }
 
 .cb-signup-popup .cb-submit-btn {
@@ -69,8 +70,8 @@
     position: absolute;
     z-index: 3;
     cursor: pointer;
-    left: 22px;
-    top: -10px;
+    left: 9px;
+    top: -9px;
 }
 
 .listing {
@@ -120,7 +121,22 @@
     margin-top: 10px;
 }
 
+.cb-signup-right {
+    position: relative;
+}
+
+.cb-popup-close-signup.mobileshow {
+    display: none;
+}
+
 @media (max-width:991px) {
+    .cb-popup-close-signup.mobileshow {
+        display: block;
+        display: block;
+        right: 9px;
+        left: auto;
+        top: -9px;
+    }
     .cb-signup-left {
         display: none;
         width: 100%;

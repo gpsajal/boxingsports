@@ -30,6 +30,11 @@
     <div class="cb-signup-right">
 
         <div class="cb-right-inner-block">
+            <!--Close button for mobile-->
+            <div class="cb-popup-close-signup mobileshow">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="closeDialog()">close</mat-icon>
+            </div>
+            <!--Close button for mobile-->
             <div class="left float-left">
                 <h3>BE A <br> <span>LIVE + </span></h3>
                 <p>Support Us & High school sports</p>
@@ -139,9 +144,9 @@
                                 <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <!-- <div class="col-sm-12">
                             Want to add a promo? <a href=""> Switch to a monthly plan</a>
-                        </div>
+                        </div> -->
                         <div class="col-sm-12 cb-payment-total">
                             <p>
                                 <span class="float-left">Total</span><span class="float-right">$13.99/Month</span>
@@ -153,7 +158,7 @@
 
                         <div class="col-sm-12">
                             <button class="cb-submit-btn" type="submit" [disabled]="isFormValid"> {{singupButtonCaption}}</button>
-                            <p class="cb-payment-text">Hy making this purchage, you authorize us to charge your credit or debit card agree to our Terms of service,Cookies Policy & Privacy and reperent that you are at least 16 years of age. Charges on your card will appear as OTT
+                            <p class="cb-payment-text">By making this purchase, you authorize us to charge your credit or debit card agree to our Terms of service,Cookies Policy & Privacy and represent that you are at least 16 years of age. Charges on your card will appear as OTT
                                 ISC SSPORTSNETWORK.
                             </p>
                         </div>

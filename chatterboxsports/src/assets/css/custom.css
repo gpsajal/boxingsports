@@ -202,6 +202,10 @@ body>alert .outerframe {
 
 /* tick animation */
 
+.form-group {
+    margin-bottom: 13px;
+}
+
 .success-animation {
     margin: 60px auto 30px;
 }
