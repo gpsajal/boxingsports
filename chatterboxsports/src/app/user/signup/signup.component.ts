@@ -10,6 +10,7 @@ import {
   StripeCardElementOptions,
   StripeElementsOptions
 } from '@stripe/stripe-js';
+import * as moment from 'moment'
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -49,9 +50,11 @@ export class SignupComponent implements OnInit {
   singupButtonCaption:string = 'Complete Purchase';
   isSignupPaymentStatus:boolean = false;
   successMsg:string;
+  subcriptionValidityDate:string;
   constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService,private stripeService: StripeService) { }
 
   ngOnInit(): void {
+    this.subcriptionValidityDate = moment().add(1, 'month').format('MMMM Do YYYY');
     this.createForm();
   }
 
