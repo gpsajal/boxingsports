@@ -87,9 +87,9 @@ export class SignupComponent implements OnInit {
     ]);
     this.password = new FormControl('', [
       Validators.required,
-      Validators.minLength(5),
-      Validators.maxLength(10),
-      Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[ !"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~])[A-Za-z\d !"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~]{5,10}$/)
+      Validators.minLength(4),
+      //Validators.maxLength(10),
+      Validators.pattern(/^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/)
     ]);
     this.confirm_password = new FormControl('', [
       Validators.required
@@ -187,9 +187,9 @@ export class SignupComponent implements OnInit {
       else if(errortype == 'password')
       {
         return  this.password.hasError('required') ? 'This Field is required.' :
-                this.password.hasError('minlength') ? 'Password must contain at least 5 characters.' :
-                this.password.hasError('maxlength') ? 'Your password should not be greater than 10 characters.' :
-                this.password.hasError('pattern') ? 'Password should contain at least an alphabet, a number and a special character.' :
+                this.password.hasError('minlength') ? 'Password must contain at least 4 characters.' :
+                //this.password.hasError('maxlength') ? 'Your password should not be greater than 10 characters.' :
+                this.password.hasError('pattern') ? 'Password must contain one uppercase and number.' :
                 '';
       }
       else if(errortype == 'confirm_password')

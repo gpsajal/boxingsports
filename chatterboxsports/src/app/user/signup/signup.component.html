@@ -98,7 +98,7 @@
                             <!-- <label for="password">Password<sup>*</sup></label> -->
                             <mat-form-field>
                                 <mat-label>Password<sup>*</sup></mat-label>
-                                <input matInput type="password" class="form-control" id="pass" formControlName="password" [(ngModel)]="model.password" maxLength="50" validateEqual="confirm_password" reverse="true">
+                                <input matInput type="password" class="form-control" id="pass" formControlName="password" [(ngModel)]="model.password" maxLength="100" validateEqual="confirm_password" reverse="true">
                                 <mat-error *ngIf="password.invalid">{{showErrors('password')}}</mat-error>
                             </mat-form-field>
                         </div>
@@ -108,7 +108,7 @@
                             <!-- <label for="cpassword">Confirm Password<sup>*</sup></label> -->
                             <mat-form-field>
                                 <mat-label>Confirm Password<sup>*</sup></mat-label>
-                                <input matInput type="password" class="form-control" id="cpass" formControlName="confirm_password" [(ngModel)]="model.confirm_password" maxLength="50" validateEqual="password" reverse="false">
+                                <input matInput type="password" class="form-control" id="cpass" formControlName="confirm_password" [(ngModel)]="model.confirm_password" maxLength="100" validateEqual="password" reverse="false">
                                 <mat-error *ngIf="confirm_password.invalid && signupform.controls.confirm_password.hasError('required')">
                                     {{showErrors('confirm_password')}}</mat-error>
                                 <mat-error *ngIf="confirm_password.invalid && !signupform.controls.confirm_password.hasError('required')">
