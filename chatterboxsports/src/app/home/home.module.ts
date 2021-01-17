@@ -6,10 +6,14 @@ import { LandingComponent } from './landing/landing.component';
 import { HomeRoutingModule } from './home-routing/home-routing.module';
 import { HomeService } from './home.service';
 import {MatIconModule} from '@angular/material/icon';
+import { LiveplusComponent } from './liveplus/liveplus.component';
+import { TourneyComponent } from './tourney/tourney.component';
 @NgModule({
   declarations: [HeaderComponent,
     FooterComponent,
-    LandingComponent],
+    LandingComponent,
+    LiveplusComponent,
+    TourneyComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,MatIconModule
@@ -18,6 +22,8 @@ import {MatIconModule} from '@angular/material/icon';
     HeaderComponent,
     LandingComponent,
     FooterComponent,
+    LiveplusComponent,
+    TourneyComponent
   ],
   providers: [HomeService]
 })
