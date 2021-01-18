@@ -8,12 +8,14 @@ import { HomeService } from './home.service';
 import {MatIconModule} from '@angular/material/icon';
 import { LiveplusComponent } from './liveplus/liveplus.component';
 import { TourneyComponent } from './tourney/tourney.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 @NgModule({
   declarations: [HeaderComponent,
     FooterComponent,
     LandingComponent,
     LiveplusComponent,
-    TourneyComponent],
+    TourneyComponent,
+    ScheduleComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,MatIconModule
