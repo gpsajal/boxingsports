@@ -6,67 +6,18 @@
         <div class="container">
 
             <!-- Starts live/upcoming block -->
-            <div class="cb-livevideo-block">
+            <div class="cb-livevideo-block" *ngIf="liveChannelVideos.length > 0">
                 <h5>LIVE/UPCOMING <a class="see-all-btn" href="">See All</a></h5>
                 <div class="row">
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
+                    <div class="col-sm-4 col-md-3 col-xl-2" *ngFor="let livevideo of liveChannelVideos">
+                        <!-- <div id="boxcast-widget-x4hskyp019znhujikckx"></div> -->
                         <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png" (click)="openVideoDialog('video-image-one.png')">
+                            <img height="106px" width="173px" src="{{livevideo.preview}}" (click)="openVideoDialog(livevideo.viewer_url)">
                             <div class="cb-video-liveicon">
                                 <span><i></i>LIVE</span>
                             </div>
-                            <p class="cb-video-head">Sports Center</p>
-                            <p class="cb-video-subhead">ESPN . SportsCenter</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span><i></i>LIVE</span>
-                            </div>
-                            <p class="cb-video-head">Sports Center</p>
-                            <p class="cb-video-subhead">ESPN . SportsCenter</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span><i></i>LIVE</span>
-                            </div>
-                            <p class="cb-video-head">Sports Center</p>
-                            <p class="cb-video-subhead">ESPN . SportsCenter</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span><i></i>LIVE</span>
-                            </div>
-                            <p class="cb-video-head">Sports Center</p>
-                            <p class="cb-video-subhead">ESPN . SportsCenter</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span><i></i>LIVE</span>
-                            </div>
-                            <p class="cb-video-head">Sports Center</p>
-                            <p class="cb-video-subhead">ESPN . SportsCenter</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span><i></i>LIVE</span>
-                            </div>
-                            <p class="cb-video-head">Sports Center</p>
-                            <p class="cb-video-subhead">ESPN . SportsCenter</p>
+                            <p class="cb-video-head">{{livevideo.name}}</p>
+                            <!-- <p class="cb-video-subhead">ESPN . SportsCenter</p> -->
                         </div>
                     </div>
                 </div>
@@ -143,70 +94,19 @@
             <!-- Ends recent games block -->
 
             <!-- Starts instant classic block -->
-            <div class="cb-instantclassic-block">
+            <div class="cb-instantclassic-block" *ngIf="instantClassicChannelVideos.length > 0">
                 <h5>INSTANT CLASSICS <a class="see-all-btn" href="">See All</a></h5>
                 <div class="row">
-                    <div class="col-sm-4 col-md-3 col-xl-2  ">
+                    <div class="col-sm-4 col-md-3 col-xl-2  " *ngFor="let instantvideo of instantClassicChannelVideos">
                         <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
+                            <img height="106px" width="173px" src="{{instantvideo.preview}}" (click)="openVideoDialog(instantvideo.viewer_url)">
                             <div class="cb-video-liveicon">
-                                <span>10:00</span>
+                                <span>{{instantvideo.durationTime}}</span>
                             </div>
-                            <p class="cb-video-head">Wed, 12/16 - Around the Hom Presented by Bulleit</p>
-                            <p class="cb-video-subhead">ESPN . Around The Horn</p>
+                            <p class="cb-video-head">{{instantvideo.name}}</p>
+                            <!-- <p class="cb-video-subhead">ESPN . Around The Horn</p> -->
                         </div>
                     </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2  ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span>10:00</span>
-                            </div>
-                            <p class="cb-video-head">Wed, 12/16 - Around the Hom Presented by Bulleit</p>
-                            <p class="cb-video-subhead">ESPN . Around The Horn</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2  ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span>10:00</span>
-                            </div>
-                            <p class="cb-video-head">Wed, 12/16 - Around the Hom Presented by Bulleit</p>
-                            <p class="cb-video-subhead">ESPN . Around The Horn</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2  ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span>10:00</span>
-                            </div>
-                            <p class="cb-video-head">Wed, 12/16 - Around the Hom Presented by Bulleit</p>
-                            <p class="cb-video-subhead">ESPN . Around The Horn</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2  ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span>10:00</span>
-                            </div>
-                            <p class="cb-video-head">Wed, 12/16 - Around the Hom Presented by Bulleit</p>
-                            <p class="cb-video-subhead">ESPN . Around The Horn</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2  ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span>10:00</span>
-                            </div>
-                            <p class="cb-video-head">Wed, 12/16 - Around the Hom Presented by Bulleit</p>
-                            <p class="cb-video-subhead">ESPN . Around The Horn</p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
             <!-- Ends instant classic block -->
@@ -299,3 +199,9 @@
 
 </div>
 <!-- End landing body section -->
+
+<!-- Starts---Loader code -->
+<div class="cb-loader-overlay" *ngIf="loader">
+    <img src="../../../assets/images/loading.gif">
+</div>
+<!-- Ends---Loader code -->
