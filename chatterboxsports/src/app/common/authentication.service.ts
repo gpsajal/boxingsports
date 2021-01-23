@@ -38,46 +38,7 @@ export class AuthenticationService {
         );
     } 
 
-    // getAuthorizationToken() {
-    //   if(localStorage.getItem('loggedInUser')) {
-    //     this.getLoggedInUser =  JSON.parse(localStorage.getItem('loggedInUser'));
-    //     this.token = this.getLoggedInUser.token;
-    //     if(this.token){
-    //       return this.getLoggedInUser;
-    //     }else{
-    //       return null;
-    //     }
-    //   }else{
-    //     return null;
-    //   }
-    // }
-
-  // logout(checkstatuscode): Observable<any> {
-  //   if(localStorage.getItem('loggedInUser')) {
-  //     this.getLoggedInUser =  JSON.parse(localStorage.getItem('loggedInUser'));
-  //     this.userId = this.getLoggedInUser.id;
-  //   }
-  //   if(checkstatuscode == 401){
-  //     this.getLoggedInUserName.emit(false);
-  //     localStorage.removeItem('loggedInUser');
-  //     window.location.reload();
-  //   }
-    
-  //   return this.http.post<any>(this.BASE_URL +'/logout',{},httpOptions).pipe(
-  //     tap(
-  //       data  => {
-  //         this.getLoggedInUserName.emit(false);
-  //         localStorage.removeItem('loggedInUser');
-         
-  //       },
-  //       error =>{
-  //          //console.log(error);
-  //       }
-  //     ),
-  //     catchError(this.handleError<User>('user logout'))
-  //   );
-  // }
-
+   
 
    /**
    * Handle Http operation that failed.

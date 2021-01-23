@@ -46,7 +46,8 @@ export class HeaderComponent implements OnInit {
     this.fullname = '';
     localStorage.removeItem('loggedInUser');
     this.alertService.success('User Logout Successfully');
-
+    setTimeout(()=>{ window.location.reload(); },4000);
+    
   }
 
 }
