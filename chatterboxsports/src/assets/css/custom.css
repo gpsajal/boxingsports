@@ -8,6 +8,14 @@ body {
 
 /*Starts Landing code */
 
+.cb-bg-color {
+    min-height: 700px;
+}
+
+.cb-video-block img {
+    cursor: pointer;
+}
+
 .cb-videos-section {
     margin-bottom: 40px;
 }
