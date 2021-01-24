@@ -1,9 +1,10 @@
-<p>shareddialog works! {{videoUrl}}</p>
+<!-- <p>shareddialog works! {{videoUrl}}</p> -->
 <!-- <img src="../../assets/images/{{videoUrl}}"> -->
 <!-- <video width="320" height="240" controls>
     <source src="https://boxcast.tv/view/270-hoops-2022-challenge-446599" type="video/mp4"
     Your browser does not support the video tag.
   </video> -->
+  <a (click)="closeDialog()">Close</a>
   <iframe width="900" height="500" allowfullscreen="true"
 [src]="videoUrl">
 </iframe>
