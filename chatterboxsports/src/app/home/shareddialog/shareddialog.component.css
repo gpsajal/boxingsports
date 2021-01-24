@@ -1,0 +1,21 @@
+.cb-video-popup {
+    min-width: 790px;
+    max-width: 790px;
+}
+
+.cb-popup-close {
+    float: right;
+}
+
+.cb-popup-close mat-icon {
+    top: 3px;
+    position: relative;
+    cursor: pointer;
+}
+
+@media(max-width:991px) {
+    .cb-video-popup {
+        min-width: 100%;
+        max-width: 100%;
+    }
+}
