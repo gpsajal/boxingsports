@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { AlertService, AuthenticationService }  from '../../common/index';
 import { HomeService } from '../home.service';
 import { environment } from 'src/environments/environment';
+import * as moment from 'moment'
 @Component({
   selector: 'app-liveplus',
   templateUrl: './liveplus.component.html',
@@ -123,6 +124,8 @@ export class LiveplusComponent implements OnInit {
            for(var i = 0; i<this.recentVideos.length; i++)
            {
             this.recentVideos[i].viewer_url = environment.BOXCAST_VIEWER_URL+this.recentVideos[i].channel_id;
+            this.recentVideos[i].starts_at = moment(this.recentVideos[i].starts_at).format(environment.DATE_TIME_FORMAT);
+            this.recentVideos[i].stops_at = moment(this.recentVideos[i].stops_at).format(environment.DATE_TIME_FORMAT);
            }
            //console.log(this.recentVideos);
         }

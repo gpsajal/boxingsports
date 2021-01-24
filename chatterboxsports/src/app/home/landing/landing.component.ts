@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { AlertService, AuthenticationService }  from '../../common/index';
 import { HomeService } from '../home.service';
 import { environment } from 'src/environments/environment';
+import * as moment from 'moment'
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -101,6 +102,8 @@ export class LandingComponent implements OnInit {
            {
             this.instantClassicChannelVideos[i].durationTime = this.convertSecondsToHms(this.instantClassicChannelVideos[i].recording_duration_seconds);
             this.instantClassicChannelVideos[i].viewer_url = environment.BOXCAST_VIEWER_URL+this.instantClassicChannelVideos[i].channel_id;
+            this.instantClassicChannelVideos[i].starts_at = moment(this.instantClassicChannelVideos[i].starts_at).format(environment.DATE_TIME_FORMAT);
+            this.instantClassicChannelVideos[i].stops_at = moment(this.instantClassicChannelVideos[i].stops_at).format(environment.DATE_TIME_FORMAT);
            }
            //console.log(this.instantClassicChannelVideos);
         }
@@ -148,6 +151,8 @@ export class LandingComponent implements OnInit {
            for(var i = 0; i<this.recentVideos.length; i++)
            {
             this.recentVideos[i].viewer_url = environment.BOXCAST_VIEWER_URL+this.recentVideos[i].channel_id;
+            this.recentVideos[i].starts_at = moment(this.recentVideos[i].starts_at).format(environment.DATE_TIME_FORMAT);
+            this.recentVideos[i].stops_at = moment(this.recentVideos[i].stops_at).format(environment.DATE_TIME_FORMAT);
            }
            //console.log(this.recentVideos);
         }
