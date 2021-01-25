@@ -7,16 +7,17 @@
 
             <!-- Starts live/upcoming block -->
             <div class="cb-livevideo-block" *ngIf="liveChannelVideos.length > 0">
-                <h5>LIVE/UPCOMING <a *ngIf="!isSeeAll && totalLiveVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="getLiveChannelData(0,totalLiveVideos,'seeall')">See All</a><a *ngIf="isSeeAll && totalLiveVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="getLiveChannelData(0,6)">See Less</a></h5>
+                <h5>LIVE/UPCOMING <a *ngIf="!isSeeAll && totalLiveVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="seeAllLive('true')">See All</a><a *ngIf="isSeeAll && totalLiveVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="seeAllLive('false')">See Less</a></h5>
                 <div class="row">
                     <div class="col-sm-4 col-md-3 col-xl-2" *ngFor="let livevideo of liveChannelVideos">
                         <!-- <div id="boxcast-widget-x4hskyp019znhujikckx"></div> -->
                         <div class="cb-video-block">
                             <img height="106px" width="173px" src="{{livevideo.preview}}" (click)="openVideoDialog(livevideo.viewer_url)">
-                            <div class="cb-video-liveicon">
+                            <div class="cb-video-liveicon" *ngIf="livevideo.isLive == 1">
                                 <span><i></i>LIVE</span>
                             </div>
                             <p class="cb-video-head">{{livevideo.name}}</p>
+                            <p class="cb-video-subhead">Broadcasted - {{livevideo.starts_at}} - {{livevideo.stops_at}}</p> 
                             <!-- <p class="cb-video-subhead">ESPN . SportsCenter</p> -->
                         </div>
                     </div>
@@ -26,7 +27,7 @@
 
             <!-- Starts recent games block -->
             <div class="cb-recentgames-block" *ngIf="recentVideos.length > 0">
-                <h5>RECENT GAMES <a *ngIf="!isSeeAllRecent && totalRecentVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="getRecentGamesData(0,totalRecentVideos,'seeall')">See All</a><a *ngIf="isSeeAllRecent && totalRecentVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="getRecentGamesData(0,6)">See Less</a></h5>
+                <h5>RECENT GAMES <a *ngIf="!isSeeAllRecent && totalRecentVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="seeAllRecent('true')">See All</a><a *ngIf="isSeeAllRecent && totalRecentVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="seeAllRecent('false')">See Less</a></h5>
                 <div class="row">
                     <div class="col-sm-4 col-md-3 col-xl-2" *ngFor="let livevideo of recentVideos">
                         <!-- <div id="boxcast-widget-x4hskyp019znhujikckx"></div> -->
