@@ -218,7 +218,7 @@ export class LandingComponent implements OnInit {
         this.isRecentSearchWorking = true;
         //this.recentVideos = find.one.in(this.recentVideosData).with({"name":value});
         this.recentVideos = this.recentVideosData.filter(item => {
-          if((item.name != null ) && item.name.toLowerCase().indexOf(value) !== -1) {
+          if((item.name != null ) && item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1) {
             return true;
           }
           return false;
