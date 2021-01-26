@@ -17,7 +17,7 @@
                                 <span><i></i>LIVE</span>
                             </div>
                             <p class="cb-video-head">{{livevideo.name}}</p>
-                            <p class="cb-video-subhead">Broadcasted - {{livevideo.starts_at}} - {{livevideo.stops_at}}</p> 
+                            <p class="cb-video-subhead">Broadcasted - {{livevideo.starts_at}} - {{livevideo.stops_at}}</p>
                             <!-- <p class="cb-video-subhead">ESPN . SportsCenter</p> -->
                         </div>
                     </div>
@@ -27,7 +27,15 @@
 
             <!-- Starts recent games block -->
             <div class="cb-recentgames-block" *ngIf="!loader">
-                <h5>RECENT GAMES <input type="text" value="" placeholder="Search here..." #searchrecent name="" (input)="filterRecenttData(searchrecent.value)">  <a *ngIf="!isSeeAllRecent && totalRecentVideos > 6 && isRecentSearchWorking == false" class="see-all-btn" href="javascript:void(0)" (click)="seeAllRecent('true')">See All</a><a *ngIf="isSeeAllRecent && totalRecentVideos > 6 && isRecentSearchWorking == false" class="see-all-btn" href="javascript:void(0)" (click)="seeAllRecent('false')">See Less</a></h5>
+                <h5 class="rec-games">RECENT GAMES
+                    <span class="search_input">
+                        <input class="" type="text" value="" placeholder="Search here..." #searchrecent name="" (input)="filterRecenttData(searchrecent.value)"> 
+                            <a href="" class="search-icon">
+                                  <mat-icon aria-hidden="false" aria-label="search icon">search</mat-icon>
+                            </a>
+                    </span>
+                    <a *ngIf="!isSeeAllRecent && totalRecentVideos > 6 && isRecentSearchWorking == false" class="see-all-btn" href="javascript:void(0)" (click)="seeAllRecent('true')">See All</a><a *ngIf="isSeeAllRecent && totalRecentVideos > 6 && isRecentSearchWorking == false"
+                        class="see-all-btn" href="javascript:void(0)" (click)="seeAllRecent('false')">See Less</a></h5>
                 <div class="row">
                     <div class="col-sm-4 col-md-3 col-xl-2" *ngFor="let livevideo of recentVideos">
                         <!-- <div id="boxcast-widget-x4hskyp019znhujikckx"></div> -->
@@ -37,17 +45,20 @@
                                 <!-- <span><i></i>LIVE</span> -->
                             </div>
                             <p class="cb-video-head">{{livevideo.name}}</p>
-                            <p class="cb-video-subhead">Broadcasted - {{livevideo.starts_at}} - {{livevideo.stops_at}}</p> 
+                            <p class="cb-video-subhead">Broadcasted - {{livevideo.starts_at}} - {{livevideo.stops_at}}</p>
                         </div>
                     </div>
-                    <p *ngIf="recentVideos.length == 0">No Record Found.</p>
+                    <div class="col-12">
+                        <p *ngIf="recentVideos.length == 0">No Record Found.</p>
+                    </div>
                 </div>
             </div>
             <!-- Ends recent games block -->
 
             <!-- Starts instant classic block -->
             <div class="cb-instantclassic-block" *ngIf="instantClassicChannelVideos.length > 0">
-                <h5>INSTANT CLASSICS <a *ngIf="!isSeeAllInstant && totalInstantVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="getInstantClassicChannelData(0,totalInstantVideos,'isSeeAllInstant')">See All</a><a *ngIf="isSeeAllInstant && totalInstantVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="getInstantClassicChannelData(0,6)">See Less</a></h5>
+                <h5>INSTANT CLASSICS <a *ngIf="!isSeeAllInstant && totalInstantVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="getInstantClassicChannelData(0,totalInstantVideos,'isSeeAllInstant')">See All</a><a *ngIf="isSeeAllInstant && totalInstantVideos > 6"
+                        class="see-all-btn" href="javascript:void(0)" (click)="getInstantClassicChannelData(0,6)">See Less</a></h5>
                 <div class="row">
                     <div class="col-sm-4 col-md-3 col-xl-2  " *ngFor="let instantvideo of instantClassicChannelVideos">
                         <div class="cb-video-block">
@@ -56,7 +67,7 @@
                                 <span>{{instantvideo.durationTime}}</span>
                             </div>
                             <p class="cb-video-head">{{instantvideo.name}}</p>
-                            <p class="cb-video-subhead">Broadcasted - {{instantvideo.starts_at}} - {{instantvideo.stops_at}}</p> 
+                            <p class="cb-video-subhead">Broadcasted - {{instantvideo.starts_at}} - {{instantvideo.stops_at}}</p>
                         </div>
                     </div>
                 </div>

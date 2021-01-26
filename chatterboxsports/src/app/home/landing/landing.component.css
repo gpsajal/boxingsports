@@ -1,0 +1,49 @@
+.search_input {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    top: 6px;
+}
+
+.search_input input {
+    border-radius: 20px;
+    border: 1px solid #c5c5c5;
+    font-size: 12px;
+    margin-left: 10px;
+    padding-left: 11px;
+    padding-right: 33px;
+}
+
+.search_input input:focus {
+    outline: none;
+}
+
+.search_input .search-icon {
+    position: absolute;
+    top: 0px;
+    color: #000;
+    right: 0;
+    background: #e6e6e6;
+    border-radius: 0px 28px 28px 0px;
+    padding: 2px 2px 0px 4px;
+}
+
+.search_input .search-icon mat-icon {
+    font-size: 21px;
+    color: #585858;
+}
+
+@media(max-width:480px) {
+    .search_input {
+        max-width: 200px;
+        display: block;
+        margin-top: 3px;
+    }
+    .search_input input {
+        margin-left: 0;
+    }
+    .rec-games .see-all-btn {
+        position: relative;
+        top: -47px;
+    }
+}
