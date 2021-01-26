@@ -26,8 +26,8 @@
             <!-- Ends live/upcoming block -->
 
             <!-- Starts recent games block -->
-            <div class="cb-recentgames-block" *ngIf="recentVideos.length > 0">
-                <h5>RECENT GAMES <a *ngIf="!isSeeAllRecent && totalRecentVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="seeAllRecent('true')">See All</a><a *ngIf="isSeeAllRecent && totalRecentVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="seeAllRecent('false')">See Less</a></h5>
+            <div class="cb-recentgames-block" *ngIf="!loader">
+                <h5>RECENT GAMES <input type="text" value="" placeholder="Search here..." #searchrecent name="" (input)="filterRecenttData(searchrecent.value)">  <a *ngIf="!isSeeAllRecent && totalRecentVideos > 6 && isRecentSearchWorking == false" class="see-all-btn" href="javascript:void(0)" (click)="seeAllRecent('true')">See All</a><a *ngIf="isSeeAllRecent && totalRecentVideos > 6 && isRecentSearchWorking == false" class="see-all-btn" href="javascript:void(0)" (click)="seeAllRecent('false')">See Less</a></h5>
                 <div class="row">
                     <div class="col-sm-4 col-md-3 col-xl-2" *ngFor="let livevideo of recentVideos">
                         <!-- <div id="boxcast-widget-x4hskyp019znhujikckx"></div> -->
@@ -40,6 +40,7 @@
                             <p class="cb-video-subhead">Broadcasted - {{livevideo.starts_at}} - {{livevideo.stops_at}}</p> 
                         </div>
                     </div>
+                    <p *ngIf="recentVideos.length == 0">No Record Found.</p>
                 </div>
             </div>
             <!-- Ends recent games block -->
@@ -109,7 +110,7 @@
     </section>
 
     <!-- Starts Frequently asked questions section -->
-    <section class="cb-faq-section">
+    <section class="cb-faq-section" id="faq">
         <div class="cb-faq-block">
             <div class="container">
                 <div class="row">

@@ -4,7 +4,8 @@ import {MatDialog} from '@angular/material/dialog';
 import { AlertService, AuthenticationService }  from '../../common/index';
 import { HomeService } from '../home.service';
 import { environment } from 'src/environments/environment';
-import * as moment from 'moment'
+import * as moment from 'moment';
+var find = require('arraysearch').Finder;
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -25,9 +26,10 @@ export class LandingComponent implements OnInit {
   isSeeAll:boolean = false;
   isSeeAllInstant:boolean = false;
   isSeeAllRecent:boolean = false;
+  recentTempData:any = [];
+  isRecentSearchWorking:boolean = false;
   ngOnInit(): void {
     this.getLiveChannelData(0,1000);
-    this.getInstantClassicChannelData(0,6);
   }
 
   /* Start- function for open video dialog*/
@@ -53,9 +55,9 @@ export class LandingComponent implements OnInit {
     this.loader = true;
     this.homeService.getLiveChannel('1',page,limit).subscribe(
       response => {
-        this.loader = false;
+        //this.loader = false;
         if (response != undefined) {
-          console.log(response);
+          //console.log(response);
           this.liveChannelVideosData = response.data.live;
            this.liveChannelVideos = this.liveChannelVideosData.slice(0,6);
            this.totalLiveVideos = this.liveChannelVideosData.length;
@@ -78,10 +80,11 @@ export class LandingComponent implements OnInit {
 
   /* Start- function for get Instant channel videos*/
   getInstantClassicChannelData(page,limit,isSeeAllInstant=''){
-    this.loader = true;
+   
     if(isSeeAllInstant != '')
     {
       this.isSeeAllInstant = true;
+       this.loader = true;
     }
     else
     {
@@ -132,19 +135,22 @@ export class LandingComponent implements OnInit {
     this.loader = true;
     this.homeService.getLiveChannel('1',page,limit).subscribe(
       response => {
-        this.loader = false;
+        
         if (response != undefined) {
           //console.log(response);
           this.recentVideosData = response.data.recent;
-           this.recentVideos = this.recentVideosData.slice(0,6);
-           this.totalRecentVideos = this.recentVideosData.length;
-           for(var i = 0; i<this.recentVideos.length; i++)
-           {
-            this.recentVideos[i].viewer_url = environment.BOXCAST_VIEWER_URL+this.recentVideos[i].channel_id;
-            this.recentVideos[i].starts_at = moment.utc(this.recentVideos[i].starts_at).local().format(environment.DATE_TIME_FORMAT);
-            this.recentVideos[i].stops_at = moment.utc(this.recentVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
-           }
-           //console.log(this.recentVideos);
+           this.convertDateutctolocal((err,data)=>{
+             if(data)
+             {
+              this.recentVideos = this.recentVideosData.slice(0,6);
+              this.recentTempData = this.recentVideosData;
+              this.totalRecentVideos = this.recentVideosData.length;
+              this.getInstantClassicChannelData(0,6);
+              //this.loader = false;
+             }
+           });
+           
+           
         }
       },
     error => {
@@ -153,6 +159,25 @@ export class LandingComponent implements OnInit {
     });
   }
   /* End- function for get recent games videos*/
+
+  convertDateutctolocal(callback)
+  {
+    if(this.recentVideosData.length > 0)
+    {
+      for(var i = 0; i<this.recentVideosData.length; i++)
+      {
+        this.recentVideosData[i].viewer_url = environment.BOXCAST_VIEWER_URL+this.recentVideosData[i].channel_id;
+        this.recentVideosData[i].starts_at = moment.utc(this.recentVideosData[i].starts_at).local().format(environment.DATE_TIME_FORMAT);
+        this.recentVideosData[i].stops_at = moment.utc(this.recentVideosData[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
+        if(i == this.recentVideosData.length-1)
+        {
+          console.log('jsdj');
+          callback('',true); 
+        }
+      }
+    }
+    
+  }
 
   seeAllRecent(isSeeAllRecent)
   {
@@ -184,6 +209,26 @@ export class LandingComponent implements OnInit {
       this.liveChannelVideos = this.liveChannelVideosData.slice(0,6);
     }
     setTimeout(()=>{this.loader = false; },2000);
+  }
+
+  filterRecenttData(value)
+  {
+      if(value != undefined && value != '')
+      {
+        this.isRecentSearchWorking = true;
+        //this.recentVideos = find.one.in(this.recentVideosData).with({"name":value});
+        this.recentVideos = this.recentVideosData.filter(item => {
+          if((item.name != null ) && item.name.toLowerCase().indexOf(value) !== -1) {
+            return true;
+          }
+          return false;
+        });
+      }
+      else
+      {
+           this.isRecentSearchWorking = false;
+           this.recentVideos = this.recentVideosData.slice(0,6);
+      }
   }
 
 
