@@ -490,6 +490,27 @@ body>alert .outerframe {
     animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
 }
 
+.jwplayer .jw-media video {
+    position: fixed !important;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 500px;
+    height: 300px;
+    margin: auto;
+    background: transparent;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-focus-ring-color: rgba(0,0,0,0);
+    outline: none;
+}
+
+.jw-overlays, .jw-controls, .jw-flag-small-player .jw-settings-menu {
+    position: fixed !important;
+    bottom: 0;
+    right: 0;
+}
+
 @keyframes stroke {
     100% {
         stroke-dashoffset: 0;

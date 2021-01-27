@@ -4,6 +4,7 @@ import { AlertService, AuthenticationService }  from '../../common/index';
 import { HomeService } from '../home.service';
 import { environment } from 'src/environments/environment';
 import { SignupComponent } from '../../user/signup/signup.component';
+import { SigninComponent } from '../../user/signin/signin.component';
 import {MatDialog , MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import * as moment from 'moment'
 @Component({
@@ -173,7 +174,7 @@ export class LiveplusComponent implements OnInit {
   openSignupDialog()
   {
     this.dialog.closeAll();
-    const dialogRef = this.dialog.open(SignupComponent);
+    const dialogRef = this.dialog.open(SigninComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       //console.log(`Dialog result: ${result}`);

@@ -12,7 +12,7 @@
                     <div class="col-sm-4 col-md-3 col-xl-2" *ngFor="let livevideo of livePlusChannelVideos">
                         <!-- <div id="boxcast-widget-x4hskyp019znhujikckx"></div> -->
                         <div class="cb-video-block">
-                            <img height="106px" width="173px" src="{{livevideo.preview}}" (click)="openVideoDialog(livevideo.viewer_url)">
+                            <img height="106px" width="173px" src="{{livevideo.preview}}" (click)="openVideoDialog(livevideo.id)">
                             <div class="cb-video-liveicon" *ngIf="livevideo.isLive == 1">
                                 <span><i></i>LIVE</span>
                             </div>
@@ -32,7 +32,7 @@
                     <div class="col-sm-4 col-md-3 col-xl-2" *ngFor="let livevideo of recentVideos">
                         <!-- <div id="boxcast-widget-x4hskyp019znhujikckx"></div> -->
                         <div class="cb-video-block">
-                            <img height="106px" width="173px" src="{{livevideo.preview}}" (click)="openVideoDialog(livevideo.viewer_url)">
+                            <img height="106px" width="173px" src="{{livevideo.preview}}" (click)="openVideoDialog(livevideo.id)">
                             <div class="cb-video-liveicon">
                                 <!-- <span><i></i>LIVE</span> -->
                             </div>
