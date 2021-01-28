@@ -13,6 +13,18 @@
     cursor: pointer;
 }
 
+.videoplayer {
+    position: relative;
+}
+
+.videoplayer .cb-popup-close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    z-index: 999999;
+    color: #fff;
+}
+
 @media(max-width:991px) {
     .cb-video-popup {
         min-width: 100%;
