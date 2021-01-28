@@ -12,14 +12,6 @@
     position: relative;
     cursor: pointer;
 }
-.jwplayer .jw-media video {
-    position: fixed !important;
-    /*width: 500px !important;
-    height: 300px !important;*/
-}
-.jw-overlays, .jw-controls, .jw-flag-small-player .jw-settings-menu {
-    position: fixed !important;
-}
 
 @media(max-width:991px) {
     .cb-video-popup {

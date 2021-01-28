@@ -8,6 +8,47 @@ body {
 
 /*Starts Landing code */
 
+.video-container {
+    position: relative;
+    width: 500px !important;
+    height: 300px !important;
+}
+
+.video-container .jwplayer.jw-flag-aspect-mode {
+    height: 100%!important;
+}
+
+#js-video p span {
+    display: block;
+    text-align: center;
+    color: #ff0800;
+    font-size: 16px;
+}
+
+.video-container #js-video p {
+    position: absolute !important;
+    display: block;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.jwplayer.jw-flag-aspect-mode {
+    width: 100%;
+    position: absolute;
+    height: auto!important;
+}
+
+.video-container .jwplayer.jw-flag-aspect-mode .jw-video {
+    width: 100% !important;
+    height: 100% !important;
+    position: inherit !important;
+}
+
+.video-container .jwplayer.jw-flag-aspect-mode .jw-controls.jw-reset {
+    position: inherit !important;
+}
+
 .cb-bg-color,
 .cb-bg-color .cb-videos-section {
     min-height: 700px;
@@ -500,12 +541,14 @@ body>alert .outerframe {
     height: 300px;
     margin: auto;
     background: transparent;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    -webkit-focus-ring-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-focus-ring-color: rgba(0, 0, 0, 0);
     outline: none;
 }
 
-.jw-overlays, .jw-controls, .jw-flag-small-player .jw-settings-menu {
+.jw-overlays,
+.jw-controls,
+.jw-flag-small-player .jw-settings-menu {
     position: fixed !important;
     bottom: 0;
     right: 0;
@@ -592,5 +635,13 @@ body>alert .outerframe {
     }
     .cb-faq-block .col-sm-12 {
         margin-bottom: 15px;
+    }
+    .video-container {
+        position: relative;
+        width: 300px !important;
+        height: 200px !important;
+    }
+    .video-container p {
+        font-size: 12px;
     }
 }
