@@ -71,6 +71,7 @@ export class LiveplusComponent implements OnInit {
            {
             //this.livePlusChannelVideos[i].durationTime = this.convertSecondsToHms(this.livePlusChannelVideos[i].recording_duration_seconds);
             this.livePlusChannelVideos[i].viewer_url = environment.BOXCAST_VIEWER_URL+this.livePlusChannelVideos[i].channel_id;
+            this.livePlusChannelVideos[i].upcomingData = moment.utc(this.livePlusChannelVideos[i].starts_at).local().format(environment.UPCOMING_DATE_TIME_FORMAT);
             this.livePlusChannelVideos[i].starts_at = moment.utc(this.livePlusChannelVideos[i].starts_at).local().format(environment.DATE_TIME_FORMAT);
             this.livePlusChannelVideos[i].stops_at = moment.utc(this.livePlusChannelVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }
@@ -125,6 +126,7 @@ export class LiveplusComponent implements OnInit {
            for(var i = 0; i<this.recentVideos.length; i++)
            {
             this.recentVideos[i].viewer_url = environment.BOXCAST_VIEWER_URL+this.recentVideos[i].channel_id;
+            this.recentVideosData[i].durationTime =  moment.utc(moment(this.recentVideosData[i].stops_at).diff(moment(this.recentVideosData[i].starts_at))).format("HH:mm:ss");
             this.recentVideos[i].starts_at = moment.utc(this.recentVideos[i].starts_at).local().format(environment.DATE_TIME_FORMAT);
             this.recentVideos[i].stops_at = moment.utc(this.recentVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }

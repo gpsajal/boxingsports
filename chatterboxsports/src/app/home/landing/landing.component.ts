@@ -64,6 +64,7 @@ export class LandingComponent implements OnInit {
            for(var i = 0; i<this.liveChannelVideos.length; i++)
            {
             this.liveChannelVideos[i].viewer_url = environment.BOXCAST_VIEWER_URL+this.liveChannelVideos[i].channel_id;
+            this.liveChannelVideos[i].upcomingData = moment.utc(this.liveChannelVideos[i].starts_at).local().format(environment.UPCOMING_DATE_TIME_FORMAT);
             this.liveChannelVideos[i].starts_at = moment.utc(this.liveChannelVideos[i].starts_at).local().format(environment.DATE_TIME_FORMAT);
             this.liveChannelVideos[i].stops_at = moment.utc(this.liveChannelVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }
@@ -101,12 +102,12 @@ export class LandingComponent implements OnInit {
            for(var i = 0; i<this.instantClassicChannelVideos.length; i++)
            {
            // this.instantClassicChannelVideos[i].durationTime = this.convertSecondsToHms(this.instantClassicChannelVideos[i].recording_duration_seconds);
-            this.instantClassicChannelVideos[i].durationTime =  moment.utc(moment(this.instantClassicChannelVideos[i].stops_at).diff(moment(this.instantClassicChannelVideos[i].starts_at))).format("HH:mm");
+            this.instantClassicChannelVideos[i].durationTime =  moment.utc(moment(this.instantClassicChannelVideos[i].stops_at).diff(moment(this.instantClassicChannelVideos[i].starts_at))).format("HH:mm:ss");
             this.instantClassicChannelVideos[i].viewer_url = environment.BOXCAST_VIEWER_URL+this.instantClassicChannelVideos[i].channel_id;
             this.instantClassicChannelVideos[i].starts_at = moment.utc(this.instantClassicChannelVideos[i].starts_at).local().format(environment.DATE_TIME_FORMAT);
             this.instantClassicChannelVideos[i].stops_at = moment.utc(this.instantClassicChannelVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }
-           console.log(this.instantClassicChannelVideos);
+           //console.log(this.instantClassicChannelVideos);
         }
       },
     error => {
@@ -168,6 +169,7 @@ export class LandingComponent implements OnInit {
       for(var i = 0; i<this.recentVideosData.length; i++)
       {
         this.recentVideosData[i].viewer_url = environment.BOXCAST_VIEWER_URL+this.recentVideosData[i].channel_id;
+        this.recentVideosData[i].durationTime =  moment.utc(moment(this.recentVideosData[i].stops_at).diff(moment(this.recentVideosData[i].starts_at))).format("HH:mm:ss");
         this.recentVideosData[i].starts_at = moment.utc(this.recentVideosData[i].starts_at).local().format(environment.DATE_TIME_FORMAT);
         this.recentVideosData[i].stops_at = moment.utc(this.recentVideosData[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
         if(i == this.recentVideosData.length-1)

@@ -13,8 +13,9 @@
                         <!-- <div id="boxcast-widget-x4hskyp019znhujikckx"></div> -->
                         <div class="cb-video-block">
                             <img height="106px" width="173px" src="{{livevideo.preview}}" (click)="openVideoDialog(livevideo.id)">
-                            <div class="cb-video-liveicon" *ngIf="livevideo.isLive == 1">
-                                <span><i></i>LIVE</span>
+                            <div class="cb-video-liveicon" >
+                                <span *ngIf="livevideo.isLive == 1"><i></i>LIVE</span>
+                                <span *ngIf="livevideo.isLive == 0">{{livevideo.starts_at}}</span>
                             </div>
                             <p class="cb-video-head">{{livevideo.name}}</p>
                             <p class="cb-video-subhead">Broadcasted - {{livevideo.starts_at}} - {{livevideo.stops_at}}</p>
@@ -42,7 +43,7 @@
                         <div class="cb-video-block">
                             <img height="106px" width="173px" src="{{livevideo.preview}}" (click)="openVideoDialog(livevideo.id)">
                             <div class="cb-video-liveicon">
-                                <span>{{livevideo.starts_at}}</span>
+                                <span>{{livevideo.durationTime}}</span>
                             </div>
                             <p class="cb-video-head">{{livevideo.name}}</p>
                             <p class="cb-video-subhead">Broadcasted - {{livevideo.starts_at}} - {{livevideo.stops_at}}</p>
