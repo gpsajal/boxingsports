@@ -17,7 +17,7 @@ export class ShareddialogComponent implements OnInit {
     {
       //this.videoUrl = this._sanitizer.bypassSecurityTrustResourceUrl(this.shareddata.videoUrl);
       this.videoUrl = this.shareddata.videoUrl;
-      console.log(this.videoUrl);
+      //console.log(this.videoUrl);
       //console.log(this.videoUrl);
     }
     //var BOXCAST_BROADCAST_ID = '777670';
