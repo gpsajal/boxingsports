@@ -42,7 +42,7 @@
                         <div class="cb-video-block">
                             <img height="106px" width="173px" src="{{livevideo.preview}}" (click)="openVideoDialog(livevideo.id)">
                             <div class="cb-video-liveicon">
-                                <!-- <span><i></i>LIVE</span> -->
+                                <span>{{livevideo.starts_at}}</span>
                             </div>
                             <p class="cb-video-head">{{livevideo.name}}</p>
                             <p class="cb-video-subhead">Broadcasted - {{livevideo.starts_at}} - {{livevideo.stops_at}}</p>

@@ -100,12 +100,13 @@ export class LandingComponent implements OnInit {
            //console.log(this.instantClassicChannelVideos);
            for(var i = 0; i<this.instantClassicChannelVideos.length; i++)
            {
-            this.instantClassicChannelVideos[i].durationTime = this.convertSecondsToHms(this.instantClassicChannelVideos[i].recording_duration_seconds);
+           // this.instantClassicChannelVideos[i].durationTime = this.convertSecondsToHms(this.instantClassicChannelVideos[i].recording_duration_seconds);
+            this.instantClassicChannelVideos[i].durationTime =  moment.utc(moment(this.instantClassicChannelVideos[i].stops_at).diff(moment(this.instantClassicChannelVideos[i].starts_at))).format("HH:mm");
             this.instantClassicChannelVideos[i].viewer_url = environment.BOXCAST_VIEWER_URL+this.instantClassicChannelVideos[i].channel_id;
             this.instantClassicChannelVideos[i].starts_at = moment.utc(this.instantClassicChannelVideos[i].starts_at).local().format(environment.DATE_TIME_FORMAT);
             this.instantClassicChannelVideos[i].stops_at = moment.utc(this.instantClassicChannelVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }
-           //console.log(this.instantClassicChannelVideos);
+           console.log(this.instantClassicChannelVideos);
         }
       },
     error => {
