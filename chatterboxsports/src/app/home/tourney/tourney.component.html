@@ -6,67 +6,20 @@
         <div class="container">
 
             <!-- Starts live/upcoming block -->
-            <div class="cb-livevideo-block">
-                <h5>RECENT GAMES <a class="see-all-btn" href="">See All</a></h5>
+            <div class="cb-livevideo-block" *ngIf="tourneyChannelVideos.length > 0">
+                <h5>LIVE/UPCOMING <a *ngIf="!isSeeAll" class="see-all-btn" href="javascript:void(0)" (click)="seeAllLive('true')">See All</a><a *ngIf="isSeeAll" class="see-all-btn" href="javascript:void(0)" (click)="seeAllLive('false')">See Less</a></h5>
                 <div class="row">
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
+                    <div class="col-sm-4 col-md-3 col-xl-2" *ngFor="let livevideo of tourneyChannelVideos">
+                        <!-- <div id="boxcast-widget-x4hskyp019znhujikckx"></div> -->
                         <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
+                            <img height="106px" width="173px" src="{{livevideo.preview}}" (click)="openVideoDialog(livevideo.id)">
                             <div class="cb-video-liveicon">
-                                <span><i></i>LIVE</span>
+                                <span *ngIf="livevideo.isLive == 1"><i></i>LIVE</span>
+                                <span *ngIf="livevideo.isLive == 0">{{livevideo.durationTime}}</span>
                             </div>
-                            <p class="cb-video-head">Sports Center</p>
-                            <p class="cb-video-subhead">ESPN . SportsCenter</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span><i></i>LIVE</span>
-                            </div>
-                            <p class="cb-video-head">Sports Center</p>
-                            <p class="cb-video-subhead">ESPN . SportsCenter</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span><i></i>LIVE</span>
-                            </div>
-                            <p class="cb-video-head">Sports Center</p>
-                            <p class="cb-video-subhead">ESPN . SportsCenter</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span><i></i>LIVE</span>
-                            </div>
-                            <p class="cb-video-head">Sports Center</p>
-                            <p class="cb-video-subhead">ESPN . SportsCenter</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span><i></i>LIVE</span>
-                            </div>
-                            <p class="cb-video-head">Sports Center</p>
-                            <p class="cb-video-subhead">ESPN . SportsCenter</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/video-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span><i></i>LIVE</span>
-                            </div>
-                            <p class="cb-video-head">Sports Center</p>
-                            <p class="cb-video-subhead">ESPN . SportsCenter</p>
+                            <p class="cb-video-head">{{livevideo.name}}</p>
+                            <p class="cb-video-subhead">Broadcasted - {{livevideo.starts_at}} - {{livevideo.stops_at}}</p> 
+                            <!-- <p class="cb-video-subhead">ESPN . SportsCenter</p> -->
                         </div>
                     </div>
                 </div>
@@ -74,75 +27,25 @@
             <!-- Ends live/upcoming block -->
 
             <!-- Starts recent games block -->
-            <div class="cb-recentgames-block">
-                <h5>TOP RECENT GAMES <a class="see-all-btn" href="">See All</a></h5>
+            <div class="cb-recentgames-block" *ngIf="recentVideos.length > 0">
+                <h5>RECENT GAMES <a *ngIf="!isSeeAllRecent && totalRecentVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="seeAllRecent('true')">See All</a><a *ngIf="isSeeAllRecent && totalRecentVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="seeAllRecent('false')">See Less</a></h5>
                 <div class="row">
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
+                    <div class="col-sm-4 col-md-3 col-xl-2" *ngFor="let livevideo of recentVideos">
+                        <!-- <div id="boxcast-widget-x4hskyp019znhujikckx"></div> -->
                         <div class="cb-video-block">
-                            <img src="../../assets/images/instantclassic-image-one.png">
+                            <img height="106px" width="173px" src="{{livevideo.preview}}" (click)="openVideoDialog(livevideo.id)">
                             <div class="cb-video-liveicon">
-                                <span>06:00 PM</span>
+                                <span>{{livevideo.durationTime}}</span>
                             </div>
-                            <p class="cb-video-head">AS San Juan vs. Granada(Round 1)</p>
-                            <p class="cb-video-subhead">ESPN+ . Copa del Rey</p>
+                            <p class="cb-video-head">{{livevideo.name}}</p>
+                            <p class="cb-video-subhead">Broadcasted - {{livevideo.starts_at}} - {{livevideo.stops_at}}</p> 
                         </div>
                     </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/instantclassic-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span>06:00 PM</span>
-                            </div>
-                            <p class="cb-video-head">AS San Juan vs. Granada(Round 1)</p>
-                            <p class="cb-video-subhead">ESPN+ . Copa del Rey</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/instantclassic-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span>06:00 PM</span>
-                            </div>
-                            <p class="cb-video-head">AS San Juan vs. Granada(Round 1)</p>
-                            <p class="cb-video-subhead">ESPN+ . Copa del Rey</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/instantclassic-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span>06:00 PM</span>
-                            </div>
-                            <p class="cb-video-head">AS San Juan vs. Granada(Round 1)</p>
-                            <p class="cb-video-subhead">ESPN+ . Copa del Rey</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/instantclassic-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span>06:00 PM</span>
-                            </div>
-                            <p class="cb-video-head">AS San Juan vs. Granada(Round 1)</p>
-                            <p class="cb-video-subhead">ESPN+ . Copa del Rey</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3 col-xl-2 ">
-                        <div class="cb-video-block">
-                            <img src="../../assets/images/instantclassic-image-one.png">
-                            <div class="cb-video-liveicon">
-                                <span>06:00 PM</span>
-                            </div>
-                            <p class="cb-video-head">AS San Juan vs. Granada(Round 1)</p>
-                            <p class="cb-video-subhead">ESPN+ . Copa del Rey</p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
             <!-- Ends recent games block -->
 
-
+            
         </div>
 
 
@@ -151,3 +54,9 @@
 
 </div>
 <!-- End landing body section -->
+
+<!-- Starts---Loader code -->
+<div class="cb-loader-overlay" *ngIf="loader">
+    <img src="../../../assets/images/loading.gif">
+</div>
+<!-- Ends---Loader code -->

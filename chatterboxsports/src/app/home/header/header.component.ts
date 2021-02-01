@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   firstName:string;
   lastName:string;
   fullname:string;
+  isTourneyUser:boolean = false;
  
   constructor(public dialog: MatDialog,private alertService:AlertService) { }
 
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit {
       this.userEmail = this.getloggenInUser.email;
       //console.log(this.getloggenInUser);
       this.fullname = this.firstName+' '+this.lastName;
+      this.isTourneyUser = this.getloggenInUser.isTourneyUser;
     }
   }
 

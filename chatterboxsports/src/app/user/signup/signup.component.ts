@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import { environment } from '../../../environments/environment';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AlertService }  from '../../common/index';
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
 import {
@@ -51,9 +51,14 @@ export class SignupComponent implements OnInit {
   isSignupPaymentStatus:boolean = false;
   successMsg:string;
   subcriptionValidityDate:string;
-  constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService,private stripeService: StripeService) { }
+  isTourneyUser:boolean = false;
+  constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService,private stripeService: StripeService,@Inject(MAT_DIALOG_DATA) public shareddata: any,) { }
 
   ngOnInit(): void {
+    if(this.shareddata.isTourneyUser != undefined && this.shareddata.isTourneyUser != '')
+    {
+      this.isTourneyUser = this.shareddata.isTourneyUser;
+    }
     this.subcriptionValidityDate = moment().add(1, 'month').format('MMMM Do YYYY');
     this.createForm();
   }

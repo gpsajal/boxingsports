@@ -1,0 +1,111 @@
+<div class="cb-signup-popup" *ngIf="!isSignupPaymentStatus">
+    <!-- Starts Left block-->
+
+    <div class="cb-signup-left">
+        <div class="cb-popup-close-signup">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="closeDialog()">close</mat-icon>
+        </div>
+
+        <div class="cb-box">
+            <p class="cb-selected">SELECTED</p>
+            <img src="../../assets/images/cb-logo.png">
+            <p class="cb-live-text">Tourney Pass</p>
+            <p class="cb-left-text">Tourney Pass is a 45 day purchase to access the premuim channel in which showcase exclusive rights coverage. The tourney pass expires after 45 days and is not a subscription.</p>
+            <button class="cb-doller-btn" type="submit"> $14.99/45 Days</button>
+
+        </div>
+
+    </div>
+    <!-- Ends Left block-->
+
+    <!-- Starts right block-->
+    <div class="cb-signup-right">
+
+        <div class="cb-right-inner-block">
+            <!--Close button for mobile-->
+            <div class="cb-popup-close-signup mobileshow">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="closeDialog()">close</mat-icon>
+            </div>
+            <!--Close button for mobile-->
+            <div class="left float-left">
+                <h3>BE A <br> <span>LIVE + </span></h3>
+                <p>Support Us & High school sports</p>
+            </div>
+            <div class="right float-left"> <img src="../../assets/images/cb-logo.png"></div>
+
+            <div class="clearfix"></div>
+            <!-- Starts Form code -->
+                <!-- Starts Payment section -->
+                <div class="cb-signup-paymentsec">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+
+                                <h3 class="cb-signup-pay"> Payment Details</h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
+                            </div>
+                        </div>
+                        <!-- <div class="col-sm-12">
+                            Want to add a promo? <a href=""> Switch to a monthly plan</a>
+                        </div> -->
+                        <div class="col-sm-12 cb-payment-total">
+                            <p>
+                                <span class="float-left">Total</span><span class="float-right">$14.99/45 Days</span>
+                            </p>
+                        </div>
+                        <div class="col-sm-12 ">
+                            <p class="cb-payment-text">Tourney Pass is a 45 day purchase to access the premuim channel in which showcase exclusive rights coverage. The tourney pass expires after 45 days and is not a subscription.</p>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <button class="cb-submit-btn" type="submit" [disabled]="isFormValid" (click)="submitSignupForm()"> {{singupButtonCaption}}</button>
+                            <p class="cb-payment-text">By making this purchase, you authorize us to charge your credit or debit card agree to our Terms of service,Cookies Policy & Privacy and represent that you are at least 16 years of age. Charges on your card will appear as OTT
+                                ISC SSPORTSNETWORK.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+            
+
+            <!-- Ends Form code -->
+
+
+        </div>
+    </div>
+    <!-- Ends right block-->
+
+</div>
+
+<!-- Starts---Loader code -->
+<div class="cb-loader-overlay" *ngIf="loader">
+    <img src="../../../assets/images/loading.gif">
+</div>
+<!-- Ends---Loader code -->
+
+<!-- Starts---Payment success code -->
+<div class="cb-payment-success" *ngIf="isSignupPaymentStatus">
+
+    <!-- <div class="cb-popup-close-signup">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="closeDialog()">close</mat-icon>
+    </div> -->
+
+    <div class="success-animation">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
+    </div>
+
+    <p class="payment-message">Payment Successful</p>
+    <p>{{successMsg}}</p>
+</div>
+
+<!-- Ends---Payment success code -->

@@ -12,9 +12,10 @@ import {MatInputModule} from '@angular/material/input';
 import { AlertService, AuthenticationService }  from '../common/index';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxStripeModule } from 'ngx-stripe';
+import { TourneySignupComponent } from './tourney-signup/tourney-signup.component';
 @NgModule({
   declarations: [SignupComponent,
-    SigninComponent,PasswordValidatorDirective],
+    SigninComponent,PasswordValidatorDirective, TourneySignupComponent],
   imports: [
     CommonModule,
     MatIconModule,

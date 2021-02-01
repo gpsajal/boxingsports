@@ -28,6 +28,7 @@ export class LiveplusComponent implements OnInit {
   lastName:string;
   fullname:string;
   isUserLoggedIn:boolean = false;
+  isTourneyUser:boolean = false;
   constructor(public dialog: MatDialog,private alertService:AlertService,private homeService:HomeService,private authenticationService: AuthenticationService) { 
     authenticationService.getLoggedInUserName.subscribe( isUserLoggedIn => this.checkUsersession(isUserLoggedIn));
   }
@@ -39,6 +40,7 @@ export class LiveplusComponent implements OnInit {
       this.firstName = this.getloggenInUser.first_name;
       this.lastName = this.getloggenInUser.last_name;
       this.userEmail = this.getloggenInUser.email;
+      this.isTourneyUser = this.getloggenInUser.isTourneyUser;
       this.fullname = this.firstName+' '+this.lastName;
       this.isUserLoggedIn = true;
     }

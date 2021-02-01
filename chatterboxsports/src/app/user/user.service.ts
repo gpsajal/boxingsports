@@ -25,6 +25,14 @@ export class UserService {
       catchError(this.handleError<User>('registerUser'))
     );
   }
+  
+  /** POST: add a new hero to the server */
+  userTourneySignup(user: User): Observable<User> {
+    return this.http.post<User>(this.BASE_URL+'tourneySubscription', user, this.httpOptions).pipe(
+      tap((newUser: User) => this.log('')),
+      catchError(this.handleError<User>('tourney Subscription'))
+    );
+  }
 
   /** POST: add a new hero to the server */
   userSignin(user: User): Observable<User> {
