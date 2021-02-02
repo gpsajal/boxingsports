@@ -18,6 +18,7 @@ export class AuthenticationService {
     private BASE_URL = environment.BASE_URL;
     @Output() getLoggedInUserName: EventEmitter<any> = new EventEmitter();
     @Output() checktourneyUser: EventEmitter<any> = new EventEmitter();
+    @Output() getUserfullname: EventEmitter<any> = new EventEmitter();
     constructor(private router: Router, private http: HttpClient, ) {
     }
 
@@ -26,10 +27,12 @@ export class AuthenticationService {
         return this.http.post<User>(this.BASE_URL+'/login', { email: email, pass: pass }, httpOptions).pipe(
         tap( 
           response => {  
-            console.log(response['data']);
-            console.log(response['data'].first_name);
+            //console.log(response['data']);
+            //console.log(response['data'].first_name);
               localStorage.setItem('loggedInUser', JSON.stringify({ userId:response['data'].user_id,email: response['data'].email_address, first_name: response['data'].first_name,last_name: response['data'].last_name,isTourneyUser:response['data'].isTourneyUser}));
+              var fullname = response['data'].first_name+' '+response['data'].last_name;
               this.getLoggedInUserName.emit(true);
+              this.getUserfullname.emit(fullname);
               if(response['data'].isTourneyUser != undefined && response['data'].isTourneyUser == 1)
               {
                 this.checktourneyUser.emit(true);

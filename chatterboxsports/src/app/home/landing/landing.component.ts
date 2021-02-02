@@ -174,7 +174,7 @@ export class LandingComponent implements OnInit {
         this.recentVideosData[i].stops_at = moment.utc(this.recentVideosData[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
         if(i == this.recentVideosData.length-1)
         {
-          console.log('jsdj');
+          //console.log('jsdj');
           callback('',true); 
         }
       }

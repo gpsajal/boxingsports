@@ -110,7 +110,7 @@ export class TourneySignupComponent implements OnInit {
   //   },
   // })
   .subscribe((result) => {
-    console.log(result);
+   // console.log(result);
         if (result.token != undefined) {
           // Use the token
          this.tourneyData.payToken = result.token.id;

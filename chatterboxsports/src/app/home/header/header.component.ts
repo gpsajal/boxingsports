@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SigninComponent } from '../../user/signin/signin.component';
 import {MatDialog} from '@angular/material/dialog';
 import { AlertService, AuthenticationService }  from '../../common/index';
-
+import { Router, NavigationStart } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -14,9 +14,15 @@ export class HeaderComponent implements OnInit {
   firstName:string;
   lastName:string;
   fullname:string;
-  isTourneyUser:boolean = false;
+  isCheckTourneyUser:boolean = false;
+  isTourneyUser:number;
+  isUserLoggedIn:boolean = false;
  
-  constructor(public dialog: MatDialog,private alertService:AlertService) { }
+  constructor(public dialog: MatDialog,private alertService:AlertService,private router: Router,private authenticationService: AuthenticationService) { 
+    authenticationService.getLoggedInUserName.subscribe( isUserLoggedIn => this.checkUsersession(isUserLoggedIn));
+    authenticationService.checktourneyUser.subscribe( isCheckTourneyUser => this.checkUserPlan(isCheckTourneyUser));
+    authenticationService.getUserfullname.subscribe( userfullname => this.getUserFullName(userfullname));
+  }
 
   ngOnInit(): void {
     if(localStorage.getItem('loggedInUser')) {
@@ -27,6 +33,19 @@ export class HeaderComponent implements OnInit {
       //console.log(this.getloggenInUser);
       this.fullname = this.firstName+' '+this.lastName;
       this.isTourneyUser = this.getloggenInUser.isTourneyUser;
+    }
+  }
+
+  private checkUsersession(isuserLoggedIn: boolean): void {
+    this.isUserLoggedIn = isuserLoggedIn;
+  }
+  private getUserFullName(fullname: string): void {
+    this.fullname = fullname;
+  }
+  private checkUserPlan(isCheckTourneyUser: boolean): void {
+    if(isCheckTourneyUser)
+    {
+      this.isTourneyUser = 1;
     }
   }
 
@@ -48,7 +67,11 @@ export class HeaderComponent implements OnInit {
     this.fullname = '';
     localStorage.removeItem('loggedInUser');
     this.alertService.success('User Logout Successfully');
-    setTimeout(()=>{ window.location.reload(); },4000);
+    setTimeout(()=>{ 
+      this.router.navigate(['/']);
+       },2000);
+    setTimeout(()=>{ 
+      window.location.reload(); },4000);
     
   }
 
