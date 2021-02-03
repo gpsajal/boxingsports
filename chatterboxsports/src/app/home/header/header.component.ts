@@ -75,4 +75,12 @@ export class HeaderComponent implements OnInit {
     
   }
 
+  scrollToSection()
+  {
+    let element:HTMLDivElement  = document.getElementById('faq') as HTMLDivElement;
+    element.scrollIntoView({
+        behavior: "smooth", block: "start"
+    });
+  }
+
 }

@@ -10,6 +10,8 @@ import { LiveplusComponent } from './liveplus/liveplus.component';
 import { TourneyComponent } from './tourney/tourney.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { ShareddialogComponent } from './shareddialog/shareddialog.component';
+import { FaqComponent } from './faq/faq.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 @NgModule({
   declarations: [HeaderComponent,
     FooterComponent,
@@ -17,10 +19,13 @@ import { ShareddialogComponent } from './shareddialog/shareddialog.component';
     LiveplusComponent,
     TourneyComponent,
     ScheduleComponent,
-    ShareddialogComponent],
+    ShareddialogComponent,
+    FaqComponent],
   imports: [
     CommonModule,
-    HomeRoutingModule,MatIconModule
+    HomeRoutingModule,
+    MatIconModule,
+    MatExpansionModule
   ],
   exports: [
     HeaderComponent,

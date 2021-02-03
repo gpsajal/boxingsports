@@ -13,9 +13,10 @@ import { AlertService, AuthenticationService }  from '../common/index';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxStripeModule } from 'ngx-stripe';
 import { TourneySignupComponent } from './tourney-signup/tourney-signup.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 @NgModule({
   declarations: [SignupComponent,
-    SigninComponent,PasswordValidatorDirective, TourneySignupComponent],
+    SigninComponent,PasswordValidatorDirective, TourneySignupComponent, UserprofileComponent],
   imports: [
     CommonModule,
     MatIconModule,
