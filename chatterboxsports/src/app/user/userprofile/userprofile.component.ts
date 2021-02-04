@@ -12,9 +12,9 @@ export class UserprofileComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // closeDialog()
-  //  {
-  //    this.dialog.closeAll();
-  //  }
+  closeDialog()
+   {
+     this.dialog.closeAll();
+   }
 
 }
