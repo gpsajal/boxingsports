@@ -65,8 +65,7 @@ export class HeaderComponent implements OnInit {
 
   openProfileDialog()
   {
-    const dialogRef = this.dialog.open(UserprofileComponent);
-
+    //const dialogRef = this.dialog.open(UserprofileComponent);
   
   }
 
