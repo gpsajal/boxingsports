@@ -1,0 +1,77 @@
+.cb-profile {
+    position: relative;
+    max-width: 730px;
+}
+
+.cb-profile-back {
+    background: #fcf5f5;
+    margin-bottom: 15px;
+    box-shadow: 0px 0px 9px 1px #e4e4e4;
+}
+
+.cb-profile .cb-popup-close {
+    display: inline-block;
+    float: right;
+    cursor: pointer;
+}
+
+.cb-profile h3 {
+    margin: 10px 0px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.plan-box {
+    box-shadow: 1px 1px 6px #e7e7e7;
+    padding: 15px;
+    border: 1px solid #e7e7e7;
+    margin-bottom: 15px;
+}
+
+.plan-box span.subbtn {
+    padding: 10px;
+    background: #e0e0e0;
+    display: inline-block;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.cb-profile .cb-popup-close {
+    margin-top: 0px;
+}
+
+.profile-head {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.cb-upgrade-btn {
+    background: #cb3342;
+    color: #fff !important;
+    border: none;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 13px 22px;
+    margin-left: 15px;
+}
+
+.subs-text {
+    font-size: 14px;
+    color: #696f79;
+    font-weight: 600;
+    margin: 20px 0px 40px;
+}
+
+.subprice {
+    font-weight: 800;
+    float: right;
+    display: inline-block;
+    font-size: 35px;
+    padding-right: 50px;
+    margin-top: 10px;
+}
+
+.plan-box a {
+    font-weight: 600;
+    cursor: pointer;
+}

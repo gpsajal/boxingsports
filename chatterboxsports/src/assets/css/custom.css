@@ -1,8 +1,16 @@
 html,
 body {
     height: 100%;
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Mulish', sans-serif !important;
     overflow-x: hidden;
+}
+
+.mat-body,
+.mat-body-1,
+.mat-typography {
+    font: 400 14px/20px;
+    font-family: 'Mulish', sans-serif !important;
+    letter-spacing: normal;
 }
 
 
