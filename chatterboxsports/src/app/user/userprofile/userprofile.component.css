@@ -1,6 +1,8 @@
 .cb-profile {
     position: relative;
     max-width: 730px;
+    margin: 50px auto;
+    border: 1px solid #e0e0e0;
 }
 
 .cb-profile-back {
