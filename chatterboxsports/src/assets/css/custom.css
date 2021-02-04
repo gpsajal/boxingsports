@@ -7,7 +7,7 @@ body {
 
 .mat-body,
 .mat-body-1,
-.mat-typography {
+.mat-typography h3 {
     font: 400 14px/20px;
     font-family: 'Mulish', sans-serif !important;
     letter-spacing: normal;
