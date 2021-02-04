@@ -1,6 +1,6 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import {MatAccordion} from '@angular/material/expansion';
-
+import { Router,ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-faq',
   templateUrl: './faq.component.html',
@@ -8,9 +8,14 @@ import {MatAccordion} from '@angular/material/expansion';
 })
 export class FaqComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
-  constructor() { }
+  faqId=0;
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.faqId = params['id'];
+      
+    });
     this.scrollToSection();
   }
   

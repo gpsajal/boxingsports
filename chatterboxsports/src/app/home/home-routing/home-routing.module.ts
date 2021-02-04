@@ -11,7 +11,8 @@ const routes:Routes =[
   { path: 'liveplus', component: LiveplusComponent},
   { path: 'tourney', component: TourneyComponent},
   { path: 'schedule', component: ScheduleComponent},
-  { path: 'faq', component: FaqComponent}
+  { path: 'faq', component: FaqComponent},
+  { path: 'faq/:id', component: FaqComponent}
 ];
 
 
