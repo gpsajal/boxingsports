@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { CancelsubscriptionComponent } from '../../user/cancelsubscription/cancelsubscription.component';
+
 @Component({
   selector: 'app-userprofile',
   templateUrl: './userprofile.component.html',
@@ -12,9 +14,14 @@ export class UserprofileComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  closeDialog()
-   {
-     this.dialog.closeAll();
-   }
+  
+
+   opencancelDialog()
+  {
+    const dialogRef = this.dialog.open(CancelsubscriptionComponent);
+  
+  }
+
+   
 
 }

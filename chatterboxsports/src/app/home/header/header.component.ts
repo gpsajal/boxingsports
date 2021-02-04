@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SigninComponent } from '../../user/signin/signin.component';
-import { UserprofileComponent } from '../../user/userprofile/userprofile.component';
+
 import {MatDialog} from '@angular/material/dialog';
 import { AlertService, AuthenticationService }  from '../../common/index';
 import { Router, NavigationStart } from '@angular/router';
@@ -63,11 +63,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  openProfileDialog()
-  {
-    //const dialogRef = this.dialog.open(UserprofileComponent);
   
-  }
 
   userLogout()
   {

@@ -14,9 +14,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxStripeModule } from 'ngx-stripe';
 import { TourneySignupComponent } from './tourney-signup/tourney-signup.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import { CancelsubscriptionComponent } from './cancelsubscription/cancelsubscription.component';
 @NgModule({
   declarations: [SignupComponent,
-    SigninComponent,PasswordValidatorDirective, TourneySignupComponent, UserprofileComponent],
+    SigninComponent,PasswordValidatorDirective, TourneySignupComponent, UserprofileComponent, CancelsubscriptionComponent],
   imports: [
     CommonModule,
     MatIconModule,
