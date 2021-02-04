@@ -12,6 +12,7 @@
 .cb-profile .cb-popup-close {
     display: inline-block;
     float: right;
+    cursor: pointer;
 }
 
 .cb-profile h3 {
