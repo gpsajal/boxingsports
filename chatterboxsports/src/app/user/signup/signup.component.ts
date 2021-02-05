@@ -3,7 +3,7 @@ import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import { environment } from '../../../environments/environment';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog, MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
 import { AlertService }  from '../../common/index';
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
 import {
@@ -52,13 +52,17 @@ export class SignupComponent implements OnInit {
   successMsg:string;
   subcriptionValidityDate:string;
   isTourneyUser:boolean = false;
-  constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService,private stripeService: StripeService,@Inject(MAT_DIALOG_DATA) public shareddata: any,) { }
+  constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService,private stripeService: StripeService,@Inject(MAT_DIALOG_DATA) public shareddata: any,private router: Router,public dialogRef:MatDialogRef<SignupComponent>) { }
 
   ngOnInit(): void {
-    if(this.shareddata.isTourneyUser != undefined && this.shareddata.isTourneyUser != '')
+    if(this.shareddata != undefined)
     {
-      this.isTourneyUser = this.shareddata.isTourneyUser;
+      if(this.shareddata.isTourneyUser != undefined && this.shareddata.isTourneyUser != '')
+      {
+        this.isTourneyUser = this.shareddata.isTourneyUser;
+      }
     }
+   
     this.subcriptionValidityDate = moment().add(1, 'month').format('MMMM Do YYYY');
     this.createForm();
   }
@@ -255,4 +259,11 @@ export class SignupComponent implements OnInit {
         }); 
     }
    /*End- function for create stripe token*/
+
+   opentermsPage()
+   {
+     //this.dialogRef.close();
+     window.open(environment.SITE_URL+'terms', "_blank");
+     //this.router.navigate(['terms']);
+   }
 }

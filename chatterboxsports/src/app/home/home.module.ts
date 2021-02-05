@@ -12,6 +12,7 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { ShareddialogComponent } from './shareddialog/shareddialog.component';
 import { FaqComponent } from './faq/faq.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { TermsComponent } from './terms/terms.component';
 @NgModule({
   declarations: [HeaderComponent,
     FooterComponent,
@@ -20,7 +21,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     TourneyComponent,
     ScheduleComponent,
     ShareddialogComponent,
-    FaqComponent],
+    FaqComponent,
+    TermsComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
