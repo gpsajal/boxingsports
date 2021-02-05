@@ -55,6 +55,7 @@
     border-radius: 4px;
     padding: 13px 22px;
     margin-left: 15px;
+    border: 1px solid #cb3342;
 }
 
 .subs-text {
@@ -76,4 +77,40 @@
 .plan-box a {
     font-weight: 600;
     cursor: pointer;
+}
+
+.cb-upgradenotnow-btn {
+    background: transparent;
+    border: 1px solid #cb3342;
+    color: #cb3342 !important;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 13px 22px;
+}
+
+@media(max-width:480px) {
+    .cb-profile {
+        padding: 10px;
+    }
+    .subprice {
+        font-weight: 800;
+        float: none;
+        display: block;
+        font-size: 25px;
+        padding-right: 0;
+        margin-top: 15px;
+        text-align: center;
+    }
+    .plan-box span.subbtn {
+        font-weight: 600;
+        text-align: center;
+        display: block;
+    }
+    .profilebtn a {
+        display: block;
+        float: none;
+        width: 100%;
+        text-align: center;
+        margin: 5px 0px;
+    }
 }

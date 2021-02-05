@@ -14,9 +14,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxStripeModule } from 'ngx-stripe';
 import { TourneySignupComponent } from './tourney-signup/tourney-signup.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import { CancelsubscriptionComponent } from './cancelsubscription/cancelsubscription.component';
+import { AuthGuard } from '../guards/index';
 @NgModule({
   declarations: [SignupComponent,
-    SigninComponent,PasswordValidatorDirective, TourneySignupComponent, UserprofileComponent],
+    SigninComponent,PasswordValidatorDirective, TourneySignupComponent, UserprofileComponent, CancelsubscriptionComponent],
   imports: [
     CommonModule,
     MatIconModule,
@@ -27,6 +29,6 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
     ReactiveFormsModule,
     NgxStripeModule.forRoot('pk_test_ahyaxlBCFVqNmlrlyMHTvUsb'),
   ],
-  providers: [UserService, AuthenticationService]
+  providers: [UserService, AuthenticationService,AuthGuard]
 })
 export class UserModule { }

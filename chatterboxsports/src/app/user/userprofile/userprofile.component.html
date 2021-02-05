@@ -8,10 +8,7 @@
             <div class="row cb-profile-back">
                 <div class="col-12">
                     <h3>My Profile
-                        <div class="cb-popup-close">
-                            <mat-icon aria-hidden="false" aria-label=" home icon" (click)="closeDialog()">close</mat-icon>
 
-                        </div>
                     </h3>
 
                 </div>
@@ -29,7 +26,7 @@
 
                             <mat-form-field>
                                 <mat-label>First Name<sup>*</sup></mat-label>
-                                <input matInput type="text" class="form-control">
+                                <input matInput type="text" class="form-control" value="{{firstName}}" readonly>
                                 <!-- <mat-error *ngIf="email.invalid">{{showErrors('email')}}</mat-error> -->
                             </mat-form-field>
                         </div>
@@ -40,7 +37,7 @@
 
                             <mat-form-field>
                                 <mat-label>Last Name<sup>*</sup></mat-label>
-                                <input matInput type="text" class="form-control">
+                                <input matInput type="text" class="form-control" value="{{lastName}}" readonly>
                                 <!-- <mat-error *ngIf="email.invalid">{{showErrors('email')}}</mat-error> -->
                             </mat-form-field>
                         </div>
@@ -55,7 +52,7 @@
 
                             <mat-form-field>
                                 <mat-label>Email address<sup>*</sup></mat-label>
-                                <input matInput type="text" class="form-control">
+                                <input matInput type="text" class="form-control" value="{{userEmail}}" readonly>
                                 <!-- <mat-error *ngIf="email.invalid">{{showErrors('email')}}</mat-error> -->
                             </mat-form-field>
                         </div>
@@ -76,8 +73,8 @@
                         <p>
                             <span class="subbtn">Subscription Plan</span><span class="subprice">$13.99</span></p>
                         <p class="subs-text">You are selected a Chatterbox Live+ is a premium monthly subscription channel dedicated to bringing you live coverage of the biggest events.</p>
-                        <p class="text-right"> <a>Cancel Subscription </a>
-                            <a class="cb-upgrade-btn">Upgrade Plan </a>
+                        <p class="text-right profilebtn"> <a class="cb-upgradenotnow-btn" (click)="opencancelDialog()">Cancel Subscription </a>
+                            <!-- <a class="cb-upgrade-btn">Upgrade Plan </a> -->
                         </p>
                     </div>
                 </div>

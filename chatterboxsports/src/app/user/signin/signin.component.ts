@@ -2,7 +2,7 @@ import { Component, OnInit,Inject } from '@angular/core';
 import { SignupComponent } from '../signup/signup.component';
 import {MatDialog , MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { UserService } from '../user.service';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import { environment } from '../../../environments/environment';
 import { AlertService, AuthenticationService }  from '../../common/index';
@@ -20,9 +20,12 @@ export class SigninComponent implements OnInit {
   loader:boolean = false;
   userFullname:string;
   userEmail:string;
-  constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService, private authservice:AuthenticationService,public dialogRef: MatDialogRef<SigninComponent>, @Inject(MAT_DIALOG_DATA) public data: any,) { }
+  returnUrl: string;
+  constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService, private authservice:AuthenticationService,public dialogRef: MatDialogRef<SigninComponent>, @Inject(MAT_DIALOG_DATA) public data: any,private route: ActivatedRoute,
+  private router: Router) { }
 
   ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.createForm();
   }
 
@@ -131,6 +134,10 @@ export class SigninComponent implements OnInit {
       this.userFullname = responseobject.data.first_name+' '+responseobject.data.last_name;
       this.userEmail = responseobject.data.email;;
       this.dialogRef.close(this.userFullname);
+      if(this.returnUrl != "/" && this.router.url != "/" )
+      {
+        this.router.navigateByUrl(this.returnUrl);
+      }
     }
    }
    /*End- function to display alert messages */

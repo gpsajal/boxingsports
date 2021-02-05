@@ -1,0 +1,95 @@
+.cb-profilesub {
+    position: relative;
+    max-width: 730px;
+    margin: 0px auto;
+    border: 1px solid #e0e0e0;
+}
+
+.cb-profile-back {
+    background: #fff;
+    margin-bottom: 15px;
+    box-shadow: 0px 0px 9px 1px #e4e4e4;
+}
+
+.cb-profilesub .cb-popup-close {
+    display: inline-block;
+    float: right;
+    cursor: pointer;
+}
+
+.cb-profilesub h3 {
+    margin: 10px 0px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.cb-profile .cb-popup-close {
+    margin-top: 0px;
+}
+
+.profile-head {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.cb-upgrade-btn {
+    background: #cb3342;
+    color: #fff !important;
+    border: none;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 13px 22px;
+    border: 1px solid #cb3342;
+}
+
+.plan-box p {
+    font-size: 18px;
+    color: #8692a6;
+}
+
+.cb-upgradenotnow-btn {
+    background: transparent;
+    border: 1px solid #cb3342;
+    color: #cb3342 !important;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 13px 22px;
+}
+
+.btun-cancel {
+    margin: 25px 0px;
+}
+
+.plan-box {
+    margin-top: 15px;
+}
+
+.btun-cancel a {
+    font-weight: 600;
+    min-width: 45%;
+    display: inline-block;
+    margin: 5px;
+}
+
+.btun-cancel a:focus {
+    outline: none;
+}
+
+.btun-cancel a:hover {
+    text-decoration: none;
+}
+
+@media(max-width:568px) {
+    .btun-cancel a {
+        font-weight: 600;
+        min-width: 100%;
+        display: inline-block;
+        margin: 5px;
+    }
+    .cb-profilesub h3 {
+        margin: 10px 0px;
+        font-size: 20px;
+        font-weight: 600;
+        font-size: 15px;
+    }
+}
