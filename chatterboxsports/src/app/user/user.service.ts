@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  private BASE_URL = environment.BASE_URL;  
+  private BASE_URL = environment.BASE_URL+'app/user/';  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -20,7 +20,7 @@ export class UserService {
 
   /** POST: add a new hero to the server */
   userSignup(user: User): Observable<User> {
-    return this.http.post<User>(this.BASE_URL+'register', user, this.httpOptions).pipe(
+    return this.http.post<User>(this.BASE_URL+'registration', user, this.httpOptions).pipe(
       tap((newUser: User) => this.log('')),
       catchError(this.handleError<User>('registerUser'))
     );

@@ -220,7 +220,7 @@ export class SignupComponent implements OnInit {
 
     /*Start- function to display alert messages */
   displayResponse(responseobject) {
-   // console.log(responseobject);
+    console.log(responseobject);
     this.loader = false;
     this.singupButtonCaption = 'Complete Purchase';
     if (responseobject.status === 400) {
