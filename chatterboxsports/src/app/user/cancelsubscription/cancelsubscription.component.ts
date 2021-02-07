@@ -18,4 +18,9 @@ export class CancelsubscriptionComponent implements OnInit {
     this.dialog.closeAll();
   }
 
+  cancelSubscription()
+  {
+    
+  }
+
 }
