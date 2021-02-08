@@ -66,9 +66,29 @@ export class LiveplusComponent implements OnInit {
         this.loader = false;
         if (response != undefined) {
           //console.log(response);
-          this.livePlusChannelVideosData = response.data.live;
-           this.livePlusChannelVideos = this.livePlusChannelVideosData.slice(0,6);
-           this.totalLivePlusVideos = this.livePlusChannelVideosData.length;
+          //this.livePlusChannelVideosData = response.data.live;
+          if(response.data.future != undefined && response.data.future.length > 0)
+          {
+            for(var i = 0; i< response.data.future.length; i++)
+            {
+              this.livePlusChannelVideosData.push(response.data.future[i]);
+            }
+          }
+
+          if(response.data.live != undefined && response.data.live.length > 0)
+          {
+            for(var i = 0; i< response.data.live.length; i++)
+            {
+              this.livePlusChannelVideosData.push(response.data.live[i]);
+            }
+          }
+         
+          if(response.data.total != undefined)
+          {
+            this.totalLivePlusVideos = response.data.total;
+          }
+           this.livePlusChannelVideos = this.livePlusChannelVideosData;
+          // this.totalLivePlusVideos = this.livePlusChannelVideosData.length;
            for(var i = 0; i<this.livePlusChannelVideos.length; i++)
            {
             //this.livePlusChannelVideos[i].durationTime = this.convertSecondsToHms(this.livePlusChannelVideos[i].recording_duration_seconds);
@@ -78,7 +98,7 @@ export class LiveplusComponent implements OnInit {
             this.livePlusChannelVideos[i].stops_at = moment.utc(this.livePlusChannelVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }
            //console.log(this.livePlusChannelVideos);
-           this.getRecentGamesData(0,1000);
+           this.getRecentGamesData(0,6);
         }
       },
     error => {
@@ -121,10 +141,22 @@ export class LiveplusComponent implements OnInit {
       response => {
         this.loader = false;
         if (response != undefined) {
-          //console.log(response);
-          this.recentVideosData = response.data.recent;
-           this.recentVideos = this.recentVideosData.slice(0,6);
-           this.totalRecentVideos = this.recentVideosData.length;
+          
+          if(response.data.past != undefined && response.data.past.length > 0)
+          {
+            for(var i = 0; i< response.data.past.length; i++)
+            {
+              this.recentVideosData.push(response.data.past[i]);
+            }
+          }
+         
+          if(response.data.total != undefined)
+          {
+            this.totalRecentVideos = response.data.total;
+          }
+          //this.recentVideosData = response.data.recent;
+           this.recentVideos = this.recentVideosData;
+           //this.totalRecentVideos = this.recentVideosData.length;
            for(var i = 0; i<this.recentVideos.length; i++)
            {
             this.recentVideos[i].viewer_url = environment.BOXCAST_VIEWER_URL+this.recentVideos[i].channel_id;
@@ -148,7 +180,8 @@ export class LiveplusComponent implements OnInit {
     if(isSeeAllRecent == 'true')
     {
       this.isSeeAllRecent = true;
-      this.recentVideos = this.recentVideosData;
+      this.getRecentGamesData(0,this.recentVideosData);
+      //this.recentVideos = this.recentVideosData;
     }
     else
     {
@@ -164,7 +197,8 @@ export class LiveplusComponent implements OnInit {
     if(isSeeAll == 'true')
     {
       this.isSeeAll = true;
-      this.livePlusChannelVideos = this.livePlusChannelVideosData;
+      this.getLiveplusChannelData(0,this.totalLivePlusVideos);
+      //this.livePlusChannelVideos = this.livePlusChannelVideosData;
     }
     else
     {

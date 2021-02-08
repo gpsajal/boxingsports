@@ -9,7 +9,7 @@ import { CancelsubscriptionComponent } from '../../user/cancelsubscription/cance
 })
 export class UserprofileComponent implements OnInit {
   getloggenInUser:any ={};
-  userId:number;
+  userId:any;
   userEmail:string;
   firstName:string;
   lastName:string;

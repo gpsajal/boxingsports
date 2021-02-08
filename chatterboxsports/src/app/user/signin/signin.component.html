@@ -51,8 +51,8 @@
                     <!-- <label for="pwd">Password<sup>*</sup></label> -->
                     <mat-form-field>
                         <mat-label>Password<sup>*</sup></mat-label>
-                        <input matInput type="password" class="form-control" id="password" formControlName="pass" [(ngModel)]="model.pass" maxLength="50">
-                        <mat-error *ngIf="pass.invalid">{{showErrors('pass')}}</mat-error>
+                        <input matInput type="password" class="form-control" id="password" formControlName="password" [(ngModel)]="model.password" maxLength="50">
+                        <mat-error *ngIf="password.invalid">{{showErrors('password')}}</mat-error>
                     </mat-form-field>
                 </div>
                 <!-- <div class="cb-forgot-button"><a class="float-right" href="">Forgot password?</a></div> -->

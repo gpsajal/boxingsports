@@ -12,6 +12,7 @@ import { UserModule }    from './user/user.module';
 import { AlertService } from './common/alertService';
 import { AlertComponent } from './shared/alert/alert.component';
 import { NgxStripeModule } from 'ngx-stripe';
+import { httpInterceptorProviders } from './http-interceptors/index';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,7 @@ import { NgxStripeModule } from 'ngx-stripe';
     UserModule,
     NgxStripeModule.forRoot('pk_test_ahyaxlBCFVqNmlrlyMHTvUsb'),
   ],
-  providers: [AlertService],
+  providers: [AlertService,httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -30,7 +30,7 @@ export class TourneyComponent implements OnInit {
   firstName:string;
   lastName:string;
   fullname:string;
-  userId:number;
+  userId:any;
   isUserLoggedIn:boolean = false;
   isCheckTourneyUser:boolean = false;
   isTourneyUser:number;
@@ -79,9 +79,29 @@ export class TourneyComponent implements OnInit {
         this.loader = false;
         if (response != undefined) {
           //console.log(response);
-          this.tourneyChannelVideosData = response.data.live;
-           this.tourneyChannelVideos = this.tourneyChannelVideosData.slice(0,6);
-           this.totalLivePlusVideos = this.tourneyChannelVideosData.length;
+          if(response.data.future != undefined && response.data.future.length > 0)
+          {
+            for(var i = 0; i< response.data.future.length; i++)
+            {
+              this.tourneyChannelVideosData.push(response.data.future[i]);
+            }
+          }
+
+          if(response.data.live != undefined && response.data.live.length > 0)
+          {
+            for(var i = 0; i< response.data.live.length; i++)
+            {
+              this.tourneyChannelVideosData.push(response.data.live[i]);
+            }
+          }
+//console.log(this.tourneyChannelVideos);
+          if(response.data.total != undefined)
+          {
+            this.totalLivePlusVideos = response.data.total;
+          }
+         // this.tourneyChannelVideosData = response.data.live;
+           this.tourneyChannelVideos = this.tourneyChannelVideosData;
+           //this.totalLivePlusVideos = this.tourneyChannelVideosData.length;
            for(var i = 0; i<this.tourneyChannelVideos.length; i++)
            {
             //this.tourneyChannelVideos[i].durationTime = this.convertSecondsToHms(this.tourneyChannelVideos[i].recording_duration_seconds);
@@ -91,7 +111,7 @@ export class TourneyComponent implements OnInit {
             this.tourneyChannelVideos[i].stops_at = moment.utc(this.tourneyChannelVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }
            //console.log(this.tourneyChannelVideos);
-           this.getRecentGamesData(0,1000);
+           this.getRecentGamesData(0,6);
         }
       },
     error => {
@@ -143,9 +163,21 @@ export class TourneyComponent implements OnInit {
         this.loader = false;
         if (response != undefined) {
           //console.log(response);
-          this.recentVideosData = response.data.recent;
-           this.recentVideos = this.recentVideosData.slice(0,6);
-           this.totalRecentVideos = this.recentVideosData.length;
+          if(response.data.past != undefined && response.data.past.length > 0)
+          {
+            for(var i = 0; i< response.data.past.length; i++)
+            {
+              this.recentVideosData.push(response.data.past[i]);
+            }
+          }
+         
+          if(response.data.total != undefined)
+          {
+            this.totalRecentVideos = response.data.total;
+          }
+         // this.recentVideosData = response.data.recent;
+           this.recentVideos = this.recentVideosData;
+           //this.totalRecentVideos = this.recentVideosData.length;
            for(var i = 0; i<this.recentVideos.length; i++)
            {
             this.recentVideos[i].viewer_url = environment.BOXCAST_VIEWER_URL+this.recentVideos[i].channel_id;
@@ -169,7 +201,8 @@ export class TourneyComponent implements OnInit {
     if(isSeeAllRecent == 'true')
     {
       this.isSeeAllRecent = true;
-      this.recentVideos = this.recentVideosData;
+      this.getRecentGamesData(0,this.recentVideosData);
+      //this.recentVideos = this.recentVideosData;
     }
     else
     {
@@ -185,7 +218,8 @@ export class TourneyComponent implements OnInit {
     if(isSeeAll == 'true')
     {
       this.isSeeAll = true;
-      this.tourneyChannelVideos = this.tourneyChannelVideosData;
+      this.getTourneyChannelData(0,this.totalLivePlusVideos);
+      //this.tourneyChannelVideos = this.tourneyChannelVideosData;
     }
     else
     {

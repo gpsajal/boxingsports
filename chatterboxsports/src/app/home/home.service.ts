@@ -8,11 +8,28 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class HomeService {
+  getloggenInUser:any ={};
+  userId:any;
+  userEmail:string;
+  firstName:string;
+  lastName:string;
+  fullname:string;
+  isTourneyUser:number;
   private BASE_URL = environment.BASE_URL;  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  constructor(private http: HttpClient,private router: Router) { }
+  constructor(private http: HttpClient,private router: Router) { 
+    if(localStorage.getItem('loggedInUser')) {
+      this.getloggenInUser=  JSON.parse(localStorage.getItem('loggedInUser'));
+      this.userId = this.getloggenInUser.userId;
+      this.firstName = this.getloggenInUser.first_name;
+      this.lastName = this.getloggenInUser.last_name;
+      this.userEmail = this.getloggenInUser.email;
+      this.fullname = this.firstName+' '+this.lastName;
+      this.isTourneyUser = this.getloggenInUser.isTourneyUser;
+    }
+  }
 
   /*Api call for get live channel data  */
 // getLiveChannel(channelType){
@@ -28,7 +45,17 @@ export class HomeService {
 /** POST: add a new hero to the server */
 getLiveChannel(channelType,page,limit): Observable<any> {
   var url = this.BASE_URL + "channelvideos/"+channelType; 
-  return this.http.post<any>(url, {"page":page,"limit":limit}, this.httpOptions).pipe(
+  var body;
+  if(this.userId != undefined && this.userId != '')
+  {
+    body = {"page":page,"limit":limit,"userId":this.userId};
+  }
+  else
+  {
+    body = {"page":page,"limit":limit};
+  }
+  
+  return this.http.post<any>(url, body, this.httpOptions).pipe(
     tap((newUser: any) => this.log('get live channel data')),
     catchError(this.handleError<any>('get live channel data'))
   );

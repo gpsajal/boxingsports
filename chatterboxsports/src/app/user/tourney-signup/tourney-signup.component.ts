@@ -47,7 +47,7 @@ export class TourneySignupComponent implements OnInit {
   subcriptionValidityDate:string;
   isTourneyUser:boolean = false;
   getloggenInUser:any ={};
-  userId:number;
+  userId:any;
   userEmail:string;
   firstName:string;
   lastName:string;

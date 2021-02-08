@@ -28,8 +28,24 @@ export class LandingComponent implements OnInit {
   isSeeAllRecent:boolean = false;
   recentTempData:any = [];
   isRecentSearchWorking:boolean = false;
+  getloggenInUser:any ={};
+  userId:any;
+  userEmail:string;
+  firstName:string;
+  lastName:string;
+  fullname:string;
+  isTourneyUser:number;
   ngOnInit(): void {
-    this.getLiveChannelData(0,1000);
+    this.getLiveChannelData(0,6);
+    if(localStorage.getItem('loggedInUser')) {
+      this.getloggenInUser=  JSON.parse(localStorage.getItem('loggedInUser'));
+      this.userId = this.getloggenInUser.userId;
+      this.firstName = this.getloggenInUser.first_name;
+      this.lastName = this.getloggenInUser.last_name;
+      this.userEmail = this.getloggenInUser.email;
+      this.fullname = this.firstName+' '+this.lastName;
+      this.isTourneyUser = this.getloggenInUser.isTourneyUser;
+    }
   }
 
   /* Start- function for open video dialog*/
@@ -58,9 +74,29 @@ export class LandingComponent implements OnInit {
         //this.loader = false;
         if (response != undefined) {
           //console.log(response);
-          this.liveChannelVideosData = response.data.live;
+          this.liveChannelVideosData = [];
+         
+          if(response.data.live != undefined && response.data.live.length > 0)
+          {
+            for(var i = 0; i< response.data.live.length; i++)
+            {
+              this.liveChannelVideosData.push(response.data.live[i]);
+            }
+          }
+          if(response.data.future != undefined && response.data.future.length > 0)
+          {
+            for(var i = 0; i< response.data.future.length; i++)
+            {
+              this.liveChannelVideosData.push(response.data.future[i]);
+            }
+          }
+
+          if(response.data.total != undefined)
+          {
+            this.totalLiveVideos = response.data.total;
+          }
            this.liveChannelVideos = this.liveChannelVideosData.slice(0,6);
-           this.totalLiveVideos = this.liveChannelVideosData.length;
+           //this.totalLiveVideos = this.liveChannelVideosData.length;
            for(var i = 0; i<this.liveChannelVideos.length; i++)
            {
             this.liveChannelVideos[i].viewer_url = environment.BOXCAST_VIEWER_URL+this.liveChannelVideos[i].channel_id;
@@ -69,7 +105,7 @@ export class LandingComponent implements OnInit {
             this.liveChannelVideos[i].stops_at = moment.utc(this.liveChannelVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }
            //console.log(this.liveChannelVideos);
-           this.getRecentGamesData(0,1000);
+           this.getRecentGamesData(0,6);
         }
       },
     error => {
@@ -95,9 +131,35 @@ export class LandingComponent implements OnInit {
       response => {
         this.loader = false;
         if (response != undefined) {
-          //console.log(response);
-           this.instantClassicChannelVideos = response.data;
-           this.totalInstantVideos = this.instantClassicChannelVideos.length;
+          if(response.data.future != undefined && response.data.future.length > 0)
+          {
+            for(var i = 0; i< response.data.future.length; i++)
+            {
+              this.instantClassicChannelVideos.push(response.data.future[i]);
+            }
+          }
+
+          if(response.data.live != undefined && response.data.live.length > 0)
+          {
+            for(var i = 0; i< response.data.live.length; i++)
+            {
+              this.instantClassicChannelVideos.push(response.data.live[i]);
+            }
+          }
+         
+          if(response.data.past != undefined && response.data.past.length > 0)
+          {
+            for(var i = 0; i< response.data.past.length; i++)
+            {
+              this.instantClassicChannelVideos.push(response.data.past[i]);
+            }
+          }
+         
+          if(response.data.total != undefined)
+          {
+            this.totalInstantVideos = response.data.total;
+          }
+           //this.totalInstantVideos = this.instantClassicChannelVideos.length;
            //console.log(this.instantClassicChannelVideos);
            for(var i = 0; i<this.instantClassicChannelVideos.length; i++)
            {
@@ -140,13 +202,17 @@ export class LandingComponent implements OnInit {
         
         if (response != undefined) {
           //console.log(response);
-          this.recentVideosData = response.data.recent;
+          this.recentVideosData = response.data.past;
+          if(response.data.total != undefined)
+          {
+            this.totalRecentVideos = response.data.total;
+          }
            this.convertDateutctolocal((err,data)=>{
              if(data)
              {
-              this.recentVideos = this.recentVideosData.slice(0,6);
+              this.recentVideos = this.recentVideosData;
               this.recentTempData = this.recentVideosData;
-              this.totalRecentVideos = this.recentVideosData.length;
+              //this.totalRecentVideos = this.recentVideosData.length;
               this.getInstantClassicChannelData(0,6);
               //this.loader = false;
              }
@@ -188,7 +254,8 @@ export class LandingComponent implements OnInit {
     if(isSeeAllRecent == 'true')
     {
       this.isSeeAllRecent = true;
-      this.recentVideos = this.recentVideosData;
+      this.getRecentGamesData(0,this.totalRecentVideos);
+      //this.recentVideos = this.recentVideosData;
     }
     else
     {
@@ -204,7 +271,8 @@ export class LandingComponent implements OnInit {
     if(isSeeAll == 'true')
     {
       this.isSeeAll = true;
-      this.liveChannelVideos = this.liveChannelVideosData;
+      //this.liveChannelVideos = this.liveChannelVideosData;
+      this.getLiveChannelData(0,this.totalLiveVideos);
     }
     else
     {

@@ -15,7 +15,7 @@ export class SigninComponent implements OnInit {
   model: any = {};
   signinform: FormGroup;
   email: FormControl;
-  pass: FormControl;
+  password: FormControl;
   isFormValid: boolean = null;
   loader:boolean = false;
   userFullname:string;
@@ -59,7 +59,7 @@ export class SigninComponent implements OnInit {
       Validators.email,
       Validators.pattern(/^[a-zA-Z][A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-z]{2,4}$/)
     ]);
-    this.pass = new FormControl('', [
+    this.password = new FormControl('', [
       Validators.required,
       //Validators.minLength(8),
       //Validators.maxLength(20),
@@ -68,7 +68,7 @@ export class SigninComponent implements OnInit {
    
     this.signinform = new FormGroup({
       email: this.email,
-      pass: this.pass,
+      password: this.password,
     });
   }
   /* end- function for create form*/
@@ -82,7 +82,7 @@ export class SigninComponent implements OnInit {
     }
     this.isFormValid = true;	
     this.loader = true;
-    this.authservice.userSignIn(this.model.email,this.model.pass)
+    this.authservice.userSignIn(this.model.email,this.model.password)
         .subscribe(
             data => {
                 this.displayResponse(data);
@@ -106,9 +106,9 @@ export class SigninComponent implements OnInit {
                 '';
   
       }
-      else if(errortype == 'pass')
+      else if(errortype == 'password')
       {
-        return  this.pass.hasError('required') ? 'This Field is required.' :
+        return  this.password.hasError('required') ? 'This Field is required.' :
                 '';
       }      
     }

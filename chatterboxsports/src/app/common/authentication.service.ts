@@ -12,10 +12,17 @@ const httpOptions = {
 
 @Injectable()
 export class AuthenticationService {
-    userId: number;
     fullname: string;
     getLoggedInUser: any = {};
+    userId:any;
+    userEmail:string;
+    firstName:string;
+    lastName:string;
+    isTourneyUser:number;
+    token:any;
     private BASE_URL = environment.BASE_URL;
+    private USER_LOGIN_URL  = this.BASE_URL + 'account';
+    private USER_URL  = this.BASE_URL + 'user';
     @Output() getLoggedInUserName: EventEmitter<any> = new EventEmitter();
     @Output() checktourneyUser: EventEmitter<any> = new EventEmitter();
     @Output() getUserfullname: EventEmitter<any> = new EventEmitter();
@@ -23,13 +30,13 @@ export class AuthenticationService {
     }
 
     // login service
-    userSignIn(email: string, pass: string): Observable<User> {
-        return this.http.post<User>(this.BASE_URL+'/login', { email: email, pass: pass }, httpOptions).pipe(
+    userSignIn(email: string, password: string): Observable<User> {
+        return this.http.post<User>(this.USER_LOGIN_URL+'/login', { email: email, password: password }, httpOptions).pipe(
         tap( 
           response => {  
             //console.log(response['data']);
             //console.log(response['data'].first_name);
-              localStorage.setItem('loggedInUser', JSON.stringify({ userId:response['data'].user_id,email: response['data'].email_address, first_name: response['data'].first_name,last_name: response['data'].last_name,isTourneyUser:response['data'].isTourneyUser}));
+              localStorage.setItem('loggedInUser', JSON.stringify({ userId:response['data'].user_id,email: response['data'].email_address, first_name: response['data'].first_name,last_name: response['data'].last_name,isTourneyUser:response['data'].isTourneyUser,token:response['data'].token,subscriptions:response['data'].subscriptions}));
               var fullname = response['data'].first_name+' '+response['data'].last_name;
               this.getLoggedInUserName.emit(true);
               this.getUserfullname.emit(fullname);
@@ -46,7 +53,66 @@ export class AuthenticationService {
         );
     } 
 
-   
+     // function for get auth token
+     getAuthToken() {
+      if(localStorage.getItem('loggedInUser')) 
+      {
+        this.getLoggedInUser =  JSON.parse(localStorage.getItem('loggedInUser'));
+        this.token = this.getLoggedInUser.token;
+        if(this.token)
+        {
+          return this.getLoggedInUser;
+        }
+        else
+        {
+          return '';
+        }
+      }
+      else
+      {
+        return '';
+      }
+    }
+
+  /*function for logout user*/ 
+  logout(checkstatuscode): Observable<any> {
+    if(localStorage.getItem('currentUser')) {
+      this.getLoggedInUser =  JSON.parse(localStorage.getItem('loggedInUser'));
+      this.userId = this.getLoggedInUser.userId;
+    }
+    if(checkstatuscode == 401){
+      this.getLoggedInUserName.emit(false);
+      this.getUserfullname.emit('');
+      localStorage.removeItem('loggedInUser');
+      window.location.reload();
+    }
+    
+    return this.http.post<any>(this.USER_LOGIN_URL +'/logout',{},httpOptions).pipe(
+      tap(
+        data  => {
+          this.getLoggedInUserName.emit(false);
+           this.getUserfullname.emit('');
+          localStorage.removeItem('loggedInUser');
+            if(checkstatuscode == 401)
+            {
+              this.router.navigate(['/']);
+            }
+            else
+            {
+              this.router.navigate(['/']);
+            }
+         
+          setTimeout(()=>{
+              window.location.reload();
+          },200);
+        },
+        error =>{
+        }
+      ),
+      catchError(this.handleError<User>('Logout user'))
+    );
+  }
+
 
    /**
    * Handle Http operation that failed.

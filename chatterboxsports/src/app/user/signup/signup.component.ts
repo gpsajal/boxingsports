@@ -255,7 +255,9 @@ export class SignupComponent implements OnInit {
         },
         error => { 
           this.isFormValid = false;
+          console.log(error);
           this.displayResponse(error);
+        
         }); 
     }
    /*End- function for create stripe token*/

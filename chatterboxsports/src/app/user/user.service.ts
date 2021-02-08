@@ -10,7 +10,9 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  private BASE_URL = environment.BASE_URL+'app/user/';  
+  private BASE_URL = environment.BASE_URL;  
+  private USER_LOGIN_URL  = this.BASE_URL + 'account';
+  private USER_URL  = this.BASE_URL + 'user/';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -20,7 +22,7 @@ export class UserService {
 
   /** POST: add a new hero to the server */
   userSignup(user: User): Observable<User> {
-    return this.http.post<User>(this.BASE_URL+'registration', user, this.httpOptions).pipe(
+    return this.http.post<User>(this.USER_URL+'registration', user, this.httpOptions).pipe(
       tap((newUser: User) => this.log('')),
       catchError(this.handleError<User>('registerUser'))
     );
@@ -36,7 +38,7 @@ export class UserService {
 
   /** POST: add a new hero to the server */
   userSignin(user: User): Observable<User> {
-    return this.http.post<User>(this.BASE_URL+'login', user, this.httpOptions).pipe(
+    return this.http.post<User>(this.USER_LOGIN_URL+'login', user, this.httpOptions).pipe(
       tap((newUser: User) => this.log('')),
       catchError(this.handleError<User>('loginUser'))
     );
