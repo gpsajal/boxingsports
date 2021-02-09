@@ -75,25 +75,25 @@ export class AuthenticationService {
     }
 
   /*function for logout user*/ 
-  logout(checkstatuscode): Observable<any> {
-    if(localStorage.getItem('currentUser')) {
+  logout(statusCode): Observable<any> {
+    if(localStorage.getItem('loggedInUser')) {
       this.getLoggedInUser =  JSON.parse(localStorage.getItem('loggedInUser'));
       this.userId = this.getLoggedInUser.userId;
     }
-    if(checkstatuscode == 401){
+    if(statusCode == 401){
       this.getLoggedInUserName.emit(false);
       this.getUserfullname.emit('');
       localStorage.removeItem('loggedInUser');
       window.location.reload();
     }
     
-    return this.http.post<any>(this.USER_LOGIN_URL +'/logout',{},httpOptions).pipe(
+    return this.http.get<any>(this.USER_LOGIN_URL +'/logout',httpOptions).pipe(
       tap(
         data  => {
           this.getLoggedInUserName.emit(false);
            this.getUserfullname.emit('');
-          localStorage.removeItem('loggedInUser');
-            if(checkstatuscode == 401)
+            localStorage.removeItem('loggedInUser');
+            if(statusCode == 401)
             {
               this.router.navigate(['/']);
             }

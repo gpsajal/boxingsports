@@ -87,8 +87,8 @@ export class AuthInterceptor implements HttpInterceptor {
       this.router.navigate(['500']);
       return EMPTY;
     }else if(statuscode === 401){
-     //const authservice = this.injector.get(AuthenticationService);
-     //authservice.logout(statuscode);
+     const authservice = this.injector.get(AuthenticationService);
+     authservice.logout(statuscode);
       return EMPTY;
     }
   } 

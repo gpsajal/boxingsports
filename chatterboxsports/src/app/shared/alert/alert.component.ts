@@ -20,8 +20,8 @@ export class AlertComponent implements OnInit {
                 return;
             }
             this.alerts.push(alert);
-     setTimeout(() => 
-     this.removeAlert(alert), 10000);
+     setTimeout(() =>   this.removeAlert(alert), 10000);
+    
         });
     }
 

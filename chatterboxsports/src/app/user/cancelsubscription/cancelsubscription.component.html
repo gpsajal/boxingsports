@@ -31,13 +31,17 @@
                         </p>
                         <p class="text-center btun-cancel">
                             <a href="javascript:void(0)" (click)="closeDialog()" class="cb-upgradenotnow-btn">Not Now </a>
-                            <a href="javascript:void(0)" (click)="cancelSubscription()" class="cb-upgrade-btn">Cancel Subscription </a>
+                            <a href="javascript:void(0)" (click)="cancelSubscription('live')" class="cb-upgrade-btn">Cancel Subscription </a>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Starts right block-->
-
+        <!-- Starts right block-->  
+<!-- Starts---Loader code -->
+<div class="cb-loader-overlay" *ngIf="loader">
+    <img src="../../../assets/images/loading.gif">
+</div>
+<!-- Ends---Loader code -->
     </div>

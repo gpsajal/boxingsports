@@ -30,7 +30,7 @@ export class UserService {
   
   /** POST: add a new hero to the server */
   userTourneySignup(user: User): Observable<User> {
-    return this.http.post<User>(this.BASE_URL+'tourneySubscription', user, this.httpOptions).pipe(
+    return this.http.post<User>(this.USER_URL+'tourneySubscription', user, this.httpOptions).pipe(
       tap((newUser: User) => this.log('')),
       catchError(this.handleError<User>('tourney Subscription'))
     );
@@ -41,6 +41,13 @@ export class UserService {
     return this.http.post<User>(this.USER_LOGIN_URL+'login', user, this.httpOptions).pipe(
       tap((newUser: User) => this.log('')),
       catchError(this.handleError<User>('loginUser'))
+    );
+  }
+
+  // email verify account service 
+  deleteUserSubscription(userId,planType): Observable<any>  {
+    return this.http.delete<any>(this.USER_URL + userId +'/subscriptions/'+planType, this.httpOptions).pipe(
+      catchError(this.handleError<User>('Delete user Subscription'))
     );
   }
 

@@ -69,12 +69,11 @@ export class LandingComponent implements OnInit {
   /* Start- function for get live channel videos*/
   getLiveChannelData(page,limit){
     this.loader = true;
+    this.liveChannelVideosData = [];
     this.homeService.getLiveChannel('1',page,limit).subscribe(
       response => {
         //this.loader = false;
         if (response != undefined) {
-          //console.log(response);
-          this.liveChannelVideosData = [];
          
           if(response.data.live != undefined && response.data.live.length > 0)
           {
@@ -91,11 +90,11 @@ export class LandingComponent implements OnInit {
             }
           }
 
-          if(response.data.total != undefined)
+          if(response.total_records != undefined)
           {
-            this.totalLiveVideos = response.data.total;
+            this.totalLiveVideos = response.total_records;
           }
-           this.liveChannelVideos = this.liveChannelVideosData.slice(0,6);
+           this.liveChannelVideos = this.liveChannelVideosData;
            //this.totalLiveVideos = this.liveChannelVideosData.length;
            for(var i = 0; i<this.liveChannelVideos.length; i++)
            {
@@ -127,37 +126,46 @@ export class LandingComponent implements OnInit {
     {
       this.isSeeAllInstant = false;
     }
+    this.instantClassicChannelVideos = [];
     this.homeService.getLiveChannel('2',page,limit).subscribe(
       response => {
         this.loader = false;
         if (response != undefined) {
-          if(response.data.future != undefined && response.data.future.length > 0)
-          {
-            for(var i = 0; i< response.data.future.length; i++)
-            {
-              this.instantClassicChannelVideos.push(response.data.future[i]);
-            }
-          }
+          // if(response.data.future != undefined && response.data.future.length > 0)
+          // {
+          //   for(var i = 0; i< response.data.future.length; i++)
+          //   {
+          //     this.instantClassicChannelVideos.push(response.data.future[i]);
+          //   }
+          // }
 
-          if(response.data.live != undefined && response.data.live.length > 0)
+          // if(response.data.live != undefined && response.data.live.length > 0)
+          // {
+          //   for(var i = 0; i< response.data.live.length; i++)
+          //   {
+          //     this.instantClassicChannelVideos.push(response.data.live[i]);
+          //   }
+          // }
+         
+          // if(response.data.past != undefined && response.data.past.length > 0)
+          // {
+          //   for(var i = 0; i< response.data.past.length; i++)
+          //   {
+          //     this.instantClassicChannelVideos.push(response.data.past[i]);
+          //   }
+          // }
+
+          if(response.data != undefined && response.data.length > 0)
           {
-            for(var i = 0; i< response.data.live.length; i++)
+            for(var i = 0; i< response.data.length; i++)
             {
-              this.instantClassicChannelVideos.push(response.data.live[i]);
+              this.instantClassicChannelVideos.push(response.data[i]);
             }
           }
          
-          if(response.data.past != undefined && response.data.past.length > 0)
+          if(response.total_records != undefined)
           {
-            for(var i = 0; i< response.data.past.length; i++)
-            {
-              this.instantClassicChannelVideos.push(response.data.past[i]);
-            }
-          }
-         
-          if(response.data.total != undefined)
-          {
-            this.totalInstantVideos = response.data.total;
+            this.totalInstantVideos = response.total_records;
           }
            //this.totalInstantVideos = this.instantClassicChannelVideos.length;
            //console.log(this.instantClassicChannelVideos);
@@ -197,15 +205,16 @@ export class LandingComponent implements OnInit {
   /* Start- function for get recent games videos*/
   getRecentGamesData(page,limit){
     this.loader = true;
+    this.recentVideosData = [];
     this.homeService.getLiveChannel('1',page,limit).subscribe(
       response => {
         
         if (response != undefined) {
           //console.log(response);
           this.recentVideosData = response.data.past;
-          if(response.data.total != undefined)
+          if(response.total_records != undefined)
           {
-            this.totalRecentVideos = response.data.total;
+            this.totalRecentVideos = response.total_records;
           }
            this.convertDateutctolocal((err,data)=>{
              if(data)
@@ -260,7 +269,8 @@ export class LandingComponent implements OnInit {
     else
     {
       this.isSeeAllRecent = false;
-      this.recentVideos = this.recentVideosData.slice(0,6);
+      this.getRecentGamesData(0,6);
+      //this.recentVideos = this.recentVideosData.slice(0,6);
     }
     setTimeout(()=>{this.loader = false; },2000);
   }
@@ -277,7 +287,8 @@ export class LandingComponent implements OnInit {
     else
     {
       this.isSeeAll = false;
-      this.liveChannelVideos = this.liveChannelVideosData.slice(0,6);
+      //this.liveChannelVideos = this.liveChannelVideosData;
+      this.getLiveChannelData(0,6);
     }
     setTimeout(()=>{this.loader = false; },2000);
   }

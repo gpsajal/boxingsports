@@ -74,6 +74,7 @@ export class TourneyComponent implements OnInit {
     {
       this.isSeeAll = false;
     }
+    this.tourneyChannelVideosData = [];
     this.homeService.getLiveChannel('4',page,limit).subscribe(
       response => {
         this.loader = false;
@@ -95,9 +96,9 @@ export class TourneyComponent implements OnInit {
             }
           }
 //console.log(this.tourneyChannelVideos);
-          if(response.data.total != undefined)
+          if(response.total_records != undefined)
           {
-            this.totalLivePlusVideos = response.data.total;
+            this.totalLivePlusVideos = response.total_records;
           }
          // this.tourneyChannelVideosData = response.data.live;
            this.tourneyChannelVideos = this.tourneyChannelVideosData;
@@ -158,6 +159,7 @@ export class TourneyComponent implements OnInit {
   /* Start- function for get recent games videos*/
   getRecentGamesData(page,limit){
     this.loader = true;
+    this.recentVideosData = [];
     this.homeService.getLiveChannel('4',page,limit).subscribe(
       response => {
         this.loader = false;
@@ -171,9 +173,9 @@ export class TourneyComponent implements OnInit {
             }
           }
          
-          if(response.data.total != undefined)
+          if(response.total_records != undefined)
           {
-            this.totalRecentVideos = response.data.total;
+            this.totalRecentVideos = response.total_records;
           }
          // this.recentVideosData = response.data.recent;
            this.recentVideos = this.recentVideosData;
@@ -207,7 +209,8 @@ export class TourneyComponent implements OnInit {
     else
     {
       this.isSeeAllRecent = false;
-      this.recentVideos = this.recentVideosData.slice(0,6);
+      this.getRecentGamesData(0,6);
+      //this.recentVideos = this.recentVideosData.slice(0,6);
     }
     setTimeout(()=>{this.loader = false; },2000);
   }
@@ -224,7 +227,8 @@ export class TourneyComponent implements OnInit {
     else
     {
       this.isSeeAll = false;
-      this.tourneyChannelVideos = this.tourneyChannelVideosData.slice(0,6);
+      this.getTourneyChannelData(0,6);
+      //this.tourneyChannelVideos = this.tourneyChannelVideosData.slice(0,6);
     }
     setTimeout(()=>{this.loader = false; },2000);
   }

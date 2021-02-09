@@ -52,6 +52,8 @@ export class TourneySignupComponent implements OnInit {
   firstName:string;
   lastName:string;
   fullname:string;
+  token:string;
+  subscriptions:any;
   isUserLoggedIn:boolean = false;
   tourneyData:any = {};
   constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService,private stripeService: StripeService,@Inject(MAT_DIALOG_DATA) public shareddata: any,private authenticationService: AuthenticationService,public dialogRef:MatDialogRef<TourneySignupComponent>) 
@@ -69,6 +71,10 @@ export class TourneySignupComponent implements OnInit {
       this.userEmail = this.getloggenInUser.email;
       this.fullname = this.firstName+' '+this.lastName;
       this.isUserLoggedIn = true;
+      this.token = this.getloggenInUser.token;
+      this.subscriptions = this.getloggenInUser.subscriptions;
+      console.log(this.token);
+      console.log(this.subscriptions);
       //this.isTourneyUser = this.
     }
     if(this.shareddata.isTourneyUser != undefined && this.shareddata.isTourneyUser != '')
@@ -151,7 +157,9 @@ export class TourneySignupComponent implements OnInit {
       this.isSignupPaymentStatus = true;
       //this.alertService.success(successdata);
       this.successMsg = successdata;
-      localStorage.setItem('loggedInUser', JSON.stringify({ userId:this.userId,email: this.userEmail, first_name: this.firstName,last_name:this.lastName,isTourneyUser:1}));
+      
+      localStorage.setItem('loggedInUser', JSON.stringify({ userId:this.userId,email: this.userEmail, first_name: this.firstName,last_name:this.lastName,isTourneyUser:1,token:this.token,subscriptions:this.subscriptions}));
+      console.log(localStorage.getItem('loggedInUser'));
       setTimeout(()=>{ this.dialogRef.close(1); },5000);
       
       //this.gettourneystatus.emit(true);

@@ -61,6 +61,7 @@ export class LiveplusComponent implements OnInit {
     {
       this.isSeeAll = false;
     }
+    this.livePlusChannelVideosData = [];
     this.homeService.getLiveChannel('3',page,limit).subscribe(
       response => {
         this.loader = false;
@@ -83,9 +84,9 @@ export class LiveplusComponent implements OnInit {
             }
           }
          
-          if(response.data.total != undefined)
+          if(response.total_records != undefined)
           {
-            this.totalLivePlusVideos = response.data.total;
+            this.totalLivePlusVideos = response.total_records;
           }
            this.livePlusChannelVideos = this.livePlusChannelVideosData;
           // this.totalLivePlusVideos = this.livePlusChannelVideosData.length;
@@ -137,6 +138,7 @@ export class LiveplusComponent implements OnInit {
   /* Start- function for get recent games videos*/
   getRecentGamesData(page,limit){
     this.loader = true;
+    this.recentVideosData = [];
     this.homeService.getLiveChannel('3',page,limit).subscribe(
       response => {
         this.loader = false;
@@ -150,9 +152,9 @@ export class LiveplusComponent implements OnInit {
             }
           }
          
-          if(response.data.total != undefined)
+          if(response.total_records != undefined)
           {
-            this.totalRecentVideos = response.data.total;
+            this.totalRecentVideos = response.total_records;
           }
           //this.recentVideosData = response.data.recent;
            this.recentVideos = this.recentVideosData;
@@ -180,13 +182,14 @@ export class LiveplusComponent implements OnInit {
     if(isSeeAllRecent == 'true')
     {
       this.isSeeAllRecent = true;
-      this.getRecentGamesData(0,this.recentVideosData);
+      this.getRecentGamesData(0,this.totalRecentVideos);
       //this.recentVideos = this.recentVideosData;
     }
     else
     {
       this.isSeeAllRecent = false;
-      this.recentVideos = this.recentVideosData.slice(0,6);
+      this.getRecentGamesData(0,6);
+      //this.recentVideos = this.recentVideosData.slice(0,6);
     }
     setTimeout(()=>{this.loader = false; },2000);
   }
@@ -203,7 +206,8 @@ export class LiveplusComponent implements OnInit {
     else
     {
       this.isSeeAll = false;
-      this.livePlusChannelVideos = this.livePlusChannelVideosData.slice(0,6);
+      this.getLiveplusChannelData(0,6);
+      //this.livePlusChannelVideos = this.livePlusChannelVideosData.slice(0,6);
     }
     setTimeout(()=>{this.loader = false; },2000);
   }

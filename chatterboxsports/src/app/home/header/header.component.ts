@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
   isCheckTourneyUser:boolean = false;
   isTourneyUser:number;
   isUserLoggedIn:boolean = false;
+  statusCode:any;
  
   constructor(public dialog: MatDialog,private alertService:AlertService,private router: Router,private authenticationService: AuthenticationService) { 
     authenticationService.getLoggedInUserName.subscribe( isUserLoggedIn => this.checkUsersession(isUserLoggedIn));
@@ -67,14 +68,21 @@ export class HeaderComponent implements OnInit {
 
   userLogout()
   {
-    this.fullname = '';
-    localStorage.removeItem('loggedInUser');
-    this.alertService.success('User Logout Successfully');
-    setTimeout(()=>{ 
-      this.router.navigate(['/']);
-       },2000);
-    setTimeout(()=>{ 
-      window.location.reload(); },4000);
+    // this.fullname = '';
+    // localStorage.removeItem('loggedInUser');
+    // this.alertService.success('User Logout Successfully');
+    // setTimeout(()=>{ 
+    //   this.router.navigate(['/']);
+    //    },2000);
+    // setTimeout(()=>{ 
+    //   window.location.reload(); },4000);
+    this.authenticationService.logout(this.statusCode).subscribe(
+      data => {
+        this.fullname = '';
+      },
+      error => {
+       
+      });
     
   }
 
