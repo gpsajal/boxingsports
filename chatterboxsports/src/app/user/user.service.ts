@@ -49,7 +49,7 @@ export class UserService {
     return this.http.delete<any>(this.USER_URL + userId +'/subscriptions/'+planType, this.httpOptions).pipe(
       catchError(this.handleError<User>('Delete user Subscription'))
     );
-  }
+  } 
 
   /**
    * Handle Http operation that failed.
