@@ -168,18 +168,32 @@ body {
     width: 20%;
 }
 
+.sportstableblock {
+    overflow: auto;
+}
+
 
 /* Add media queries for smaller screens */
 
-@media screen and (max-width:720px) {
+@media screen and (max-width:768px) {
     .weekdays li {
         width: 13.1%;
+    }
+    .schedule-inner {
+        margin: 10px 0px;
     }
 }
 
 @media screen and (max-width: 420px) {
     .weekdays li {
         width: 12.5%;
+    }
+    .event-date {
+        font-size: 20px;
+    }
+    .tab-foot {
+        text-align: left;
+        padding: 15px 10px 0px 10px;
     }
 }
 
