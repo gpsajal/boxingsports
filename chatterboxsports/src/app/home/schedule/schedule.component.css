@@ -1,3 +1,204 @@
-.cb-profile-block {
-    max-width: 730px;
+ul {
+    list-style-type: none;
+}
+
+.cb-schedule {
+    min-height: 700px;
+}
+
+.cb-calender {
+    padding: 25px 25px 0px;
+}
+
+.clublogo {
+    margin-right: 10px;
+}
+
+.cb-calender .month {
+    max-width: 340px;
+}
+
+body {
+    font-family: Verdana, sans-serif;
+}
+
+.month {
+    padding: 6px 0px;
+    width: 100%;
+    background: #fff;
+    text-align: center;
+}
+
+.month .prev {
+    text-align: left;
+}
+
+.month .next {
+    text-align: right;
+}
+
+.month ul {
+    margin: 0;
+    padding: 0;
+}
+
+.month ul li {
+    color: #d1cfcf;
+    font-size: 11px;
+    text-transform: capitalize;
+    letter-spacing: 0px;
+    line-height: 18px;
+}
+
+.month .prev {
+    float: left;
+    padding-top: 10px;
+}
+
+.month .next {
+    float: right;
+    padding-top: 10px;
+}
+
+.weekdays {
+    margin: 0;
+    padding: 10px 0;
+}
+
+.weekdays li {
+    display: inline-block;
+    width: 37px;
+    color: #666;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.month ul li.active {
+    background: #eac4c8;
+    color: #cb3342;
+}
+
+.weekdays li span {
+    display: block;
+}
+
+#sportstable {
+    width: 100%;
+}
+
+#sportstable tr th {
+    background: #fcf5f5;
+    padding: 15px 25px;
+}
+
+.left-right-arrow {
+    display: inline-block;
+}
+
+.left-right-arrow li {
+    display: inline-block;
+    width: 20px;
+}
+
+.left-right-arrow li.next {
+    display: inline-block;
+    width: 20px;
+    text-align: right;
+}
+
+.left-right-arrow li.prev {
+    display: inline-block;
+    width: 20px;
+    text-align: left;
+}
+
+.schedule-inner {
+    border-radius: 10px;
+    margin: 50px;
+    box-shadow: 1px 1px 10px 0px #e1e1e1;
+}
+
+.cal-date {
+    color: #8692a6;
+    font-size: 14px;
+}
+
+.tab-foot {
+    text-align: right;
+    padding: 15px 10px 0px 0px;
+    background: #fcf5f5;
+}
+
+.event-date {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 15px 0px;
+    padding-left: 25px;
+}
+
+#sportstable tr td {
+    padding: 25px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+#sportstable.sports {
+    width: 20%;
+}
+
+#sportstable.match {
+    width: 40%;
+}
+
+#sportstable td span {
+    color: #000;
+    font-weight: 700;
+    width: 100px;
+    font-size: 16px;
+    display: inline-block;
+    text-align: center;
+}
+
+#sportstable.time {
+    width: 20%;
+}
+
+#sportstable.channel {
+    width: 20%;
+}
+
+.sportstableblock {
+    overflow: auto;
+}
+
+
+/* Add media queries for smaller screens */
+
+@media screen and (max-width:768px) {
+    .weekdays li {
+        width: 13.1%;
+    }
+    .schedule-inner {
+        margin: 10px 0px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .weekdays li {
+        width: 12.5%;
+    }
+    .event-date {
+        font-size: 20px;
+    }
+    .tab-foot {
+        text-align: left;
+        padding: 15px 10px 0px 10px;
+    }
+}
+
+@media screen and (max-width: 290px) {
+    .weekdays li {
+        width: 12.2%;
+    }
 }
