@@ -75,18 +75,26 @@ export class LandingComponent implements OnInit {
         //this.loader = false;
         if (response != undefined) {
          
-          if(response.data.live != undefined && response.data.live.length > 0)
+          // if(response.data.live != undefined && response.data.live.length > 0)
+          // {
+          //   for(var i = 0; i< response.data.live.length; i++)
+          //   {
+          //     this.liveChannelVideosData.push(response.data.live[i]);
+          //   }
+          // }
+          // if(response.data.future != undefined && response.data.future.length > 0)
+          // {
+          //   for(var i = 0; i< response.data.future.length; i++)
+          //   {
+          //     this.liveChannelVideosData.push(response.data.future[i]);
+          //   }
+          // }
+
+          if(response.data != undefined && response.data.length > 0)
           {
-            for(var i = 0; i< response.data.live.length; i++)
+            for(var i = 0; i< response.data.length; i++)
             {
-              this.liveChannelVideosData.push(response.data.live[i]);
-            }
-          }
-          if(response.data.future != undefined && response.data.future.length > 0)
-          {
-            for(var i = 0; i< response.data.future.length; i++)
-            {
-              this.liveChannelVideosData.push(response.data.future[i]);
+              this.liveChannelVideosData.push(response.data[i]);
             }
           }
 
@@ -127,7 +135,7 @@ export class LandingComponent implements OnInit {
       this.isSeeAllInstant = false;
     }
     this.instantClassicChannelVideos = [];
-    this.homeService.getLiveChannel('2',page,limit).subscribe(
+    this.homeService.getLiveChannel('2',page,limit,'future').subscribe(
       response => {
         this.loader = false;
         if (response != undefined) {
@@ -206,12 +214,17 @@ export class LandingComponent implements OnInit {
   getRecentGamesData(page,limit){
     this.loader = true;
     this.recentVideosData = [];
-    this.homeService.getLiveChannel('1',page,limit).subscribe(
+    this.homeService.getLiveChannel('1',page,limit,'past').subscribe(
       response => {
         
         if (response != undefined) {
           //console.log(response);
-          this.recentVideosData = response.data.past;
+          
+          if(response.data != undefined && response.data.length > 0)
+          {
+            this.recentVideosData = response.data;
+          }
+          
           if(response.total_records != undefined)
           {
             this.totalRecentVideos = response.total_records;

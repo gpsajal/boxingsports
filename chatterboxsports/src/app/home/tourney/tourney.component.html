@@ -7,7 +7,7 @@
 
             <!-- Starts live/upcoming block -->
             <div class="cb-livevideo-block" *ngIf="tourneyChannelVideos.length > 0">
-                <h5>LIVE/UPCOMING <a *ngIf="!isSeeAll" class="see-all-btn" href="javascript:void(0)" (click)="seeAllLive('true')">See All</a><a *ngIf="isSeeAll" class="see-all-btn" href="javascript:void(0)" (click)="seeAllLive('false')">See Less</a></h5>
+                <h5>LIVE/UPCOMING <a *ngIf="!isSeeAll && totalLivePlusVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="seeAllLive('true')">See All</a><a *ngIf="isSeeAll && totalLivePlusVideos > 6" class="see-all-btn" href="javascript:void(0)" (click)="seeAllLive('false')">See Less</a></h5>
                 <div class="row">
                     <div class="col-sm-4 col-md-3 col-xl-2" *ngFor="let livevideo of tourneyChannelVideos">
                         <!-- <div id="boxcast-widget-x4hskyp019znhujikckx"></div> -->

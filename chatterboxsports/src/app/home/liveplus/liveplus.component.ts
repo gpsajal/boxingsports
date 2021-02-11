@@ -62,25 +62,33 @@ export class LiveplusComponent implements OnInit {
       this.isSeeAll = false;
     }
     this.livePlusChannelVideosData = [];
-    this.homeService.getLiveChannel('3',page,limit).subscribe(
+    this.homeService.getLiveChannel('3',page,limit,'future').subscribe(
       response => {
         this.loader = false;
         if (response != undefined) {
           //console.log(response);
           //this.livePlusChannelVideosData = response.data.live;
-          if(response.data.future != undefined && response.data.future.length > 0)
-          {
-            for(var i = 0; i< response.data.future.length; i++)
-            {
-              this.livePlusChannelVideosData.push(response.data.future[i]);
-            }
-          }
+          // if(response.data.future != undefined && response.data.future.length > 0)
+          // {
+          //   for(var i = 0; i< response.data.future.length; i++)
+          //   {
+          //     this.livePlusChannelVideosData.push(response.data.future[i]);
+          //   }
+          // }
 
-          if(response.data.live != undefined && response.data.live.length > 0)
+          // if(response.data.live != undefined && response.data.live.length > 0)
+          // {
+          //   for(var i = 0; i< response.data.live.length; i++)
+          //   {
+          //     this.livePlusChannelVideosData.push(response.data.live[i]);
+          //   }
+          // }
+
+          if(response.data!= undefined && response.data.length > 0)
           {
-            for(var i = 0; i< response.data.live.length; i++)
+            for(var i = 0; i< response.data.length; i++)
             {
-              this.livePlusChannelVideosData.push(response.data.live[i]);
+              this.livePlusChannelVideosData.push(response.data);
             }
           }
          
@@ -139,16 +147,16 @@ export class LiveplusComponent implements OnInit {
   getRecentGamesData(page,limit){
     this.loader = true;
     this.recentVideosData = [];
-    this.homeService.getLiveChannel('3',page,limit).subscribe(
+    this.homeService.getLiveChannel('3',page,limit,'past').subscribe(
       response => {
         this.loader = false;
         if (response != undefined) {
           
-          if(response.data.past != undefined && response.data.past.length > 0)
+          if(response.data != undefined && response.data.length > 0)
           {
-            for(var i = 0; i< response.data.past.length; i++)
+            for(var i = 0; i< response.data.length; i++)
             {
-              this.recentVideosData.push(response.data.past[i]);
+              this.recentVideosData.push(response.data[i]);
             }
           }
          

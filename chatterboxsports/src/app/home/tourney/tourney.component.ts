@@ -75,24 +75,32 @@ export class TourneyComponent implements OnInit {
       this.isSeeAll = false;
     }
     this.tourneyChannelVideosData = [];
-    this.homeService.getLiveChannel('4',page,limit).subscribe(
+    this.homeService.getLiveChannel('4',page,limit,'future').subscribe(
       response => {
         this.loader = false;
         if (response != undefined) {
           //console.log(response);
-          if(response.data.future != undefined && response.data.future.length > 0)
-          {
-            for(var i = 0; i< response.data.future.length; i++)
-            {
-              this.tourneyChannelVideosData.push(response.data.future[i]);
-            }
-          }
+          // if(response.data.future != undefined && response.data.future.length > 0)
+          // {
+          //   for(var i = 0; i< response.data.future.length; i++)
+          //   {
+          //     this.tourneyChannelVideosData.push(response.data.future[i]);
+          //   }
+          // }
 
-          if(response.data.live != undefined && response.data.live.length > 0)
+          // if(response.data.live != undefined && response.data.live.length > 0)
+          // {
+          //   for(var i = 0; i< response.data.live.length; i++)
+          //   {
+          //     this.tourneyChannelVideosData.push(response.data.live[i]);
+          //   }
+          // }
+
+          if(response.data != undefined && response.data.length > 0)
           {
-            for(var i = 0; i< response.data.live.length; i++)
+            for(var i = 0; i< response.data.length; i++)
             {
-              this.tourneyChannelVideosData.push(response.data.live[i]);
+              this.tourneyChannelVideosData.push(response.data[i]);
             }
           }
 //console.log(this.tourneyChannelVideos);
@@ -160,16 +168,16 @@ export class TourneyComponent implements OnInit {
   getRecentGamesData(page,limit){
     this.loader = true;
     this.recentVideosData = [];
-    this.homeService.getLiveChannel('4',page,limit).subscribe(
+    this.homeService.getLiveChannel('4',page,limit,'past').subscribe(
       response => {
         this.loader = false;
         if (response != undefined) {
           //console.log(response);
-          if(response.data.past != undefined && response.data.past.length > 0)
+          if(response.data != undefined && response.data.length > 0)
           {
-            for(var i = 0; i< response.data.past.length; i++)
+            for(var i = 0; i< response.data.length; i++)
             {
-              this.recentVideosData.push(response.data.past[i]);
+              this.recentVideosData.push(response.data[i]);
             }
           }
          
