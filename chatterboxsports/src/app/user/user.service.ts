@@ -11,8 +11,9 @@ import { environment } from '../../environments/environment';
 })
 export class UserService {
   private BASE_URL = environment.BASE_URL;  
-  private USER_LOGIN_URL  = this.BASE_URL + 'account';
+  private USER_ACCOUNT_URL  = this.BASE_URL + 'account';
   private USER_URL  = this.BASE_URL + 'user/';
+  private USER_PAYMENT_URL  = this.BASE_URL + 'payment/';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -38,7 +39,7 @@ export class UserService {
 
   /** POST: add a new hero to the server */
   userSignin(user: User): Observable<User> {
-    return this.http.post<User>(this.USER_LOGIN_URL+'login', user, this.httpOptions).pipe(
+    return this.http.post<User>(this.USER_ACCOUNT_URL+'login', user, this.httpOptions).pipe(
       tap((newUser: User) => this.log('')),
       catchError(this.handleError<User>('loginUser'))
     );
@@ -50,6 +51,23 @@ export class UserService {
       catchError(this.handleError<User>('Delete user Subscription'))
     );
   } 
+
+/** check email exist */
+checkEmailExist(emailId): Observable<any> {
+  return this.http.get<any>(this.USER_ACCOUNT_URL +'/'+emailId, this.httpOptions).pipe(
+    tap((newUser: any) => this.log('check user email')),
+    catchError(this.handleError<any>('check user email'))
+  );
+}
+
+/** check email exist */
+getStripeSecretToekn(amount): Observable<any> {
+  return this.http.post<any>(this.USER_PAYMENT_URL +'intent',{amount: amount,description: "Tourney subscription has been charged of amount 13.99 successful"}, this.httpOptions).pipe(
+    tap((newUser: any) => this.log('get payment intent')),
+    catchError(this.handleError<any>('get payment intent'))
+  );
+}
+
 
   /**
    * Handle Http operation that failed.

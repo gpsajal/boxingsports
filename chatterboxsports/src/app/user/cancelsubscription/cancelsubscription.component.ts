@@ -18,6 +18,8 @@ export class CancelsubscriptionComponent implements OnInit {
   fullname:string;
   isTourneyUser:number;
   loader:boolean = false;
+  isLivePlusUser:number;
+  subscriptionData = [];
   constructor(public dialog: MatDialog,public dialogRef:MatDialogRef<CancelsubscriptionComponent>,private userService: UserService,private alertService:AlertService) { }
 
   ngOnInit(): void {
@@ -29,6 +31,8 @@ export class CancelsubscriptionComponent implements OnInit {
       this.userEmail = this.getloggenInUser.email;
       this.fullname = this.firstName+' '+this.lastName;
       this.isTourneyUser = this.getloggenInUser.isTourneyUser;
+      this.isLivePlusUser = this.getloggenInUser.isLivePlusUser;
+      this.subscriptionData = this.getloggenInUser.subscriptions;
     }
   }
 

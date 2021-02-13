@@ -52,6 +52,7 @@ export class SignupComponent implements OnInit {
   successMsg:string;
   subcriptionValidityDate:string;
   isTourneyUser:boolean = false;
+  clientSecret:any;
   constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService,private stripeService: StripeService,@Inject(MAT_DIALOG_DATA) public shareddata: any,private router: Router,public dialogRef:MatDialogRef<SignupComponent>) { }
 
   ngOnInit(): void {
@@ -130,33 +131,20 @@ export class SignupComponent implements OnInit {
     this.loader = true;
     this.singupButtonCaption = 'Please wait...';
     delete this.signupform.value.terms;
-      this.isFormValid = true;	
-      //this.signupform.value.stripeToken = 'pm_1I8qqtGV54ADk0vh6NPjo9ts';
-      var name = this.signupform.value.first_name+' '+this.signupform.value.last_name;
-      this.stripeService
-      //.createToken(this.card.element, { name })
-      .createPaymentMethod ({
-    type: 'card',
-    card: this.card.element,
-    billing_details: {
-      name: name,
-      email:this.signupform.value.email_address
-    },
-  }).subscribe((result) => {
-        if (result.paymentMethod != undefined) {
-          // Use the token
-          this.signupform.value.stripeToken = result.paymentMethod.id;
-         // console.log( result.paymentMethod.id);
-          this.saveUser();
-        } else if (result.error) {
-          // Error creating the token
-          this.isFormValid = false;
-          this.loader = false;
-          this.alertService.error(result.error.message);
-          this.singupButtonCaption = 'Complete Purchase';
-          //console.log(result.error.message);
-        }
-      });
+    this.isFormValid = true;	
+    var name = this.signupform.value.first_name+' '+this.signupform.value.last_name;
+    var amount = 13.99 * 100;
+    this.userService.checkEmailExist(this.signupform.value.email_address)
+    .subscribe(
+        data => 
+        {
+           this.getStripeSecret(amount);
+        },
+        error => 
+        { 
+          this.displayResponse(error);
+        }); 
+    
      
   }
   /*end- user signup function */
@@ -220,12 +208,10 @@ export class SignupComponent implements OnInit {
 
     /*Start- function to display alert messages */
   displayResponse(responseobject) {
-    console.log(responseobject);
     this.loader = false;
     this.singupButtonCaption = 'Complete Purchase';
     if (responseobject.status === 400) {
      var errordata = responseobject.error.message;
-    // console.log(errordata);
      this.alertService.error(errordata);
     }
     else if (responseobject.status === 409) {
@@ -255,7 +241,6 @@ export class SignupComponent implements OnInit {
         },
         error => { 
           this.isFormValid = false;
-          console.log(error);
           this.displayResponse(error);
         
         }); 
@@ -268,4 +253,56 @@ export class SignupComponent implements OnInit {
      window.open(environment.SITE_URL+'terms', "_blank");
      //this.router.navigate(['terms']);
    }
+
+   /*Start- function for create stripe token*/
+   getStripeSecret(amount) {
+     var self =this;
+    this.userService.getStripeSecretToekn(amount)
+    .subscribe(
+        data => {
+            //this.displayResponse(data);
+            console.log(data)
+            if(data.data.clientSecret != undefined)
+            {
+              self.clientSecret = data.data.clientSecret;
+              this.stripeService.createPaymentMethod ({
+                type: 'card',
+                card: this.card.element,
+                billing_details: {
+                  name: this.signupform.value.first_name+' '+this.signupform.value.last_name,
+                  email:this.signupform.value.email_address
+                },
+              }).subscribe((result) => {
+              
+                if (result.paymentMethod != undefined) {
+                  // Use the token
+                  this.stripeService.confirmCardPayment( self.clientSecret, {
+                    payment_method: result.paymentMethod.id
+                   }).subscribe((res) => 
+                   { 
+                     console.log(res);
+                       if(res.paymentIntent.id)
+                       {
+                         console.log(res.paymentIntent.id);
+                         this.signupform.value.stripeToken = res.paymentIntent.id;
+                         this.saveUser();
+                       }
+                   });
+                } else if (result.error) {
+                  // Error creating the token
+                  this.isFormValid = false;
+                  this.loader = false;
+                  this.alertService.error(result.error.message);
+                  this.singupButtonCaption = 'Complete Purchase';
+                  //console.log(result.error.message);
+                }
+              });
+            }
+            
+        },
+        error => { 
+          this.displayResponse(error);
+        }); 
+    }
+   /*End- function for create stripe token*/
 }

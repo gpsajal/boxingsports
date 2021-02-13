@@ -15,6 +15,8 @@ export class UserprofileComponent implements OnInit {
   lastName:string;
   fullname:string;
   isTourneyUser:number;
+  isLivePlusUser:number;
+  subscriptionData = [];
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -26,6 +28,8 @@ export class UserprofileComponent implements OnInit {
       this.userEmail = this.getloggenInUser.email;
       this.fullname = this.firstName+' '+this.lastName;
       this.isTourneyUser = this.getloggenInUser.isTourneyUser;
+      this.isLivePlusUser = this.getloggenInUser.isLivePlusUser;
+      this.subscriptionData = this.getloggenInUser.subscriptions;
     }
   }
 
