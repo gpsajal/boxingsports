@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import {MatDialog, MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
 import { AlertService }  from '../../common/index';
+import * as moment from 'moment'
 @Component({
   selector: 'app-cancelsubscription',
   templateUrl: './cancelsubscription.component.html',
@@ -20,6 +21,8 @@ export class CancelsubscriptionComponent implements OnInit {
   loader:boolean = false;
   isLivePlusUser:number;
   subscriptionData = [];
+  token:string;
+  liveplusExpireDate:any;
   constructor(public dialog: MatDialog,public dialogRef:MatDialogRef<CancelsubscriptionComponent>,private userService: UserService,private alertService:AlertService) { }
 
   ngOnInit(): void {
@@ -30,9 +33,30 @@ export class CancelsubscriptionComponent implements OnInit {
       this.lastName = this.getloggenInUser.last_name;
       this.userEmail = this.getloggenInUser.email;
       this.fullname = this.firstName+' '+this.lastName;
+      this.token = this.getloggenInUser.token;
       this.isTourneyUser = this.getloggenInUser.isTourneyUser;
       this.isLivePlusUser = this.getloggenInUser.isLivePlusUser;
       this.subscriptionData = this.getloggenInUser.subscriptions;
+
+      this.subscriptionData = this.getloggenInUser.subscriptions;
+
+      if(this.subscriptionData.length > 0)
+      {
+       
+        for(var i = 0; i < this.subscriptionData.length; i++)
+        {
+          if(this.subscriptionData[i].planType == 'live+')
+          {
+            this.liveplusExpireDate = moment(this.subscriptionData[i].expiryDate).format(environment.DATE_FORMAT);
+          }
+          
+          // if(this.subscriptionData[i].planType == 'tourney')
+          // {
+          //   this.tourneyExpireDate = this.subscriptionData[1].expiryDate;
+          // }
+        }
+       
+      }
     }
   }
 
@@ -49,17 +73,17 @@ export class CancelsubscriptionComponent implements OnInit {
     this.userService.deleteUserSubscription(this.userId,planType)
     .subscribe(
         data => {
-            this.displayResponse(data);
+            this.displayResponse(data,planType);
         },
         error => { 
-          this.displayResponse(error);
+          this.displayResponse(error,planType);
         }); 
     // }
    
   }
 
   /*Start- function to display alert messages */
-  displayResponse(responseobject) {
+  displayResponse(responseobject,planType) {
      this.loader = false;
      if (responseobject.status === 400) {
       var errordata = responseobject.error.message;
@@ -72,9 +96,17 @@ export class CancelsubscriptionComponent implements OnInit {
      }
      else{
        var successdata = responseobject.message;
-       this.alertService.info(successdata);
+       this.alertService.success(successdata);
+       if(planType == 'live+')
+       {
+        localStorage.setItem('loggedInUser', JSON.stringify({ userId:this.userId,email: this.userEmail, first_name: this.firstName,last_name:this.lastName,isTourneyUser:this.isTourneyUser,token:this.token,subscriptions:this.subscriptionData,isLivePlusUser:0}));
+       }
+       else if(planType == '')
+       {
+
+       }
       //  localStorage.setItem('loggedInUser', JSON.stringify({ userId:this.userId,email: this.userEmail, first_name: this.firstName,last_name:this.lastName,isTourneyUser:1}));
-       setTimeout(()=>{ this.dialogRef.close(); },5000);
+       setTimeout(()=>{ this.dialogRef.close(true); },5000);
        
        //this.gettourneystatus.emit(true);
      }

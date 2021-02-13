@@ -30,8 +30,14 @@ export class UserService {
   }
   
   /** POST: add a new hero to the server */
-  userTourneySignup(user: User): Observable<User> {
-    return this.http.post<User>(this.USER_URL+'tourneySubscription', user, this.httpOptions).pipe(
+  // userTourneySignup(user: User): Observable<User> {
+  //   return this.http.post<User>(this.USER_URL+'tourneySubscription', user, this.httpOptions).pipe(
+  //     tap((newUser: User) => this.log('')),
+  //     catchError(this.handleError<User>('tourney Subscription'))
+  //   );
+  // }
+  userTourneySignup(user: User,userId): Observable<User> {
+    return this.http.post<User>(this.USER_URL+userId+'/subscriptions', user, this.httpOptions).pipe(
       tap((newUser: User) => this.log('')),
       catchError(this.handleError<User>('tourney Subscription'))
     );
@@ -62,9 +68,25 @@ checkEmailExist(emailId): Observable<any> {
 
 /** check email exist */
 getStripeSecretToekn(amount): Observable<any> {
-  return this.http.post<any>(this.USER_PAYMENT_URL +'intent',{amount: amount,description: "Tourney subscription has been charged of amount 13.99 successful"}, this.httpOptions).pipe(
+  return this.http.post<any>(this.USER_PAYMENT_URL +'intent',{amount: amount,description: "Live+ subscription has been charged of amount 13.99 successful"}, this.httpOptions).pipe(
     tap((newUser: any) => this.log('get payment intent')),
     catchError(this.handleError<any>('get payment intent'))
+  );
+}
+
+/** check email exist */
+getStripeSubscription(subscriptiondata): Observable<any> {
+  return this.http.post<any>(this.USER_PAYMENT_URL +'subscription',subscriptiondata, this.httpOptions).pipe(
+    tap((newUser: any) => this.log('set subscription')),
+    catchError(this.handleError<any>('set subscription'))
+  );
+}
+
+/** check email exist */
+getStripeBuySubscription(subscriptiondata): Observable<any> {
+  return this.http.post<any>(this.USER_PAYMENT_URL +'subscription',subscriptiondata, this.httpOptions).pipe(
+    tap((newUser: any) => this.log('set subscription')),
+    catchError(this.handleError<any>('set subscription'))
   );
 }
 

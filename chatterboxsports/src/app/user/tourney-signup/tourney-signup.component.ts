@@ -53,9 +53,11 @@ export class TourneySignupComponent implements OnInit {
   lastName:string;
   fullname:string;
   token:string;
-  subscriptions:any;
+  subscriptions = [];
+  isLivePlusUser:number;
   isUserLoggedIn:boolean = false;
   tourneyData:any = {};
+  subscriptionObject:any = {};
   constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService,private stripeService: StripeService,@Inject(MAT_DIALOG_DATA) public shareddata: any,private authenticationService: AuthenticationService,public dialogRef:MatDialogRef<TourneySignupComponent>) 
   { 
     authenticationService.getLoggedInUserName.subscribe( isUserLoggedIn => this.checkUsersession(isUserLoggedIn)); 
@@ -72,9 +74,10 @@ export class TourneySignupComponent implements OnInit {
       this.fullname = this.firstName+' '+this.lastName;
       this.isUserLoggedIn = true;
       this.token = this.getloggenInUser.token;
+      this.isLivePlusUser = this.getloggenInUser.isLivePlusUser;
       this.subscriptions = this.getloggenInUser.subscriptions;
-      console.log(this.token);
-      console.log(this.subscriptions);
+      this.isTourneyUser = this.getloggenInUser.isTourneyUser;
+     
       //this.isTourneyUser = this.
     }
     if(this.shareddata.isTourneyUser != undefined && this.shareddata.isTourneyUser != '')
@@ -99,43 +102,99 @@ export class TourneySignupComponent implements OnInit {
 
 
   /*start- user signup function */
-  submitSignupForm() {
-    this.loader = true;
-    this.singupButtonCaption = 'Please wait...';
-      this.isFormValid = true;	
-      //this.signupform.value.stripeToken = 'pm_1I8qqtGV54ADk0vh6NPjo9ts';
-      var name = this.firstName +' '+this.lastName;
-      this.stripeService
-      .createToken(this.card.element, { name })
-  //     this.stripeService.createPaymentMethod ({
-  //   type: 'card',
-  //   card: this.card.element,
-  //   billing_details: {
-  //     name: name,
-  //     email:this.userEmail
-  //   },
-  // })
-  .subscribe((result) => {
-   // console.log(result);
-        if (result.token != undefined) {
-          // Use the token
-         this.tourneyData.payToken = result.token.id;
-         this.tourneyData.userId = this.userId;
-         // console.log( result.paymentMethod.id);
-          this.saveUser();
-        } else if (result.error) {
-          // Error creating the token
-          this.isFormValid = false;
-          this.loader = false;
-          this.alertService.error(result.error.message);
-          this.singupButtonCaption = 'Complete Purchase';
-          //console.log(result.error.message);
-        }
-      });
+  // submitSignupForm() {
+  //   this.loader = true;
+  //   this.singupButtonCaption = 'Please wait...';
+  //     this.isFormValid = true;	
+  //     //this.signupform.value.stripeToken = 'pm_1I8qqtGV54ADk0vh6NPjo9ts';
+  //     var name = this.firstName +' '+this.lastName;
+  //     this.stripeService
+  //     .createToken(this.card.element, { name })
+  // //     this.stripeService.createPaymentMethod ({
+  // //   type: 'card',
+  // //   card: this.card.element,
+  // //   billing_details: {
+  // //     name: name,
+  // //     email:this.userEmail
+  // //   },
+  // // })
+  // .subscribe((result) => {
+  //  // console.log(result);
+  //       if (result.token != undefined) {
+  //         // Use the token
+  //        this.tourneyData.payToken = result.token.id;
+  //        this.tourneyData.userId = this.userId;
+  //        // console.log( result.paymentMethod.id);
+  //         this.saveUser();
+  //       } else if (result.error) {
+  //         // Error creating the token
+  //         this.isFormValid = false;
+  //         this.loader = false;
+  //         this.alertService.error(result.error.message);
+  //         this.singupButtonCaption = 'Complete Purchase';
+  //         //console.log(result.error.message);
+  //       }
+  //     });
      
-  }
-  /*end- user signup function */
+  // }
+  // /*end- user signup function */
 
+
+  getTourneyStripeSecret() 
+  {
+     this.loader = true;
+        var name = this.firstName +' '+this.lastName;
+        this.stripeService.createPaymentMethod ({
+          type: 'card',
+          card: this.card.element,
+          billing_details: {
+            name: name,
+            email:this.userEmail
+          },
+        }).subscribe((result) => {
+        
+            if (result.paymentMethod != undefined)
+            {
+              this.subscriptionObject.email = this.userEmail;
+              this.subscriptionObject.priceId = environment.tourneyPriceId;
+              this.subscriptionObject.method = result.paymentMethod.id;
+              this.subscriptionObject.isTourney = true;
+              //console.log(this.subscriptionObject);
+              this.userService.getStripeBuySubscription(this.subscriptionObject)
+              .subscribe(
+              data => 
+              {
+                  // Use the token
+                  //console.log(data);                  
+                  const client_secret = data.data.clientSecret;
+                  const status = data.data.status;
+                  const subscriptionId = data.data.subscriptionId;
+            
+                  if(status == 'succeeded')
+                  {
+                    this.saveUser(subscriptionId);
+                  }
+                  else
+                  {
+                     // Error creating the token
+                      this.isFormValid = false;
+                      this.loader = false;
+                      this.alertService.error('Payment Failed');
+                      this.singupButtonCaption = 'Complete Purchase';
+                  }
+              },
+              error=>
+              {
+                  // Error creating the token
+                  this.isFormValid = false;
+                  this.loader = false;
+                  this.alertService.error(error.message);
+                  this.singupButtonCaption = 'Complete Purchase';
+              });
+            }
+        });
+  }
+  /*End- function for create stripe token*/
     
 
     /*Start- function to display alert messages */
@@ -158,8 +217,8 @@ export class TourneySignupComponent implements OnInit {
       //this.alertService.success(successdata);
       this.successMsg = successdata;
       
-      localStorage.setItem('loggedInUser', JSON.stringify({ userId:this.userId,email: this.userEmail, first_name: this.firstName,last_name:this.lastName,isTourneyUser:1,token:this.token,subscriptions:this.subscriptions}));
-      console.log(localStorage.getItem('loggedInUser'));
+      localStorage.setItem('loggedInUser', JSON.stringify({ userId:this.userId,email: this.userEmail, first_name: this.firstName,last_name:this.lastName,isTourneyUser:1,token:this.token,subscriptions:this.subscriptions,isLivePlusUser:this.isLivePlusUser}));
+      //console.log(localStorage.getItem('loggedInUser'));
       setTimeout(()=>{ this.dialogRef.close(1); },5000);
       
       //this.gettourneystatus.emit(true);
@@ -173,8 +232,18 @@ export class TourneySignupComponent implements OnInit {
    }
 
    /*Start- function for create stripe token*/
-   saveUser() {
-    this.userService.userTourneySignup(this.tourneyData)
+   saveUser(subscriptionId) {
+    this.tourneyData = {
+      productId: 'stripe',
+      platform: 'web',
+      productPrice: "14.99",
+      planType: 'tourney',
+      planName: 'Tourney',
+      planDescription: 'Tourney plan description',
+      expiryDate: "1629844921000",
+      receiptData: subscriptionId
+    };
+    this.userService.userTourneySignup(this.tourneyData,this.userId)
     .subscribe(
         data => {
             this.displayResponse(data);

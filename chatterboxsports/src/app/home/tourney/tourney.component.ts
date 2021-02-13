@@ -34,6 +34,8 @@ export class TourneyComponent implements OnInit {
   isUserLoggedIn:boolean = false;
   isCheckTourneyUser:boolean = false;
   isTourneyUser:number;
+  isLivePlusUser:number;
+  subscriptionData = [];
   constructor(public dialog: MatDialog,private alertService:AlertService,private homeService:HomeService,private authenticationService: AuthenticationService) { 
     authenticationService.getLoggedInUserName.subscribe( isUserLoggedIn => this.checkUsersession(isUserLoggedIn));
     authenticationService.checktourneyUser.subscribe( isCheckTourneyUser => this.checkUserPlan(isCheckTourneyUser));
@@ -50,6 +52,8 @@ export class TourneyComponent implements OnInit {
       this.fullname = this.firstName+' '+this.lastName;
       this.isUserLoggedIn = true;
       this.isTourneyUser = this.getloggenInUser.isTourneyUser;
+      this.isLivePlusUser = this.getloggenInUser.isLivePlusUser;
+      this.subscriptionData = this.getloggenInUser.subscriptions;
     }
   }
 
@@ -135,25 +139,33 @@ export class TourneyComponent implements OnInit {
   {
     if(this.isUserLoggedIn)
     {
-      if(this.isTourneyUser)
+      if(this.isLivePlusUser == 1)
       {
-        const dialogRef = this.dialog.open(ShareddialogComponent,{
-          data: { videoUrl: url },
-        });
-    
-        dialogRef.afterClosed().subscribe(result => {
-          //console.log('Dialog result:'+result);
-          if(result != undefined && result != '')
-          {
-            //this.fullname = result;
-          }
-        });
+        if(this.isTourneyUser)
+        {
+          const dialogRef = this.dialog.open(ShareddialogComponent,{
+            data: { videoUrl: url },
+          });
+      
+          dialogRef.afterClosed().subscribe(result => {
+            if(result != undefined && result != '')
+            {
+              //this.fullname = result;
+            }
+          });
+        }
+        else
+        {
+          this.openSigninDialog('tourney');
+          return false;
+        }
       }
       else
       {
-        this.openSigninDialog('tourney');
-        return false;
+          this.alertService.info('You do not have active Live+ subscription.');
+          return false;
       }
+      
     }
     else
     {

@@ -66,14 +66,15 @@
 
             <!-- Ends Form code -->
 
-            <div class="row">
+            <div class="row" *ngIf="isLivePlusUser == 1">
                 <div class="col-12">
                     <p class="profile-head">Subscription Plan</p>
                     <div class="plan-box">
                         <p>
                             <span class="subbtn">Subscription Plan</span><span class="subprice">$13.99</span></p>
                         <p class="subs-text">You are selected a Chatterbox Live+ is a premium monthly subscription channel dedicated to bringing you live coverage of the biggest events.</p>
-                        <p class="text-right profilebtn"> <a class="cb-upgradenotnow-btn" (click)="opencancelDialog()">Cancel Subscription </a>
+                        <p *ngIf="!isLivePlusUserCancelled" class="text-right profilebtn"> <a class="cb-upgradenotnow-btn" (click)="opencancelDialog()">Cancel Subscription </a>
+                        <p *ngIf="isLivePlusUserCancelled" class="text-right profilebtn"> <a class="cb-upgradenotnow-btn">Your Live+ Subscription Cancelled Successfully.</a>
                             <!-- <a class="cb-upgrade-btn">Upgrade Plan </a> -->
                         </p>
                     </div>

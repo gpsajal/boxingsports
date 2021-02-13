@@ -11,7 +11,9 @@ export const environment = {
   BOXCAST_VIEWER_URL:"https://boxcast.tv/view/",
   DATE_TIME_FORMAT:'MMM D, YYYY h:mm A',
   UPCOMING_DATE_TIME_FORMAT:'MMM D, h:mm A',
-  DATE_FORMAT:'MMM D, YYYY'
+  DATE_FORMAT:'MMM D, YYYY',
+  livePlusPriceId:"price_1IJN5LGV54ADk0vhkwrBVCVf",
+  tourneyPriceId:"price_1IKMqlGV54ADk0vhjiM5uStS"
 };
 
 /*

@@ -53,6 +53,7 @@ export class SignupComponent implements OnInit {
   subcriptionValidityDate:string;
   isTourneyUser:boolean = false;
   clientSecret:any;
+  subscriptionObject:any = {};
   constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService,private stripeService: StripeService,@Inject(MAT_DIALOG_DATA) public shareddata: any,private router: Router,public dialogRef:MatDialogRef<SignupComponent>) { }
 
   ngOnInit(): void {
@@ -138,10 +139,11 @@ export class SignupComponent implements OnInit {
     .subscribe(
         data => 
         {
-           this.getStripeSecret(amount);
+           this.getStripeSecret();
         },
         error => 
         { 
+          this.isFormValid = false;
           this.displayResponse(error);
         }); 
     
@@ -255,54 +257,127 @@ export class SignupComponent implements OnInit {
    }
 
    /*Start- function for create stripe token*/
-   getStripeSecret(amount) {
-     var self =this;
-    this.userService.getStripeSecretToekn(amount)
-    .subscribe(
-        data => {
-            //this.displayResponse(data);
-            console.log(data)
-            if(data.data.clientSecret != undefined)
-            {
-              self.clientSecret = data.data.clientSecret;
-              this.stripeService.createPaymentMethod ({
-                type: 'card',
-                card: this.card.element,
-                billing_details: {
-                  name: this.signupform.value.first_name+' '+this.signupform.value.last_name,
-                  email:this.signupform.value.email_address
-                },
-              }).subscribe((result) => {
+  //  getStripeSecret(amount) {
+  //    var self =this;
+  //   this.userService.getStripeSecretToekn(amount)
+  //   .subscribe(
+  //       data => {
+  //           //this.displayResponse(data);
+  //           console.log(data)
+  //           if(data.data.clientSecret != undefined)
+  //           {
+  //             self.clientSecret = data.data.clientSecret;
+  //             this.stripeService.createPaymentMethod ({
+  //               type: 'card',
+  //               card: this.card.element,
+  //               billing_details: {
+  //                 name: this.signupform.value.first_name+' '+this.signupform.value.last_name,
+  //                 email:this.signupform.value.email_address
+  //               },
+  //             }).subscribe((result) => {
               
-                if (result.paymentMethod != undefined) {
+  //               if (result.paymentMethod != undefined) {
+  //                 // Use the token
+  //                 this.stripeService.confirmCardPayment( self.clientSecret, {
+  //                   payment_method: result.paymentMethod.id
+  //                  }).subscribe((res) => 
+  //                  { 
+  //                    console.log(res);
+  //                      if(res.paymentIntent.id)
+  //                      {
+  //                        console.log(res.paymentIntent.id);
+  //                        this.signupform.value.stripeToken = res.paymentIntent.id;
+  //                        this.saveUser();
+  //                      }
+  //                  });
+  //               } else if (result.error) {
+  //                 // Error creating the token
+  //                 this.isFormValid = false;
+  //                 this.loader = false;
+  //                 this.alertService.error(result.error.message);
+  //                 this.singupButtonCaption = 'Complete Purchase';
+  //                 //console.log(result.error.message);
+  //               }
+  //             });
+  //           }
+            
+  //       },
+  //       error => { 
+  //         this.displayResponse(error);
+  //       }); 
+  //   }
+
+  getStripeSecret() 
+  {
+        this.stripeService.createPaymentMethod ({
+          type: 'card',
+          card: this.card.element,
+          billing_details: {
+            name: this.signupform.value.first_name+' '+this.signupform.value.last_name,
+            email:this.signupform.value.email_address
+          },
+        }).subscribe((result) => {
+        
+            if (result.paymentMethod != undefined)
+            {
+              this.subscriptionObject.email = this.signupform.value.email_address;
+              this.subscriptionObject.priceId = environment.livePlusPriceId;
+              this.subscriptionObject.method = result.paymentMethod.id;
+              //console.log(this.subscriptionObject);
+              this.userService.getStripeSubscription(this.subscriptionObject)
+              .subscribe(
+              data => 
+              {
                   // Use the token
-                  this.stripeService.confirmCardPayment( self.clientSecret, {
-                    payment_method: result.paymentMethod.id
-                   }).subscribe((res) => 
-                   { 
-                     console.log(res);
-                       if(res.paymentIntent.id)
-                       {
-                         console.log(res.paymentIntent.id);
-                         this.signupform.value.stripeToken = res.paymentIntent.id;
-                         this.saveUser();
-                       }
-                   });
-                } else if (result.error) {
+                  //console.log(data);                  
+                  const client_secret = data.data.clientSecret;
+                  const status = data.data.status;
+                  const subscriptionId = data.data.subscriptionId;
+                  this.signupform.value.stripeToken = subscriptionId;
+                  if(status == 'succeeded')
+                  {
+                    this.saveUser();
+                  }
+                  else
+                  {
+                     // Error creating the token
+                      this.isFormValid = false;
+                      this.loader = false;
+                      this.alertService.error('Payment Failed');
+                      this.singupButtonCaption = 'Complete Purchase';
+                  }
+                 
+                  // this.stripeService.confirmCardPayment(client_secret).subscribe(
+                  //   (res) => 
+                  //   { 
+                  //     console.log(res);
+                       
+                  //     //console.log(res.paymentIntent.id);
+                  //     this.signupform.value.stripeToken = subscriptionId;
+                  //     this.saveUser();
+                        
+                  //   },
+                  //   error=>
+                  //   {
+                  //       console.log(error);
+                  //       // Error creating the token
+                  //       this.isFormValid = false;
+                  //       this.loader = false;
+                  //       this.alertService.error(error.error.message);
+                  //       this.singupButtonCaption = 'Complete Purchase';
+                  //   }
+                  //   );
+              },
+              error=>
+              {
                   // Error creating the token
                   this.isFormValid = false;
                   this.loader = false;
-                  this.alertService.error(result.error.message);
+                  this.alertService.error(error.message);
                   this.singupButtonCaption = 'Complete Purchase';
-                  //console.log(result.error.message);
-                }
               });
             }
-            
-        },
-        error => { 
-          this.displayResponse(error);
-        }); 
-    }
-   /*End- function for create stripe token*/
+        });
+  }
+  /*End- function for create stripe token*/
 }

@@ -29,6 +29,8 @@ export class LiveplusComponent implements OnInit {
   fullname:string;
   isUserLoggedIn:boolean = false;
   isTourneyUser:boolean = false;
+  isLivePlusUser:number;
+  subscriptionData = [];
   constructor(public dialog: MatDialog,private alertService:AlertService,private homeService:HomeService,private authenticationService: AuthenticationService) { 
     authenticationService.getLoggedInUserName.subscribe( isUserLoggedIn => this.checkUsersession(isUserLoggedIn));
   }
@@ -43,6 +45,8 @@ export class LiveplusComponent implements OnInit {
       this.isTourneyUser = this.getloggenInUser.isTourneyUser;
       this.fullname = this.firstName+' '+this.lastName;
       this.isUserLoggedIn = true;
+      this.isLivePlusUser = this.getloggenInUser.isLivePlusUser;
+      this.subscriptionData = this.getloggenInUser.subscriptions;
     }
   }
 
@@ -120,7 +124,7 @@ export class LiveplusComponent implements OnInit {
   /* Start- function for open video dialog*/
   openVideoDialog(url)
   {
-    if(this.isUserLoggedIn)
+    if(this.isUserLoggedIn && this.isLivePlusUser == 1)
     {
       const dialogRef = this.dialog.open(ShareddialogComponent,{
         data: { videoUrl: url },
@@ -136,9 +140,17 @@ export class LiveplusComponent implements OnInit {
     }
     else
     {
-       //this.alertService.info('Please login to watch live+ videos.');
-       this.openSignupDialog();
-       return false;
+      if(this.isUserLoggedIn && this.isLivePlusUser == 0)
+      {
+          this.alertService.info('You have not subscribed for Live+.');
+          return false;
+      }
+      else
+      {
+        //this.alertService.info('Please login to watch live+ videos.');
+        this.openSignupDialog();
+        return false;
+      }
     }
   }
   /* End-  function for open video dialog*/

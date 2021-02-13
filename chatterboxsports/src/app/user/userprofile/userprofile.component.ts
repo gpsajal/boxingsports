@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { CancelsubscriptionComponent } from '../../user/cancelsubscription/cancelsubscription.component';
-
+import * as moment from 'moment'
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-userprofile',
   templateUrl: './userprofile.component.html',
@@ -16,7 +17,10 @@ export class UserprofileComponent implements OnInit {
   fullname:string;
   isTourneyUser:number;
   isLivePlusUser:number;
+  isLivePlusUserCancelled:boolean = false;
   subscriptionData = [];
+  liveplusExpireDate:any;
+  tourneyExpireDate:any;
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -30,16 +34,40 @@ export class UserprofileComponent implements OnInit {
       this.isTourneyUser = this.getloggenInUser.isTourneyUser;
       this.isLivePlusUser = this.getloggenInUser.isLivePlusUser;
       this.subscriptionData = this.getloggenInUser.subscriptions;
+
+      if(this.subscriptionData.length > 0)
+      {
+       
+        for(var i = 0; i < this.subscriptionData.length; i++)
+        {
+          if(this.subscriptionData[i].planType == 'live+')
+          {
+            this.liveplusExpireDate = moment.unix(this.subscriptionData[i].expiryDate).format(environment.DATE_FORMAT);
+          }
+          
+          // if(this.subscriptionData[i].planType == 'tourney')
+          // {
+          //   this.tourneyExpireDate = this.subscriptionData[1].expiryDate;
+          // }
+        }
+       
+      }
     }
   }
 
   
-
+/*function for open cancel payment*/
    opencancelDialog()
   {
     const dialogRef = this.dialog.open(CancelsubscriptionComponent);
-  
+    dialogRef.afterClosed().subscribe(result => {
+      if(result)
+      {
+        this.isLivePlusUserCancelled = true;
+      }
+    });
   }
+  /*function for open cancel payment*/
 
    
 
