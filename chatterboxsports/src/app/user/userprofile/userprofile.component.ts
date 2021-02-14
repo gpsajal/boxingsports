@@ -21,6 +21,7 @@ export class UserprofileComponent implements OnInit {
   subscriptionData = [];
   liveplusExpireDate:any;
   tourneyExpireDate:any;
+  liveproductPrice:any;
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -43,6 +44,7 @@ export class UserprofileComponent implements OnInit {
           if(this.subscriptionData[i].planType == 'live+')
           {
             this.liveplusExpireDate = moment.unix(this.subscriptionData[i].expiryDate).format(environment.DATE_FORMAT);
+            this.liveproductPrice = this.subscriptionData[i].productPrice;
           }
           
           // if(this.subscriptionData[i].planType == 'tourney')

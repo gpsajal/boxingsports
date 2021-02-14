@@ -88,7 +88,7 @@ export class LiveplusComponent implements OnInit {
           //   }
           // }
 
-          if(response.data!= undefined && response.data.length > 0)
+          if(response.data != undefined && response.data.length > 0)
           {
             for(var i = 0; i< response.data.length; i++)
             {
