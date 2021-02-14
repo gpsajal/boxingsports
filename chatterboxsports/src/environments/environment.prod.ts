@@ -8,6 +8,9 @@ export const environment = {
   DATE_TIME_FORMAT:'MMM D, YYYY h:mm A',
   UPCOMING_DATE_TIME_FORMAT:'MMM D, h:mm A',
   DATE_FORMAT:'MMM D, YYYY',
-  livePlusPriceId:"price_1IJN5LGV54ADk0vhkwrBVCVf",
-  tourneyPriceId:"price_1IKMqlGV54ADk0vhjiM5uStS"
+  //livePlusPriceId:"price_1IJN5LGV54ADk0vhkwrBVCVf",
+  //tourneyPriceId:"price_1IKMqlGV54ADk0vhjiM5uStS"
+  livePlusPriceId:"price_1GsaIoF3iSRZyQvHHatVli91",
+  tourneyPriceId:"price_1Gscr9F3iSRZyQvHakwMRk4D",
+  stripe_publish_key:"pk_test_a1zNrEXYzWw45x23wNlxIzTO00iMOfyZ0P"
 };

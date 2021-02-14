@@ -16,6 +16,7 @@ import { TourneySignupComponent } from './tourney-signup/tourney-signup.componen
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { CancelsubscriptionComponent } from './cancelsubscription/cancelsubscription.component';
 import { AuthGuard } from '../guards/index';
+import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [SignupComponent,
     SigninComponent,PasswordValidatorDirective, TourneySignupComponent, UserprofileComponent, CancelsubscriptionComponent],
@@ -27,7 +28,8 @@ import { AuthGuard } from '../guards/index';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxStripeModule.forRoot('pk_test_ahyaxlBCFVqNmlrlyMHTvUsb'),
+    //NgxStripeModule.forRoot('pk_test_ahyaxlBCFVqNmlrlyMHTvUsb'),
+    NgxStripeModule.forRoot(environment.stripe_publish_key),
   ],
   providers: [UserService, AuthenticationService,AuthGuard]
 })

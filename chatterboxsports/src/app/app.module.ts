@@ -13,6 +13,7 @@ import { AlertService } from './common/alertService';
 import { AlertComponent } from './shared/alert/alert.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { httpInterceptorProviders } from './http-interceptors/index';
+import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { httpInterceptorProviders } from './http-interceptors/index';
     MatInputModule,
     HomeModule,
     UserModule,
-    NgxStripeModule.forRoot('pk_test_ahyaxlBCFVqNmlrlyMHTvUsb'),
+    //NgxStripeModule.forRoot('pk_test_ahyaxlBCFVqNmlrlyMHTvUsb'),
+    NgxStripeModule.forRoot(environment.stripe_publish_key),
   ],
   providers: [AlertService,httpInterceptorProviders],
   bootstrap: [AppComponent]
