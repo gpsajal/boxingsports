@@ -15,7 +15,7 @@ export const environment = {
   //livePlusPriceId:"price_1IJN5LGV54ADk0vhkwrBVCVf",
   //tourneyPriceId:"price_1IKMqlGV54ADk0vhjiM5uStS"
   livePlusPriceId:"price_1GsaIoF3iSRZyQvHHatVli91",
-  tourneyPriceId:"price_1Gscr9F3iSRZyQvHakwMRk4D",
+  tourneyPriceId:"price_1Gss4pF3iSRZyQvHoUREtiQp",
   stripe_publish_key:"pk_test_a1zNrEXYzWw45x23wNlxIzTO00iMOfyZ0P"
 };
 
