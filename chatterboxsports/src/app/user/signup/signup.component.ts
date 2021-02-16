@@ -317,7 +317,7 @@ export class SignupComponent implements OnInit {
             email:this.signupform.value.email_address
           },
         }).subscribe((result) => {
-        
+        //console.log(result);
             if (result.paymentMethod != undefined)
             {
               this.subscriptionObject.email = this.signupform.value.email_address;
@@ -376,6 +376,13 @@ export class SignupComponent implements OnInit {
                   this.alertService.error(error.message);
                   this.singupButtonCaption = 'Complete Purchase';
               });
+            }
+            else if(result.error != undefined)
+            {
+              this.isFormValid = false;
+              this.loader = false;
+              this.alertService.error(result.error.message);
+              this.singupButtonCaption = 'Complete Purchase';
             }
         });
   }

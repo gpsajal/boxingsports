@@ -7,16 +7,20 @@ export const environment = {
   SITE_URL:"http://localhost:4200/",
   //BASE_URL:"http://localhost:2020/users/",
   //BASE_URL:"http://ec2-18-219-16-136.us-east-2.compute.amazonaws.com:5050/users/",
-  BASE_URL:"http://ec2-3-137-98-252.us-east-2.compute.amazonaws.com:8000/app/",
+  //BASE_URL:"http://ec2-3-137-98-252.us-east-2.compute.amazonaws.com:8000/app/",
+  BASE_URL:"https://api.chatterboxsports.com/app/",
   BOXCAST_VIEWER_URL:"https://boxcast.tv/view/",
   DATE_TIME_FORMAT:'MMM D, YYYY h:mm A',
   UPCOMING_DATE_TIME_FORMAT:'MMM D, h:mm A',
   DATE_FORMAT:'MMM D, YYYY',
-  //livePlusPriceId:"price_1IJN5LGV54ADk0vhkwrBVCVf",
+  //livePlusPriceId:"price_1IJN5LGV54ADk0vhkwrBVCVf", 
   //tourneyPriceId:"price_1IKMqlGV54ADk0vhjiM5uStS"
-  livePlusPriceId:"price_1GsaIoF3iSRZyQvHHatVli91",
-  tourneyPriceId:"price_1Gss4pF3iSRZyQvHoUREtiQp",
-  stripe_publish_key:"pk_test_a1zNrEXYzWw45x23wNlxIzTO00iMOfyZ0P"
+  ////livePlusPriceId:"price_1GsaIoF3iSRZyQvHHatVli91", -- clinet stripe test
+  //tourneyPriceId:"price_1Gss4pF3iSRZyQvHoUREtiQp", -- clinet stripe test
+  livePlusPriceId:"price_1GsaD5F3iSRZyQvH4fuPRGfa",
+  tourneyPriceId:"price_1HK3zeF3iSRZyQvHHc2F82Tt",
+   //stripe_publish_key:"pk_test_a1zNrEXYzWw45x23wNlxIzTO00iMOfyZ0P"
+   stripe_publish_key:"pk_live_enSESyU24IvAyDGAcqfaKvHZ00xbNPNhIh"
 };
 
 /*

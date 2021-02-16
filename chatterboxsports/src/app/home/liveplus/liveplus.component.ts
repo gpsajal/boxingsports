@@ -88,19 +88,19 @@ export class LiveplusComponent implements OnInit {
           //   }
           // }
 
-          if(response.data != undefined && response.data.length > 0)
-          {
-            for(var i = 0; i< response.data.length; i++)
-            {
-              this.livePlusChannelVideosData.push(response.data);
-            }
-          }
+          // if(response.data != undefined && response.data.length > 0)
+          // {
+          //   for(var i = 0; i< response.data.length; i++)
+          //   {
+          //     this.livePlusChannelVideosData.push(response.data);
+          //   }
+          // }
          
           if(response.total_records != undefined)
           {
             this.totalLivePlusVideos = response.total_records;
           }
-           this.livePlusChannelVideos = this.livePlusChannelVideosData;
+           this.livePlusChannelVideos = response.data;
           // this.totalLivePlusVideos = this.livePlusChannelVideosData.length;
            for(var i = 0; i<this.livePlusChannelVideos.length; i++)
            {
@@ -110,7 +110,7 @@ export class LiveplusComponent implements OnInit {
             this.livePlusChannelVideos[i].starts_at = moment.utc(this.livePlusChannelVideos[i].starts_at).local().format(environment.DATE_TIME_FORMAT);
             this.livePlusChannelVideos[i].stops_at = moment.utc(this.livePlusChannelVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }
-           //console.log(this.livePlusChannelVideos);
+           console.log(this.livePlusChannelVideos);
            this.getRecentGamesData(0,6);
         }
       },

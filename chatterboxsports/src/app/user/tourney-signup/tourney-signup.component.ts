@@ -192,6 +192,13 @@ export class TourneySignupComponent implements OnInit {
                   this.singupButtonCaption = 'Complete Purchase';
               });
             }
+            else if(result.error != undefined)
+            {
+              this.isFormValid = false;
+              this.loader = false;
+              this.alertService.error(result.error.message);
+              this.singupButtonCaption = 'Complete Purchase';
+            }
         });
   }
   /*End- function for create stripe token*/
