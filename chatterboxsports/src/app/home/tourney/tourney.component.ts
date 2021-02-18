@@ -223,7 +223,7 @@ export class TourneyComponent implements OnInit {
     if(isSeeAllRecent == 'true')
     {
       this.isSeeAllRecent = true;
-      this.getRecentGamesData(0,this.recentVideosData);
+      this.getRecentGamesData(0,this.totalRecentVideos);
       //this.recentVideos = this.recentVideosData;
     }
     else
@@ -241,7 +241,7 @@ export class TourneyComponent implements OnInit {
     if(isSeeAll == 'true')
     {
       this.isSeeAll = true;
-      this.getTourneyChannelData(0,this.totalLivePlusVideos);
+      this.getTourneyChannelData(0,this.totalLivePlusVideos,'true');
       //this.tourneyChannelVideos = this.tourneyChannelVideosData;
     }
     else

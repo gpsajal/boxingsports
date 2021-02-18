@@ -220,7 +220,7 @@ export class LiveplusComponent implements OnInit {
     if(isSeeAll == 'true')
     {
       this.isSeeAll = true;
-      this.getLiveplusChannelData(0,this.totalLivePlusVideos);
+      this.getLiveplusChannelData(0,this.totalLivePlusVideos,'true');
       //this.livePlusChannelVideos = this.livePlusChannelVideosData;
     }
     else

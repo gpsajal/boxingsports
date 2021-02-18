@@ -54,6 +54,7 @@ export class SignupComponent implements OnInit {
   isTourneyUser:boolean = false;
   clientSecret:any;
   subscriptionObject:any = {};
+  isSiteUnderMaintenance:boolean = true;
   constructor(private userService: UserService,public dialog: MatDialog, private alertService:AlertService,private stripeService: StripeService,@Inject(MAT_DIALOG_DATA) public shareddata: any,private router: Router,public dialogRef:MatDialogRef<SignupComponent>) { }
 
   ngOnInit(): void {
