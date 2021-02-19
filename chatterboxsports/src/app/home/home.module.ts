@@ -13,6 +13,11 @@ import { ShareddialogComponent } from './shareddialog/shareddialog.component';
 import { FaqComponent } from './faq/faq.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { TermsComponent } from './terms/terms.component';
+import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 @NgModule({
   declarations: [HeaderComponent,
     FooterComponent,
@@ -27,7 +32,13 @@ import { TermsComponent } from './terms/terms.component';
     CommonModule,
     HomeRoutingModule,
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule,
+    FormsModule, 
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule
   ],
   exports: [
     HeaderComponent,

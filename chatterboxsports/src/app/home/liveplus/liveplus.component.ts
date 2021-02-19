@@ -66,7 +66,7 @@ export class LiveplusComponent implements OnInit {
       this.isSeeAll = false;
     }
     this.livePlusChannelVideosData = [];
-    this.homeService.getLiveChannel('3',page,limit,'future').subscribe(
+    this.homeService.getLiveChannel('3',page,limit).subscribe(
       response => {
         this.loader = false;
         if (response != undefined) {

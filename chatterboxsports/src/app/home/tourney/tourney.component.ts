@@ -79,7 +79,7 @@ export class TourneyComponent implements OnInit {
       this.isSeeAll = false;
     }
     this.tourneyChannelVideosData = [];
-    this.homeService.getLiveChannel('4',page,limit,'future').subscribe(
+    this.homeService.getLiveChannel('4',page,limit).subscribe(
       response => {
         this.loader = false;
         if (response != undefined) {

@@ -1,24 +1,21 @@
 
 <!-- Starts landing body section -->
-<div class="cb-bg-color">
-    <!-- Starts videos section -->
+<!-- <div class="cb-bg-color">
     <section class="cb-videos-section">
         <div class="container">
             <h1 style="text-align: center; margin-top: 150px;">Schedule Coming soon!!</h1>
         </div>
     </section>
-    <!-- End videos section -->
-</div>
+</div> -->
 <!-- End landing body section -->
 
 
 
 
-<!--<div class="container">
+<div class="container">
     <div class="cb-schedule">
         <div class="schedule-inner">
-            <h1>Schedule Coming Soon!!</h1>
-            <div class="cb-calender">
+            <!-- <div class="cb-calender">
                 <p class="cal-date">December 2nd 2020 - December 6th 2020</p>
                 <div class="month">
                     <ul class="weekdays">
@@ -34,8 +31,7 @@
                     </ul>
 
                 </div>
-            </div> -->
-
+            </div>  -->
             <!-- <div class="event-list">
                
                 <h3 class="event-date">Wednesday , December 2</h3>
@@ -97,7 +93,54 @@
 
                     </table>
                 </div>
-            </div> 
+            </div>  -->
+        
+            <mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Type here to filter records" #input>
+              </mat-form-field>
+              
+              <div class="mat-elevation-z8 sportstableblock">
+                <table id="sportstable" mat-table [dataSource]="dataSource" matSort>
+              
+                  
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="MATCHUP">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> MATCHUP </th>
+                    <td mat-cell *matCellDef="let row"> {{row.MATCHUP}} </td>
+                  </ng-container>
+              
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="TIME">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> TIME </th>
+                    <td mat-cell *matCellDef="let row"> {{row.TIME}} </td>
+                  </ng-container>
+              
+                  <!-- Color Column -->
+                  <ng-container matColumnDef="CHANNEL">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> CHANNEL </th>
+                    <td mat-cell *matCellDef="let row"> {{row.CHANNEL}} </td>
+                  </ng-container>
+              
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+                  <!-- Row shown when there is no matching data. -->
+                  <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                  </tr>
+                </table>
+              
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+              </div>
+              
+        
         </div>
     </div>
-</div>-->
+</div>
+
+<!-- Starts---Loader code -->
+<div class="cb-loader-overlay" *ngIf="loader">
+    <img src="../../../assets/images/loading.gif">
+</div>
+<!-- Ends---Loader code -->
