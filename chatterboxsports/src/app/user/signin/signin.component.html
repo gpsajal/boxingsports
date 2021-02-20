@@ -55,7 +55,7 @@
                         <mat-error *ngIf="password.invalid">{{showErrors('password')}}</mat-error>
                     </mat-form-field>
                 </div>
-                <!-- <div class="cb-forgot-button"><a class="float-right" href="">Forgot password?</a></div> -->
+                <div class="cb-forgot-button"><a class="float-right" href="javascript:void(0)" (click)="openForgotPasswordDialog()">Forgot password?</a></div>
                 <button class="cb-submit-btn" type="submit" [disabled]="isFormValid"> Continue</button>
 
             </form>

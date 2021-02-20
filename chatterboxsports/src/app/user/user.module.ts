@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
+import { ForgotpasswordComponent } from './Forgotpassword/Forgotpassword.component';
 import { SigninComponent } from './signin/signin.component';
 import {MatIconModule} from '@angular/material/icon';
 import { UserRoutingModule } from './user-routing/user-routing.module';
@@ -15,11 +16,12 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { TourneySignupComponent } from './tourney-signup/tourney-signup.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { CancelsubscriptionComponent } from './cancelsubscription/cancelsubscription.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { AuthGuard } from '../guards/index';
 import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [SignupComponent,
-    SigninComponent,PasswordValidatorDirective, TourneySignupComponent, UserprofileComponent, CancelsubscriptionComponent],
+    SigninComponent,PasswordValidatorDirective, TourneySignupComponent, UserprofileComponent, CancelsubscriptionComponent,ForgotpasswordComponent,ResetpasswordComponent],
   imports: [
     CommonModule,
     MatIconModule,

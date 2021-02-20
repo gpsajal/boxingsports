@@ -4,6 +4,7 @@ import { SigninComponent } from '../../user/signin/signin.component';
 import {MatDialog} from '@angular/material/dialog';
 import { AlertService, AuthenticationService }  from '../../common/index';
 import { Router, NavigationStart } from '@angular/router';
+import { SignupComponent } from '../../user/signup/signup.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -36,6 +37,7 @@ export class HeaderComponent implements OnInit {
       this.fullname = this.firstName+' '+this.lastName;
       this.isTourneyUser = this.getloggenInUser.isTourneyUser;
     }
+    this.openSignupDialog();
   }
 
   private checkUsersession(isuserLoggedIn: boolean): void {
@@ -61,6 +63,17 @@ export class HeaderComponent implements OnInit {
       {
         this.fullname = result;
       }
+    });
+  }
+
+  openSignupDialog()
+  {
+    this.dialog.closeAll();
+    const dialogRef = this.dialog.open(SignupComponent);
+    //const dialogRef = this.dialog.open(SignupComponent,{disableClose:true});
+
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log(`Dialog result: ${result}`);
     });
   }
 

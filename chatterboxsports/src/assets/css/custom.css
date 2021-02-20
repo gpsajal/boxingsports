@@ -588,6 +588,18 @@ body>alert .outerframe {
     min-width: 320px;
     position: relative;
     padding-bottom: 62px;
+    padding: 40px 40px;
+}
+
+.cb-payment-maintenance {
+    min-width: 320px;
+    position: relative;
+    padding-bottom: 62px;
+    padding: 40px 40px;
+    padding: 40px 40px;
+}
+.cb-payment-maintenance p {
+    text-align: center;
 }
 
 .cb-payment-success .cb-popup-close-signup {

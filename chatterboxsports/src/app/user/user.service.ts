@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User} from './models/index';
+import { User, Resetpassword} from './models/index';
 import { Observable, of, EMPTY, throwError  } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Router, ActivatedRoute, ParamMap  } from '@angular/router';
@@ -91,6 +91,28 @@ getStripeBuySubscription(subscriptiondata): Observable<any> {
 }
 
 
+forgotPassword(user: User): Observable<User>  {
+  return this.http.post<any>(this.USER_ACCOUNT_URL +'/forgot',user, this.httpOptions).pipe(
+    tap((newUser: any) => this.log('forgot Password')),
+    catchError(this.handleError<any>('forgot Password'))
+  );
+}
+
+resetPassword(resetpassword: Resetpassword): Observable<User>  {
+  return this.http.post<any>(this.USER_PAYMENT_URL +'subscription',resetpassword, this.httpOptions).pipe(
+    tap((newUser: any) => this.log('reset password')),
+    catchError(this.handleError<any>('reset password'))
+  );
+}
+
+verifyresetPassword(token: string): Observable<any>  {
+  return this.http.post<any>(this.USER_PAYMENT_URL +'subscription',token, this.httpOptions).pipe(
+    tap((newUser: any) => this.log('verify reset Password')),
+    catchError(this.handleError<any>('verify reset Password'))
+  );
+}
+
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.
@@ -109,8 +131,10 @@ getStripeBuySubscription(subscriptiondata): Observable<any> {
         return throwError (error);
       }else if(error.status === 403){
         return throwError (error);
-      }else if(error.status === 404){
-        return this.pageNotFoud();
+      }
+      else if(error.status === 404){
+        //return this.pageNotFoud();
+        return throwError (error);
       }
 
       // TODO: better job of transforming error for user consumption

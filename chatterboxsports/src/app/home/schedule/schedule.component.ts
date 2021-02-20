@@ -112,7 +112,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
 
             var channel;
             this.livePlusChannelVideos = this.livePlusChannelVideosData;
-            console.log(this.livePlusChannelVideos);
+            //console.log(this.livePlusChannelVideos);
             for(var i = 0; i<this.livePlusChannelVideos.length; i++)
             {
              

@@ -1,5 +1,6 @@
 import { Component, OnInit,Inject } from '@angular/core';
 import { SignupComponent } from '../signup/signup.component';
+import { ForgotpasswordComponent } from '../Forgotpassword/Forgotpassword.component';
 import {MatDialog , MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { UserService } from '../user.service';
 import { Router,ActivatedRoute } from '@angular/router';
@@ -33,6 +34,16 @@ export class SigninComponent implements OnInit {
   {
     this.dialog.closeAll();
     const dialogRef = this.dialog.open(SignupComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openForgotPasswordDialog()
+  {
+    this.dialog.closeAll();
+    const dialogRef = this.dialog.open(ForgotpasswordComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       //console.log(`Dialog result: ${result}`);
