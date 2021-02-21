@@ -598,6 +598,7 @@ body>alert .outerframe {
     padding: 40px 40px;
     padding: 40px 40px;
 }
+
 .cb-payment-maintenance p {
     text-align: center;
 }
@@ -618,6 +619,18 @@ body>alert .outerframe {
 
 .cb-payment-success p {
     text-align: center;
+}
+
+.cb-schedule .form-group .mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 10px 10px 10px 0px;
+    /* padding-left: 10px; */
+    margin-top: 12px;
+    margin-left: 12px;
+}
+
+.mat-paginator-container .mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 0;
+    border-top: 0;
 }
 
 @media(max-width:991px) {
