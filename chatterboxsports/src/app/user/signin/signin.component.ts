@@ -148,6 +148,9 @@ export class SigninComponent implements OnInit {
       if(this.returnUrl != "/" && this.router.url != "/" )
       {
         this.router.navigateByUrl(this.returnUrl);
+      }else
+      {
+        this.router.navigate(['/']);
       }
     }
    }

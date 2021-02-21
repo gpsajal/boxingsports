@@ -99,14 +99,14 @@ forgotPassword(user: User): Observable<User>  {
 }
 
 resetPassword(resetpassword: Resetpassword): Observable<User>  {
-  return this.http.post<any>(this.USER_PAYMENT_URL +'subscription',resetpassword, this.httpOptions).pipe(
+  return this.http.post<any>(this.USER_ACCOUNT_URL +'/password',resetpassword, this.httpOptions).pipe(
     tap((newUser: any) => this.log('reset password')),
     catchError(this.handleError<any>('reset password'))
   );
 }
 
 verifyresetPassword(token: string): Observable<any>  {
-  return this.http.post<any>(this.USER_PAYMENT_URL +'subscription',token, this.httpOptions).pipe(
+  return this.http.post<any>(this.USER_ACCOUNT_URL +'/verifytoken',{token:token}, this.httpOptions).pipe(
     tap((newUser: any) => this.log('verify reset Password')),
     catchError(this.handleError<any>('verify reset Password'))
   );

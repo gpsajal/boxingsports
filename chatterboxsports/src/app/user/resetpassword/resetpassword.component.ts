@@ -18,16 +18,15 @@ export class ResetpasswordComponent implements OnInit {
   password: FormControl;
   confirm_password: FormControl;
   isValidForm: boolean = null;
-  token:string;
+  token:string= '';
   ispasswordReset:boolean = false;
+  verifyUserId:any;
+  successMsg:any;
 	
 
   constructor(private route: ActivatedRoute, private router: Router,
     private userService: UserService,
     private alertService: AlertService) {
-      this.route.params.subscribe(params => {
-        this.token = params['token']; 
-      });
     }
 
     ngOnInit() 
@@ -35,21 +34,23 @@ export class ResetpasswordComponent implements OnInit {
       this.route.params.subscribe(params => {
       this.token = params['token']; 
       });
-      //this.verifyresetPasswordToken(this.token);
+      
+      this.verifyresetPasswordToken(this.token);
       this.createForm();
     }
 
   verifyresetPasswordToken(token){
-   
+   this.loader = true;
     this.userService.verifyresetPassword(token)
       .subscribe(
           data => {
-            if(data){
-            
-             }
+            if(data)
+            {
+              this.displayResponse(data,'verifytoken');
+            }
           },
           error => { 
-          
+            this.displayResponse(error,'verifytoken');
           });  
   }
   
@@ -91,6 +92,9 @@ export class ResetpasswordComponent implements OnInit {
 	  }
     this.isValidForm = true;	
     this.loader = true;
+    this.model.noToken = true;
+    this.model.id = this.verifyUserId;
+    delete this.model.confirm_password;
     this.userService.resetPassword(this.model)
     .subscribe(
       data => 
@@ -104,12 +108,16 @@ export class ResetpasswordComponent implements OnInit {
   }
   
 
-  displayResponse(responseobject) {
+  displayResponse(responseobject,type='') {
     this.loader = false;
     console.log(responseobject);
     if (responseobject.status === 400) {
      var errordata = responseobject.error.message;
      this.alertService.error(errordata);
+     if(type == 'verifytoken')
+     {
+       setTimeout(()=>{ this.router.navigate(['pagenotfound']);},10000);
+     }
     }
     else if (responseobject.status === 404) {
       var errordata = responseobject.error.message;
@@ -120,9 +128,20 @@ export class ResetpasswordComponent implements OnInit {
       this.alertService.info(infodata);
     }
     else {
-      var successdata = responseobject.message;
-      this.alertService.success(successdata);
-      this.ispasswordReset = true;
+      
+      if(type == '')
+      {
+        this.successMsg = responseobject.message;
+        //this.alertService.success(successMsg);
+        this.ispasswordReset = true;
+      }
+      else if(type == 'verifytoken')
+      {
+        if(responseobject.data._id != undefined)
+        {
+          this.verifyUserId = responseobject.data._id;
+        }
+      }
     }
    }
 

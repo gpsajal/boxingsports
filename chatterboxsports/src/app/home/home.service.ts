@@ -43,16 +43,16 @@ export class HomeService {
 // }
 
 /** POST: add a new hero to the server */
-getLiveChannel(channelType,page,limit,videoType=''): Observable<any> {
+getLiveChannel(channelType,page,limit,videoType='',searchString=''): Observable<any> {
   var url = this.BASE_URL + "channelvideos/"+channelType; 
   var body;
   if(this.userId != undefined && this.userId != '')
   {
-    body = {"page":page,"limit":limit,"userId":this.userId,"videotype":videoType};
+    body = {"page":page,"limit":limit,"userId":this.userId,"videotype":videoType,'search':searchString};
   }
   else
   {
-    body = {"page":page,"limit":limit,"videotype":videoType};
+    body = {"page":page,"limit":limit,"videotype":videoType,'search':searchString};
   }
   
   return this.http.post<any>(url, body, this.httpOptions).pipe(
