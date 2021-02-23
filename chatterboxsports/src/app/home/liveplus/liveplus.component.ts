@@ -31,6 +31,9 @@ export class LiveplusComponent implements OnInit {
   isTourneyUser:boolean = false;
   isLivePlusUser:number;
   subscriptionData = [];
+  isRecentSearchWorking:boolean = false;
+  searchString:string;
+  totalSearchVideos:any;
   constructor(public dialog: MatDialog,private alertService:AlertService,private homeService:HomeService,private authenticationService: AuthenticationService) { 
     authenticationService.getLoggedInUserName.subscribe( isUserLoggedIn => this.checkUsersession(isUserLoggedIn));
   }
@@ -110,7 +113,6 @@ export class LiveplusComponent implements OnInit {
             this.livePlusChannelVideos[i].starts_at = moment.utc(this.livePlusChannelVideos[i].starts_at).local().format(environment.DATE_TIME_FORMAT);
             this.livePlusChannelVideos[i].stops_at = moment.utc(this.livePlusChannelVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }
-           console.log(this.livePlusChannelVideos);
            this.getRecentGamesData(0,6);
         }
       },
@@ -156,10 +158,10 @@ export class LiveplusComponent implements OnInit {
   /* End-  function for open video dialog*/
 
   /* Start- function for get recent games videos*/
-  getRecentGamesData(page,limit){
+  getRecentGamesData(page,limit,searchString=''){
     this.loader = true;
     this.recentVideosData = [];
-    this.homeService.getLiveChannel('3',page,limit,'past').subscribe(
+    this.homeService.getLiveChannel('3',page,limit,'past',searchString).subscribe(
       response => {
         this.loader = false;
         if (response != undefined) {
@@ -175,6 +177,11 @@ export class LiveplusComponent implements OnInit {
           if(response.total_records != undefined)
           {
             this.totalRecentVideos = response.total_records;
+          }
+
+          if(limit == 6 && searchString == '')
+          {
+            this.totalSearchVideos = this.totalRecentVideos;
           }
           //this.recentVideosData = response.data.recent;
            this.recentVideos = this.recentVideosData;
@@ -246,6 +253,23 @@ export class LiveplusComponent implements OnInit {
   closeDialog()
   {
     this.dialog.closeAll();
+  }
+
+  filterRecenttData()
+  {
+    var searchbox = document.getElementById("searchbox") as HTMLInputElement;
+      if(searchbox.value != undefined && searchbox.value != '')
+      {
+        this.isRecentSearchWorking = true;
+        this.searchString = searchbox.value;
+        this.getRecentGamesData(0,this.totalSearchVideos,searchbox.value);
+      }
+      else
+      {
+           this.isRecentSearchWorking = false;
+           this.searchString = '';
+           this.getRecentGamesData(0,6,'');
+      }
   }
 
 

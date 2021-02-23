@@ -35,8 +35,11 @@ export class LandingComponent implements OnInit {
   lastName:string;
   fullname:string;
   isTourneyUser:number;
+  searchString:string;
+  totalSearchVideos:any;
   ngOnInit(): void {
     this.getLiveChannelData(0,6);
+    this.getInstantClassicChannelData(0,6);
     if(localStorage.getItem('loggedInUser')) {
       this.getloggenInUser=  JSON.parse(localStorage.getItem('loggedInUser'));
       this.userId = this.getloggenInUser.userId;
@@ -72,7 +75,7 @@ export class LandingComponent implements OnInit {
     this.liveChannelVideosData = [];
     this.homeService.getLiveChannel('1',page,limit).subscribe(
       response => {
-        //this.loader = false;
+        this.loader = false;
         if (response != undefined) {
          
           // if(response.data.live != undefined && response.data.live.length > 0)
@@ -211,34 +214,46 @@ export class LandingComponent implements OnInit {
   }
 
   /* Start- function for get recent games videos*/
-  getRecentGamesData(page,limit){
+  getRecentGamesData(page,limit,searchString=''){
     this.loader = true;
     this.recentVideosData = [];
-    this.homeService.getLiveChannel('1',page,limit,'past').subscribe(
+    this.homeService.getLiveChannel('1',page,limit,'past',searchString).subscribe(
       response => {
-        
+        this.loader = false;
         if (response != undefined) {
           //console.log(response);
           
-          if(response.data != undefined && response.data.length > 0)
-          {
-            this.recentVideosData = response.data;
-          }
+         
+          this.recentVideosData = response.data;
+          
           
           if(response.total_records != undefined)
           {
             this.totalRecentVideos = response.total_records;
           }
-           this.convertDateutctolocal((err,data)=>{
-             if(data)
-             {
-              this.recentVideos = this.recentVideosData;
-              this.recentTempData = this.recentVideosData;
-              //this.totalRecentVideos = this.recentVideosData.length;
-              this.getInstantClassicChannelData(0,6);
-              //this.loader = false;
-             }
-           });
+
+          if(limit == 6 && searchString == '')
+          {
+            this.totalSearchVideos = this.totalRecentVideos;
+          }
+
+          
+            this.convertDateutctolocal((err,data)=>{
+              if(data)
+              {
+               this.recentVideos = this.recentVideosData;
+               this.recentTempData = this.recentVideosData;
+               //this.totalRecentVideos = this.recentVideosData.length;
+               //this.getInstantClassicChannelData(0,6);
+               //this.loader = false;
+              }
+              else{
+                this.recentVideos = [];
+               this.recentTempData = [];
+              }
+            });
+          
+          
            
            
         }
@@ -266,6 +281,10 @@ export class LandingComponent implements OnInit {
           callback('',true); 
         }
       }
+    }
+    else
+    {
+      callback('',false); 
     }
     
   }
@@ -306,23 +325,28 @@ export class LandingComponent implements OnInit {
     setTimeout(()=>{this.loader = false; },2000);
   }
 
-  filterRecenttData(value)
+  filterRecenttData()
   {
-      if(value != undefined && value != '')
+    var searchbox = document.getElementById("searchbox") as HTMLInputElement;
+      if(searchbox.value != undefined && searchbox.value != '')
       {
         this.isRecentSearchWorking = true;
+        this.searchString = searchbox.value;
+        this.getRecentGamesData(0,this.totalSearchVideos,searchbox.value);
         //this.recentVideos = find.one.in(this.recentVideosData).with({"name":value});
-        this.recentVideos = this.recentVideosData.filter(item => {
-          if((item.name != null ) && item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1) {
-            return true;
-          }
-          return false;
-        });
+        // this.recentVideos = this.recentVideosData.filter(item => {
+        //   if((item.name != null ) && item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1) {
+        //     return true;
+        //   }
+        //   return false;
+        // });
       }
       else
       {
            this.isRecentSearchWorking = false;
-           this.recentVideos = this.recentVideosData.slice(0,6);
+           this.searchString = '';
+           this.getRecentGamesData(0,6,'');
+           //this.recentVideos = this.recentVideosData.slice(0,6);
       }
   }
 

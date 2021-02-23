@@ -30,14 +30,14 @@
             <div class="cb-recentgames-block" *ngIf="!loader">
                 <h5 class="rec-games">RECENT GAMES
                     <span class="search_input">
-                        <input class="" type="text" value="" placeholder="Search here..." #searchrecent name="" (input)="filterRecenttData(searchrecent.value)"> 
-                            <a href="" class="search-icon">
+                        <input class="" type="text" value="{{searchString}}" placeholder="Search here..." #searchrecent name="" id="searchbox" (change)="filterRecenttData()"> 
+                            <a href="javascript:void(0)" class="search-icon" >
                                   <mat-icon aria-hidden="false" aria-label="search icon">search</mat-icon>
                             </a>
                     </span>
                     <a *ngIf="!isSeeAllRecent && totalRecentVideos > 6 && isRecentSearchWorking == false" class="see-all-btn" href="javascript:void(0)" (click)="seeAllRecent('true')">See All</a><a *ngIf="isSeeAllRecent && totalRecentVideos > 6 && isRecentSearchWorking == false"
                         class="see-all-btn" href="javascript:void(0)" (click)="seeAllRecent('false')">See Less</a></h5>
-                <div class="row">
+                <div class="row" *ngIf="recentVideos.length > 0">
                     <div class="col-sm-4 col-md-3 col-xl-2" *ngFor="let livevideo of recentVideos">
                         <!-- <div id="boxcast-widget-x4hskyp019znhujikckx"></div> -->
                         <div class="cb-video-block">
@@ -53,6 +53,7 @@
                         <p *ngIf="recentVideos.length == 0">No Record Found.</p>
                     </div>
                 </div>
+                <div style="text-align: center;" *ngIf="recentVideos.length == 0"><h2>No Record Found</h2></div>
             </div>
             <!-- Ends recent games block -->
 

@@ -36,6 +36,9 @@ export class TourneyComponent implements OnInit {
   isTourneyUser:number;
   isLivePlusUser:number;
   subscriptionData = [];
+  isRecentSearchWorking:boolean = false;
+  searchString:string;
+  totalSearchVideos:any;
   constructor(public dialog: MatDialog,private alertService:AlertService,private homeService:HomeService,private authenticationService: AuthenticationService) { 
     authenticationService.getLoggedInUserName.subscribe( isUserLoggedIn => this.checkUsersession(isUserLoggedIn));
     authenticationService.checktourneyUser.subscribe( isCheckTourneyUser => this.checkUserPlan(isCheckTourneyUser));
@@ -124,7 +127,7 @@ export class TourneyComponent implements OnInit {
             this.tourneyChannelVideos[i].stops_at = moment.utc(this.tourneyChannelVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }
            //console.log(this.tourneyChannelVideos);
-           this.getRecentGamesData(0,6);
+           this.getRecentGamesData(0,6,'');
         }
       },
     error => {
@@ -177,10 +180,10 @@ export class TourneyComponent implements OnInit {
   /* End-  function for open video dialog*/
 
   /* Start- function for get recent games videos*/
-  getRecentGamesData(page,limit){
+  getRecentGamesData(page,limit,searchString){
     this.loader = true;
     this.recentVideosData = [];
-    this.homeService.getLiveChannel('4',page,limit,'past').subscribe(
+    this.homeService.getLiveChannel('4',page,limit,'past',searchString).subscribe(
       response => {
         this.loader = false;
         if (response != undefined) {
@@ -196,6 +199,11 @@ export class TourneyComponent implements OnInit {
           if(response.total_records != undefined)
           {
             this.totalRecentVideos = response.total_records;
+          }
+
+          if(limit == 6 && searchString == '')
+          {
+            this.totalSearchVideos = this.totalRecentVideos;
           }
          // this.recentVideosData = response.data.recent;
            this.recentVideos = this.recentVideosData;
@@ -223,13 +231,13 @@ export class TourneyComponent implements OnInit {
     if(isSeeAllRecent == 'true')
     {
       this.isSeeAllRecent = true;
-      this.getRecentGamesData(0,this.totalRecentVideos);
+      this.getRecentGamesData(0,this.totalRecentVideos,'');
       //this.recentVideos = this.recentVideosData;
     }
     else
     {
       this.isSeeAllRecent = false;
-      this.getRecentGamesData(0,6);
+      this.getRecentGamesData(0,6,'');
       //this.recentVideos = this.recentVideosData.slice(0,6);
     }
     setTimeout(()=>{this.loader = false; },2000);
@@ -285,6 +293,23 @@ export class TourneyComponent implements OnInit {
   closeDialog()
   {
     this.dialog.closeAll();
+  }
+
+  filterRecenttData()
+  {
+    var searchbox = document.getElementById("searchbox") as HTMLInputElement;
+      if(searchbox.value != undefined && searchbox.value != '')
+      {
+        this.isRecentSearchWorking = true;
+        this.searchString = searchbox.value;
+        this.getRecentGamesData(0,this.totalSearchVideos,searchbox.value);
+      }
+      else
+      {
+           this.isRecentSearchWorking = false;
+           this.searchString = '';
+           this.getRecentGamesData(0,6,'');
+      }
   }
 
 }
