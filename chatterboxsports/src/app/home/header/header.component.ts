@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
       this.fullname = this.firstName+' '+this.lastName;
       this.isTourneyUser = this.getloggenInUser.isTourneyUser;
     }
-    this.openSignupDialog();
+    //this.openSignupDialog();
   }
 
   private checkUsersession(isuserLoggedIn: boolean): void {

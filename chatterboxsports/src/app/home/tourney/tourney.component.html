@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="text-align: center;" *ngIf="recentVideos.length == 0"><h2>No Record Found</h2></div>
+                <div style="text-align: center;" *ngIf="!loader && recentVideos.length == 0"><h2>No Record Found</h2></div>
             </div>
             <!-- Ends recent games block -->
 

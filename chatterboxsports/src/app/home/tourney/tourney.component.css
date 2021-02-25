@@ -1,3 +1,9 @@
+.search_input {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    top: 6px;
+}
 .search_input input {
     border-radius: 20px;
     border: 1px solid #c5c5c5;

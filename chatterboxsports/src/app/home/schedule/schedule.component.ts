@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild ,AfterViewInit} from '@angular/core';
+import { Component, OnInit, ViewChild ,AfterViewInit,ChangeDetectorRef} from '@angular/core';
 import { ShareddialogComponent } from '../shareddialog/shareddialog.component';
 import { AlertService, AuthenticationService }  from '../../common/index';
 import { HomeService } from '../home.service';
@@ -49,7 +49,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
   tabledata:any = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(public dialog: MatDialog,private alertService:AlertService,private homeService:HomeService,private authenticationService: AuthenticationService) { 
+  constructor(public dialog: MatDialog,private alertService:AlertService,private homeService:HomeService,private authenticationService: AuthenticationService,private changeDetectorRefs: ChangeDetectorRef) { 
     authenticationService.getLoggedInUserName.subscribe( isUserLoggedIn => this.checkUsersession(isUserLoggedIn));
     // Create 100 users
     //const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
@@ -98,6 +98,9 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
    /* Start- function for get live channel videos*/
    getLiveplusChannelData(page,limit,channelId){
     this.loader = true;
+    //this.tabledata = [];
+    this.livePlusChannelVideosData = [];
+    //this.tabledata = [];
     this.homeService.getLiveChannel(channelId,page,limit,'future').subscribe(
       response => {
         this.loader = false;
@@ -105,15 +108,10 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
          
           if(response.data != undefined && response.data.length > 0)
           {
-            for(var i = 0; i< response.data.length; i++)
-            {
-              this.livePlusChannelVideosData.push(response.data[i]);
-            }
-
             var channel;
-            this.livePlusChannelVideos = this.livePlusChannelVideosData;
-            //console.log(this.livePlusChannelVideos);
-            for(var i = 0; i<this.livePlusChannelVideos.length; i++)
+            this.livePlusChannelVideosData = response.data;
+            //console.log(this.livePlusChannelVideosData);
+            for(var j = 0; j<this.livePlusChannelVideosData.length; j++)
             {
              
              if(channelId == 1)
@@ -129,14 +127,16 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
                channel = 'Tourney';
              }
  
-             var a = {MATCHUP:this.livePlusChannelVideos[i].name,TIME:moment.utc(this.livePlusChannelVideos[i].starts_at).local().format(environment.DATE_TIME_FORMAT),CHANNEL:channel};
-             this.tabledata.push(a);
+             this.tabledata.push({MATCHUP:this.livePlusChannelVideosData[j].name,TIME:moment.utc(this.livePlusChannelVideosData[j].starts_at).local().format(environment.DATE_TIME_FORMAT),CHANNEL:channel});
             }
-    
+            
+
             this.dataSource = new MatTableDataSource(this.tabledata);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;  
+            this.changeDetectorRefs.detectChanges();
           }
+          //console.log(this.tabledata,channelId);
          
         }
       },
