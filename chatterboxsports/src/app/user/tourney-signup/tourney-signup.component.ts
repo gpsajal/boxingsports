@@ -235,7 +235,15 @@ export class TourneySignupComponent implements OnInit {
 
    closeDialog()
    {
-     this.dialogRef.close();
+     if(this.isSignupPaymentStatus)
+     {
+      this.dialogRef.close(1);
+     }
+     else
+     {
+      this.dialogRef.close();
+     }
+     
    }
 
    /*Start- function for create stripe token*/
