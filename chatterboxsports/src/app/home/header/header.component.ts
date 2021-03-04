@@ -33,7 +33,6 @@ export class HeaderComponent implements OnInit {
       this.firstName = this.getloggenInUser.first_name;
       this.lastName = this.getloggenInUser.last_name;
       this.userEmail = this.getloggenInUser.email;
-      //console.log(this.getloggenInUser);
       this.fullname = this.firstName+' '+this.lastName;
       this.isTourneyUser = this.getloggenInUser.isTourneyUser;
     }
@@ -58,7 +57,6 @@ export class HeaderComponent implements OnInit {
     const dialogRef = this.dialog.open(SigninComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      //console.log('Dialog result:'+result);
       if(result != undefined && result != '')
       {
         this.fullname = result;

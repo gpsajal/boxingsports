@@ -78,7 +78,6 @@ export class ForgotpasswordComponent implements OnInit {
    /*Start- function to display alert messages */
    displayResponse(responseobject) {
     this.loader = false;
-    //console.log(responseobject);
     if (responseobject.status === 400) {
      var errordata = responseobject.error.message;
      this.alertService.error(errordata);

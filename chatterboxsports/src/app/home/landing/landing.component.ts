@@ -54,13 +54,11 @@ export class LandingComponent implements OnInit {
   /* Start- function for open video dialog*/
   openVideoDialog(url)
   {
-   // console.log(url);
     const dialogRef = this.dialog.open(ShareddialogComponent,{
       data: { videoUrl: url },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      //console.log('Dialog result:'+result);
       if(result != undefined && result != '')
       {
         //this.fullname = result;
@@ -114,7 +112,6 @@ export class LandingComponent implements OnInit {
             this.liveChannelVideos[i].starts_at = moment.utc(this.liveChannelVideos[i].starts_at).local().format(environment.DATE_TIME_FORMAT);
             this.liveChannelVideos[i].stops_at = moment.utc(this.liveChannelVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }
-           //console.log(this.liveChannelVideos);
            this.getRecentGamesData(0,6);
         }
       },
@@ -179,7 +176,6 @@ export class LandingComponent implements OnInit {
             this.totalInstantVideos = response.total_records;
           }
            //this.totalInstantVideos = this.instantClassicChannelVideos.length;
-           //console.log(this.instantClassicChannelVideos);
            for(var i = 0; i<this.instantClassicChannelVideos.length; i++)
            {
            // this.instantClassicChannelVideos[i].durationTime = this.convertSecondsToHms(this.instantClassicChannelVideos[i].recording_duration_seconds);
@@ -188,7 +184,6 @@ export class LandingComponent implements OnInit {
             this.instantClassicChannelVideos[i].starts_at = moment.utc(this.instantClassicChannelVideos[i].starts_at).local().format(environment.DATE_TIME_FORMAT);
             this.instantClassicChannelVideos[i].stops_at = moment.utc(this.instantClassicChannelVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }
-           //console.log(this.instantClassicChannelVideos);
         }
       },
     error => {
@@ -221,8 +216,6 @@ export class LandingComponent implements OnInit {
       response => {
         this.loader = false;
         if (response != undefined) {
-          //console.log(response);
-          
          
           this.recentVideosData = response.data;
           
@@ -277,7 +270,6 @@ export class LandingComponent implements OnInit {
         this.recentVideosData[i].stops_at = moment.utc(this.recentVideosData[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
         if(i == this.recentVideosData.length-1)
         {
-          //console.log('jsdj');
           callback('',true); 
         }
       }

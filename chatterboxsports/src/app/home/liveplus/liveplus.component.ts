@@ -73,7 +73,6 @@ export class LiveplusComponent implements OnInit {
       response => {
         this.loader = false;
         if (response != undefined) {
-          //console.log(response);
           //this.livePlusChannelVideosData = response.data.live;
           // if(response.data.future != undefined && response.data.future.length > 0)
           // {
@@ -133,7 +132,6 @@ export class LiveplusComponent implements OnInit {
       });
   
       dialogRef.afterClosed().subscribe(result => {
-        //console.log('Dialog result:'+result);
         if(result != undefined && result != '')
         {
           //this.fullname = result;
@@ -193,7 +191,6 @@ export class LiveplusComponent implements OnInit {
             this.recentVideos[i].starts_at = moment.utc(this.recentVideos[i].starts_at).local().format(environment.DATE_TIME_FORMAT);
             this.recentVideos[i].stops_at = moment.utc(this.recentVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }
-           //console.log(this.recentVideos);
         }
       },
     error => {

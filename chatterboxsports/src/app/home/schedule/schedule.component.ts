@@ -53,7 +53,6 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
     authenticationService.getLoggedInUserName.subscribe( isUserLoggedIn => this.checkUsersession(isUserLoggedIn));
     // Create 100 users
     //const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
-    //console.log(users);
     // Assign the data to the data source for the table to render
     
   }
@@ -110,7 +109,6 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
           {
             var channel;
             this.livePlusChannelVideosData = response.data;
-            //console.log(this.livePlusChannelVideosData);
             for(var j = 0; j<this.livePlusChannelVideosData.length; j++)
             {
              
@@ -136,7 +134,6 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
             this.dataSource.sort = this.sort;  
             this.changeDetectorRefs.detectChanges();
           }
-          //console.log(this.tabledata,channelId);
          
         }
       },

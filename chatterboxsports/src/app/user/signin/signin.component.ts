@@ -128,10 +128,8 @@ export class SigninComponent implements OnInit {
     /*Start- function to display alert messages */
   displayResponse(responseobject) {
     this.loader = false;
-    //console.log(responseobject)
     if (responseobject.status === 400) {
      var errordata = responseobject.error.message;
-    // console.log(errordata);
      this.alertService.error(errordata);
     }
     else if (responseobject.status === 409) {
@@ -141,7 +139,6 @@ export class SigninComponent implements OnInit {
     else{
       var successdata = responseobject.message;
       this.alertService.success(successdata);
-     // console.log(responseobject.data)
       this.userFullname = responseobject.data.first_name+' '+responseobject.data.last_name;
       this.userEmail = responseobject.data.email;;
       this.dialogRef.close(this.userFullname);

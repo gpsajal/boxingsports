@@ -87,7 +87,6 @@ export class CancelsubscriptionComponent implements OnInit {
      this.loader = false;
      if (responseobject.status === 400) {
       var errordata = responseobject.error.message;
-     // console.log(errordata);
       this.alertService.error(errordata);
      }
      else if (responseobject.status === 409) {

@@ -318,19 +318,16 @@ export class SignupComponent implements OnInit {
             email:this.signupform.value.email_address
           },
         }).subscribe((result) => {
-        //console.log(result);
             if (result.paymentMethod != undefined)
             {
               this.subscriptionObject.email = this.signupform.value.email_address;
               this.subscriptionObject.priceId = environment.livePlusPriceId;
               this.subscriptionObject.method = result.paymentMethod.id;
-              //console.log(this.subscriptionObject);
               this.userService.getStripeSubscription(this.subscriptionObject)
               .subscribe(
               data => 
               {
-                  // Use the token
-                  //console.log(data);                  
+                  // Use the token              
                   const client_secret = data.data.clientSecret;
                   const status = data.data.status;
                   const subscriptionId = data.data.subscriptionId;

@@ -159,13 +159,12 @@ export class TourneySignupComponent implements OnInit {
               this.subscriptionObject.priceId = environment.tourneyPriceId;
               this.subscriptionObject.method = result.paymentMethod.id;
               this.subscriptionObject.isTourney = true;
-              //console.log(this.subscriptionObject);
+           
               this.userService.getStripeBuySubscription(this.subscriptionObject)
               .subscribe(
               data => 
               {
                   // Use the token
-                  //console.log(data);                  
                   const client_secret = data.data.clientSecret;
                   const status = data.data.status;
                   const subscriptionId = data.data.subscriptionId;
@@ -206,12 +205,10 @@ export class TourneySignupComponent implements OnInit {
 
     /*Start- function to display alert messages */
   displayResponse(responseobject) {
-   // console.log(responseobject);
     this.loader = false;
     this.singupButtonCaption = 'Complete Purchase';
     if (responseobject.status === 400) {
      var errordata = responseobject.error.message;
-    // console.log(errordata);
      this.alertService.error(errordata);
     }
     else if (responseobject.status === 409) {
@@ -225,7 +222,6 @@ export class TourneySignupComponent implements OnInit {
       this.successMsg = successdata;
       
       localStorage.setItem('loggedInUser', JSON.stringify({ userId:this.userId,email: this.userEmail, first_name: this.firstName,last_name:this.lastName,isTourneyUser:1,token:this.token,subscriptions:this.subscriptions,isLivePlusUser:this.isLivePlusUser}));
-      //console.log(localStorage.getItem('loggedInUser'));
       setTimeout(()=>{ this.dialogRef.close(1); },5000);
       
       //this.gettourneystatus.emit(true);

@@ -34,8 +34,6 @@ export class AuthenticationService {
         return this.http.post<User>(this.USER_LOGIN_URL+'/login', { email: email, password: password }, httpOptions).pipe(
         tap( 
           response => {  
-            //console.log(response['data']);
-            //console.log(response['data'].first_name);
               localStorage.setItem('loggedInUser', JSON.stringify({ userId:response['data'].user_id,email: response['data'].email_address, first_name: response['data'].first_name,last_name: response['data'].last_name,isTourneyUser:response['data'].isTourneyUser,token:response['data'].token,subscriptions:response['data'].subscriptions,isLivePlusUser:response['data'].isLivePlusUser}));
               var fullname = response['data'].first_name+' '+response['data'].last_name;
               this.getLoggedInUserName.emit(true);

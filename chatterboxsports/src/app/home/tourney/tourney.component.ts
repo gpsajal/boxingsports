@@ -86,7 +86,6 @@ export class TourneyComponent implements OnInit {
       response => {
         this.loader = false;
         if (response != undefined) {
-          //console.log(response);
           // if(response.data.future != undefined && response.data.future.length > 0)
           // {
           //   for(var i = 0; i< response.data.future.length; i++)
@@ -110,7 +109,6 @@ export class TourneyComponent implements OnInit {
               this.tourneyChannelVideosData.push(response.data[i]);
             }
           }
-//console.log(this.tourneyChannelVideos);
           if(response.total_records != undefined)
           {
             this.totalLivePlusVideos = response.total_records;
@@ -126,7 +124,6 @@ export class TourneyComponent implements OnInit {
             this.tourneyChannelVideos[i].starts_at = moment.utc(this.tourneyChannelVideos[i].starts_at).local().format(environment.DATE_TIME_FORMAT);
             this.tourneyChannelVideos[i].stops_at = moment.utc(this.tourneyChannelVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }
-           //console.log(this.tourneyChannelVideos);
            this.getRecentGamesData(0,6,'');
         }
       },
@@ -187,7 +184,6 @@ export class TourneyComponent implements OnInit {
       response => {
         this.loader = false;
         if (response != undefined) {
-          //console.log(response);
           if(response.data != undefined && response.data.length > 0)
           {
             for(var i = 0; i< response.data.length; i++)
@@ -215,7 +211,6 @@ export class TourneyComponent implements OnInit {
             this.recentVideos[i].starts_at = moment.utc(this.recentVideos[i].starts_at).local().format(environment.DATE_TIME_FORMAT);
             this.recentVideos[i].stops_at = moment.utc(this.recentVideos[i].stops_at).local().format(environment.DATE_TIME_FORMAT);
            }
-           //console.log(this.recentVideos);
         }
       },
     error => {

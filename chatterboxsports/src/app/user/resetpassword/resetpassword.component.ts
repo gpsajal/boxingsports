@@ -110,7 +110,6 @@ export class ResetpasswordComponent implements OnInit {
 
   displayResponse(responseobject,type='') {
     this.loader = false;
-    //console.log(responseobject);
     if (responseobject.status === 400) {
      var errordata = responseobject.error.message;
      this.alertService.error(errordata);
