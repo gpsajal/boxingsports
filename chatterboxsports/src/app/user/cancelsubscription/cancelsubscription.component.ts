@@ -45,7 +45,7 @@ export class CancelsubscriptionComponent implements OnInit {
        
         for(var i = 0; i < this.subscriptionData.length; i++)
         {
-          if(this.subscriptionData[i].planType == 'live+')
+          if(this.subscriptionData[i].planType == 'Cbox+')
           {
             this.liveplusExpireDate = moment(this.subscriptionData[i].expiryDate).format(environment.DATE_FORMAT);
           }
@@ -67,7 +67,7 @@ export class CancelsubscriptionComponent implements OnInit {
 
   cancelSubscription(planType)
   {
-    //if(confirm("Are you sure want to cancel Live+ Subscription?")) {
+    //if(confirm("Are you sure want to cancel Cbox+ Subscription?")) {
     //console.log("Implement delete functionality here");
     this.loader = true;
     this.userService.deleteUserSubscription(this.userId,planType)
@@ -96,7 +96,7 @@ export class CancelsubscriptionComponent implements OnInit {
      else{
        var successdata = responseobject.message;
        this.alertService.success(successdata);
-       if(planType == 'live+')
+       if(planType == 'Cbox+')
        {
         localStorage.setItem('loggedInUser', JSON.stringify({ userId:this.userId,email: this.userEmail, first_name: this.firstName,last_name:this.lastName,isTourneyUser:this.isTourneyUser,token:this.token,subscriptions:this.subscriptionData,isLivePlusUser:0}));
        }

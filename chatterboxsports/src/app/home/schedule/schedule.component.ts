@@ -47,6 +47,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
   isLivePlusUser:number;
   subscriptionData = [];
   tabledata:any = [];
+  functioncounter:number = 0;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(public dialog: MatDialog,private alertService:AlertService,private homeService:HomeService,private authenticationService: AuthenticationService,private changeDetectorRefs: ChangeDetectorRef) { 
@@ -73,9 +74,12 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
-    this.getLiveplusChannelData(0,1000,1);
-    this.getLiveplusChannelData(0,1000,3);
-    this.getLiveplusChannelData(0,1000,4);
+    this.getLiveplusChannelData(0,1000,1,'');
+    this.getLiveplusChannelData(0,1000,1,'future');
+    this.getLiveplusChannelData(0,1000,3,'');
+    this.getLiveplusChannelData(0,1000,3,'future');
+    this.getLiveplusChannelData(0,1000,4,'');
+    this.getLiveplusChannelData(0,1000,4,'future');
     if(localStorage.getItem('loggedInUser')) {
       this.getloggenInUser=  JSON.parse(localStorage.getItem('loggedInUser'));
       this.firstName = this.getloggenInUser.first_name;
@@ -95,12 +99,12 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
 
 
    /* Start- function for get live channel videos*/
-   getLiveplusChannelData(page,limit,channelId){
+   getLiveplusChannelData(page,limit,channelId,videoType){
     this.loader = true;
     //this.tabledata = [];
     this.livePlusChannelVideosData = [];
     //this.tabledata = [];
-    this.homeService.getLiveChannel(channelId,page,limit,'future').subscribe(
+    this.homeService.getLiveChannel(channelId,page,limit,videoType).subscribe(
       response => {
         this.loader = false;
         if (response != undefined) {
@@ -118,21 +122,24 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
              }
              else if(channelId == 3)
              {
-               channel = 'Live+';
+               channel = 'Cbox+';
              }
              else if(channelId == 4)
              {
                channel = 'Tourney';
              }
- 
+
+         
              this.tabledata.push({MATCHUP:this.livePlusChannelVideosData[j].name,TIME:moment.utc(this.livePlusChannelVideosData[j].starts_at).local().format(environment.DATE_TIME_FORMAT),CHANNEL:channel});
             }
             
-
-            this.dataSource = new MatTableDataSource(this.tabledata);
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;  
-            this.changeDetectorRefs.detectChanges();
+            this.functioncounter++;
+           
+            if(this.functioncounter != undefined && this.functioncounter == 6)
+            {
+               this.showTabledata();
+            }
+           
           }
          
         }
@@ -144,6 +151,18 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
     
   }
   /* End- function for get live channel videos*/
+
+  showTabledata()
+  {
+    this.tabledata.sort((a: any, b: any) => {
+      return new Date(a.TIME).getTime() - new Date(b.TIME).getTime();
+
+  });
+    this.dataSource = new MatTableDataSource(this.tabledata);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;  
+    this.changeDetectorRefs.detectChanges();
+  }
 
   // createNewUser(id: number): UserData {
   //   return {

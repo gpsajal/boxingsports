@@ -162,14 +162,14 @@ export class TourneyComponent implements OnInit {
       }
       else
       {
-          this.alertService.info('You do not have active Live+ subscription.');
+          this.alertService.info('You do not have active Cbox+ subscription.');
           return false;
       }
       
     }
     else
     {
-       //this.alertService.info('Please login to watch live+ videos.');
+       //this.alertService.info('Please login to watch Cbox+ videos.');
        this.openSigninDialog('signin');
        return false;
     }
