@@ -45,7 +45,7 @@ export class CancelsubscriptionComponent implements OnInit {
        
         for(var i = 0; i < this.subscriptionData.length; i++)
         {
-          if(this.subscriptionData[i].planType == 'CBOX +')
+          if(this.subscriptionData[i].planType == 'live+')
           {
             this.liveplusExpireDate = moment(this.subscriptionData[i].expiryDate).format(environment.DATE_FORMAT);
           }
@@ -96,7 +96,7 @@ export class CancelsubscriptionComponent implements OnInit {
      else{
        var successdata = responseobject.message;
        this.alertService.success(successdata);
-       if(planType == 'CBOX +')
+       if(planType == 'live+')
        {
         localStorage.setItem('loggedInUser', JSON.stringify({ userId:this.userId,email: this.userEmail, first_name: this.firstName,last_name:this.lastName,isTourneyUser:this.isTourneyUser,token:this.token,subscriptions:this.subscriptionData,isLivePlusUser:0}));
        }

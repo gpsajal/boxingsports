@@ -41,7 +41,7 @@ export class UserprofileComponent implements OnInit {
        
         for(var i = 0; i < this.subscriptionData.length; i++)
         {
-          if(this.subscriptionData[i].planType == 'CBOX +')
+          if(this.subscriptionData[i].planType == 'live+')
           {
             this.liveplusExpireDate = moment.unix(this.subscriptionData[i].expiryDate).format(environment.DATE_FORMAT);
             this.liveproductPrice = this.subscriptionData[i].productPrice;
