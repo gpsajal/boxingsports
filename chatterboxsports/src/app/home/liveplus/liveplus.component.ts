@@ -142,12 +142,12 @@ export class LiveplusComponent implements OnInit {
     {
       if(this.isUserLoggedIn && this.isLivePlusUser == 0)
       {
-          this.alertService.info('You have not subscribed for Cbox+.');
+          this.alertService.info('You have not subscribed for CBOX +.');
           return false;
       }
       else
       {
-        //this.alertService.info('Please login to watch Cbox+ videos.');
+        //this.alertService.info('Please login to watch CBOX + videos.');
         this.openSignupDialog();
         return false;
       }

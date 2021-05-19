@@ -68,7 +68,7 @@ checkEmailExist(emailId): Observable<any> {
 
 /** check email exist */
 getStripeSecretToekn(amount): Observable<any> {
-  return this.http.post<any>(this.USER_PAYMENT_URL +'intent',{amount: amount,description: "Cbox+ subscription has been charged of amount 13.99 successful"}, this.httpOptions).pipe(
+  return this.http.post<any>(this.USER_PAYMENT_URL +'intent',{amount: amount,description: "CBOX + subscription has been charged of amount 13.99 successful"}, this.httpOptions).pipe(
     tap((newUser: any) => this.log('get payment intent')),
     catchError(this.handleError<any>('get payment intent'))
   );

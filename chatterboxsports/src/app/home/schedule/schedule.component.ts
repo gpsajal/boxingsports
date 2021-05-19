@@ -122,7 +122,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
              }
              else if(channelId == 3)
              {
-               channel = 'Cbox+';
+               channel = 'CBOX +';
              }
              else if(channelId == 4)
              {
@@ -189,7 +189,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
         // Use the title as the index
         live[objTitle] = this.tabledata[i];
      }
-     else if(this.tabledata[i]['CHANNEL'] == 'Cbox+')
+     else if(this.tabledata[i]['CHANNEL'] == 'CBOX +')
      {
         // Extract the title
         var objTitle = this.tabledata[i]['ID'];
