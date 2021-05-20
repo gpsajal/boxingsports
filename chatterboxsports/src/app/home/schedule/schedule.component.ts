@@ -47,7 +47,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
   isLivePlusUser:number;
   subscriptionData = [];
   tabledata:any = [];
-  functioncounter:number = 0;
+ // functioncounter:number = 0;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(public dialog: MatDialog,private alertService:AlertService,private homeService:HomeService,private authenticationService: AuthenticationService,private changeDetectorRefs: ChangeDetectorRef) { 
@@ -75,11 +75,11 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getLiveplusChannelData(0,1000,1,'');
-    this.getLiveplusChannelData(0,1000,1,'future');
+    //this.getLiveplusChannelData(0,1000,1,'future');
     this.getLiveplusChannelData(0,1000,3,'');
-    this.getLiveplusChannelData(0,1000,3,'future');
+    //this.getLiveplusChannelData(0,1000,3,'future');
     this.getLiveplusChannelData(0,1000,4,'');
-    this.getLiveplusChannelData(0,1000,4,'future');
+   // this.getLiveplusChannelData(0,1000,4,'future');
     if(localStorage.getItem('loggedInUser')) {
       this.getloggenInUser=  JSON.parse(localStorage.getItem('loggedInUser'));
       this.firstName = this.getloggenInUser.first_name;
@@ -133,12 +133,17 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
              this.tabledata.push({ID:this.livePlusChannelVideosData[j].id,MATCHUP:this.livePlusChannelVideosData[j].name,TIME:moment.utc(this.livePlusChannelVideosData[j].starts_at).local().format(environment.DATE_TIME_FORMAT),CHANNEL:channel});
             }
             
-            this.functioncounter++;
-           
-            if(this.functioncounter != undefined && this.functioncounter == 6)
-            {
-               this.showTabledata();
-            }
+            //this.functioncounter++;
+          // console.log(this.tabledata);
+           //console.log(this.functioncounter);
+            this.dataSource = new MatTableDataSource(this.tabledata);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;  
+            this.changeDetectorRefs.detectChanges();
+            // if(this.functioncounter != undefined && this.functioncounter == 6)
+            // {
+            //    this.showTabledata();
+            // }
            
           }
          
@@ -152,13 +157,13 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
   }
   /* End- function for get live channel videos*/
 
-  showTabledata()
-  {
-    this.dataSource = new MatTableDataSource(this.removeDuplicateValues());
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;  
-    this.changeDetectorRefs.detectChanges();
-  }
+  // showTabledata()
+  // {
+  //   this.dataSource = new MatTableDataSource(this.removeDuplicateValues());
+  //   this.dataSource.paginator = this.paginator;
+  //   this.dataSource.sort = this.sort;  
+  //   this.changeDetectorRefs.detectChanges();
+  // }
 
   // createNewUser(id: number): UserData {
   //   return {
@@ -168,70 +173,70 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
   //   };
   // }
 
-  removeDuplicateValues()
-  {
-     // Declare a new array
-  let newArray = [];
-   //console.log(this.tabledata);           
-  // Declare an empty object
-  let live = {};
-  let liveplus = {};
-  let tourney = {};
+  // removeDuplicateValues()
+  // {
+  //    // Declare a new array
+  // let newArray = [];
+  //  console.log(this.tabledata);           
+  // // Declare an empty object
+  // let live = {};
+  // let liveplus = {};
+  // let tourney = {};
     
-  // Loop for the array elements
-  for (let i in this.tabledata) {
+  // // Loop for the array elements
+  // for (let i in this.tabledata) {
 
-     if(this.tabledata[i]['CHANNEL'] == 'Live')
-     {
-        // Extract the title
-        var objTitle = this.tabledata[i]['ID'];
+  //    if(this.tabledata[i]['CHANNEL'] == 'Live')
+  //    {
+  //       // Extract the title
+  //       var objTitle = this.tabledata[i]['ID'];
 
-        // Use the title as the index
-        live[objTitle] = this.tabledata[i];
-     }
-     else if(this.tabledata[i]['CHANNEL'] == 'CBOX +')
-     {
-        // Extract the title
-        var objTitle = this.tabledata[i]['ID'];
+  //       // Use the title as the index
+  //       live[objTitle] = this.tabledata[i];
+  //    }
+  //    else if(this.tabledata[i]['CHANNEL'] == 'CBOX +')
+  //    {
+  //       // Extract the title
+  //       var objTitle = this.tabledata[i]['ID'];
 
-        // Use the title as the index
-        liveplus[objTitle] = this.tabledata[i];
-     }
-     else if(this.tabledata[i]['CHANNEL'] == 'Tourney')
-     {
-        // Extract the title
-        var objTitle = this.tabledata[i]['ID'];
+  //       // Use the title as the index
+  //       liveplus[objTitle] = this.tabledata[i];
+  //    }
+  //    else if(this.tabledata[i]['CHANNEL'] == 'Tourney')
+  //    {
+  //       // Extract the title
+  //       var objTitle = this.tabledata[i]['ID'];
 
-        // Use the title as the index
-        tourney[objTitle] = this.tabledata[i];
-     }
+  //       // Use the title as the index
+  //       tourney[objTitle] = this.tabledata[i];
+  //    }
 
 
      
-  }
+  // }
     
-  // Loop to push unique object into array
-  for (var i in live) {
-      newArray.push(live[i]);
-  }
+  // // Loop to push unique object into array
+  // for (var i in live) {
+  //     newArray.push(live[i]);
+  // }
 
-   // Loop to push unique object into array
-   for (var i in liveplus) {
-    newArray.push(liveplus[i]);
-  }
+  //  // Loop to push unique object into array
+  //  for (var i in liveplus) {
+  //   newArray.push(liveplus[i]);
+  // }
 
-  // Loop to push unique object into array
-  for (var i in tourney) {
-    newArray.push(tourney[i]);
-  }
+  // // Loop to push unique object into array
+  // for (var i in tourney) {
+  //   newArray.push(tourney[i]);
+  // }
     
-  // Display the unique objects
-  //console.log(newArray);
-  newArray.sort((a: any, b: any) => {
-    return new Date(a.TIME).getTime() - new Date(b.TIME).getTime();
-  });
+  // // Display the unique objects
+  // //console.log(newArray);
+  // newArray.sort((a: any, b: any) => {
+  //   return new Date(a.TIME).getTime() - new Date(b.TIME).getTime();
+  // });
 
-  return newArray;
-  }
+  // return newArray;
+  // }
 
 }
