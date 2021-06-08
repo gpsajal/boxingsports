@@ -18,6 +18,7 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { PrivacyComponent } from './privacy/privacy.component';
 @NgModule({
   declarations: [HeaderComponent,
     FooterComponent,
@@ -27,7 +28,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ScheduleComponent,
     ShareddialogComponent,
     FaqComponent,
-    TermsComponent],
+    TermsComponent,
+    PrivacyComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

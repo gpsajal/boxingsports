@@ -7,6 +7,7 @@ import { TourneyComponent } from '../tourney/tourney.component';
 import { ScheduleComponent } from '../schedule/schedule.component';
 import { FaqComponent } from '../faq/faq.component';
 import { TermsComponent } from '../terms/terms.component';
+import { PrivacyComponent } from '../privacy/privacy.component';
 const routes:Routes =[
   { path: '', component: LandingComponent},
   { path: 'liveplus', component: LiveplusComponent},
@@ -14,7 +15,8 @@ const routes:Routes =[
   { path: 'schedule', component: ScheduleComponent},
   { path: 'faq', component: FaqComponent},
   { path: 'faq/:id', component: FaqComponent},
-  { path: 'terms', component: TermsComponent}
+  { path: 'terms', component: TermsComponent},
+  { path: 'privacy', component: PrivacyComponent}
 ];
 
 

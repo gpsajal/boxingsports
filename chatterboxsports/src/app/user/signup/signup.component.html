@@ -120,7 +120,7 @@
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" value="" formControlName="terms"
-                                    [(ngModel)]="model.terms" required>I agree to <a href="javascript:void(0)" (click)="opentermsPage()">terms & conditions</a>
+                                    [(ngModel)]="model.terms" required>I agree to <a href="javascript:void(0)" (click)="opentermsPage('terms')">terms & conditions</a> and <a href="javascript:void(0)" (click)="opentermsPage('privacy')">privacy policy</a>
                             </label>
                             <mat-error *ngIf="terms.invalid && isFormValid != null && !isFormValid" class="terms-error">
                                 {{showErrors('terms')}}</mat-error>

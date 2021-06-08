@@ -250,10 +250,18 @@ export class SignupComponent implements OnInit {
     }
    /*End- function for create stripe token*/
 
-   opentermsPage()
+   opentermsPage(pageType)
    {
      //this.dialogRef.close();
-     window.open(environment.SITE_URL+'terms', "_blank");
+     if(pageType == 'terms')
+     {
+      window.open(environment.SITE_URL+'terms', "_blank");
+     }
+     else if(pageType == 'privacy')
+     {
+      window.open(environment.SITE_URL+'privacy', "_blank");
+     }
+    
      //this.router.navigate(['terms']);
    }
 
